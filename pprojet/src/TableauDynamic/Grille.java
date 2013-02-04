@@ -56,7 +56,8 @@ public Grille(String source) throws IOException{
 			while((line = reader.readLine())!=null){
 				
 				if(line.matches("^#P[\\s0-9-]+")){
-					line = line.replaceAll("[^0-9]", " ");
+					line = line.replaceAll("[^0-9\\s]", "");
+					System.out.println(line);
 					line = line.replaceFirst(" ", "");
 					tab = line.split(" ");
 					try{
@@ -135,7 +136,7 @@ public String toString(){
 		for(int j=debutLargeur;j<=finLargeur;j++){
 			Point p = new Point(i,j);
 			if(celluleVivante.contains(p))
-				echiquier = echiquier+" 0 ";
+				echiquier = echiquier+" o ";
 			else 
 				echiquier = echiquier+" - ";
 				
@@ -231,7 +232,9 @@ public void miseAjourTaille(){
 		 finLargeur = p.getY();
  }
 }
-
+public boolean typeMort(){
+	return celluleVivante.size()==0;
+}
 public ArrayList<Point> getCelluleVivante() {
 	return celluleVivante;
 }
