@@ -8,12 +8,16 @@ import javax.swing.Timer;
 public class Teste {
 public static void main(String[]args){
 	try {
-		final Grille grille=new Grille("Jeu.LIF");
+		final Grille grille=new Grille("Essai.LIF");
 		System.out.println(grille);
 		
-		Timer timer = new Timer(1000,new ActionListener(){
+		final Timer timer = new Timer(1000,new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				grille.Evolution();
+				if(grille.typeMort()){
+					System.out.print("Type : Mort ");
+					
+				}
 			}
 		});
 		
