@@ -15,6 +15,9 @@ public class Grille implements ActionListener{
 private ArrayList<Point> celluleVivante;
 private ArrayList<Integer> regleVie;
 private ArrayList<Integer> regleMort;
+private ArrayList<ArrayList<Point>>oscillation;
+private ArrayList<ArrayList<Point>>vaisseau;
+private ArrayList<ArrayList<Point>>t;
 private int debutLongueur;
 private int finLongueur;
 private int debutLargeur;
@@ -23,6 +26,8 @@ private int periode;
 public Timer timer;
 public boolean stable=false;
 public boolean mort=false;
+public boolean vaiseau=false;
+public boolean oscitia=false;
 public Grille(){
 	celluleVivante = new ArrayList<Point>();
 	regleVie = new ArrayList<Integer>();
@@ -39,6 +44,9 @@ public Grille(String source) throws IOException{
 	celluleVivante = new ArrayList<Point>();
 	regleVie = new ArrayList<Integer>();
 	regleMort = new ArrayList<Integer>();
+	oscillation=new ArrayList<ArrayList<Point>>();
+	vaisseau=new ArrayList<ArrayList<Point>>();
+	t=new ArrayList<ArrayList<Point>>();
 	debutLargeur = 0;
 	finLargeur = 0;
 	debutLongueur = 0;
@@ -129,7 +137,20 @@ public Grille(String source) throws IOException{
 	else{
 		JOptionPane.showMessageDialog(null, "Erreur de lecture du fichier", "Erreur de lecture", JOptionPane.ERROR_MESSAGE);
 	}
+	oscillation.add(celluleVivante);
+	vaisseau.add(celluleVivante);
+	t.add(celluleVivante);
 }
+
+public ArrayList<ArrayList<Point>> getOscillation() {
+	return oscillation;
+}
+
+
+public void setOscillation(ArrayList<ArrayList<Point>> oscillation) {
+	this.oscillation = oscillation;
+}
+
 
 public String toString(){
 	String echiquier = "";
@@ -173,6 +194,11 @@ public void Evolution(){
 	}else if(evol.isEmpty()){
 		mort=true;
 	}
+	oscillation.add(evol);
+	verifoscillation();
+	vaisseau.add(evol);
+	verifvaisseau();
+	t.add(evol);
 	periode++;
 	this.setCelluleVivante(evol);
 	miseAjourTaille();
@@ -180,6 +206,77 @@ public void Evolution(){
 	System.out.println(periode);
 }
 
+
+
+
+
+//verification de l'osciation
+
+public void verifoscillation(){
+	
+	ArrayList<ArrayList<Point>>Oscillateur=new ArrayList<ArrayList<Point>>();
+	Oscillateur.addAll(oscillation);
+	while(!Oscillateur.isEmpty()){
+		ArrayList<Point>var=Oscillateur.get(0);
+		Oscillateur.remove(0);
+		for(ArrayList<Point>variable:Oscillateur){
+			
+			if(var.equals(variable)){
+				oscitia=true;
+		
+				break;
+			}
+		}
+		
+	}
+	
+	
+}
+
+
+
+
+
+// verifcation de vaisseau
+
+public void verifvaisseau(){
+Point p1,p2; double d;	int i=0;
+ArrayList<ArrayList<Point>>var1=new ArrayList<ArrayList<Point>>();
+var1.addAll(t);
+boolean v=false;
+if(vaiseau==false){
+while(!var1.isEmpty()){
+	ArrayList<Point>varia=var1.get(0);
+    var1.remove(0);
+    if(!var1.isEmpty()&&var1.get(0).size()==varia.size()){
+    	p1=varia.get(0);
+    	p2=var1.get(0).get(0);
+    	d=Math.sqrt(Math.pow(p1.getX()-p2.getX(), 2)+Math.pow(p1.getY()-p2.getY(), 2));
+    	i=0;
+    	
+    while(i< var1.size()){
+    	
+    	p1=varia.get(i);
+    	p2=var1.get(0).get(i);
+    	i++;
+    	double d1=Math.sqrt(Math.pow(p1.getX()-p2.getX(), 2)+Math.pow(p1.getY()-p2.getY(), 2));
+    	if(d!=d1){
+    		v=true;
+    		break;
+    	}
+    	
+    }
+
+    if(v!=true){
+    	vaiseau=true;
+    	break;
+    	}
+    
+    }
+}
+}
+	
+}
 
 
 public boolean vivre(Point p){
@@ -200,6 +297,11 @@ public boolean vivre(Point p){
 	return regleVie.contains(voisinVivant);
 }
 
+
+
+
+
+
 public boolean meurt(Point p){
 	
     int voisinVivant=0;
@@ -217,10 +319,6 @@ public boolean meurt(Point p){
 	}
 	return regleMort.contains(voisinVivant);
 }
-
-
-
-
 
 
 
