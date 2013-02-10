@@ -15,8 +15,13 @@ public static void main(String[]args){
 			public void actionPerformed(ActionEvent e){
 				grille.Evolution();
 				if(grille.typeMort()){
-					System.out.print("Type : Mort ");
-					
+					System.out.println("Type : Mort ");
+				}
+				if(grille.oscitia){
+					System.out.println("Type : Oscillation ");
+				}
+				if(grille.vaiseau){
+					System.out.println("Type : vaisseau ");
 				}
 			}
 		});
