@@ -17,12 +17,16 @@ public static void main(String[]args){
 				if(grille.typeMort()){
 					System.out.println("Type : Mort ");
 				}
+				if(grille.stable){
+					System.out.println("Type : Stable ");
+				}
 				if(grille.oscitia){
 					System.out.println("Type : Oscillation ");
 				}
 				if(grille.vaiseau){
-					System.out.println("Type : vaisseau ");
+					System.out.println("Type : Vaisseau ");
 				}
+				
 			}
 		});
 		
