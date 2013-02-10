@@ -191,8 +191,13 @@ public void Evolution(){
 	
 	if(evol.equals(celluleVivante)){
 		stable=true;
+		oscitia=true;
+		vaiseau=true;
 	}else if(evol.isEmpty()){
 		mort=true;
+		vaiseau=true;
+		oscitia=true;
+		stable=true;
 	}
 	oscillation.add(evol);
 	verifoscillation();
@@ -248,7 +253,7 @@ if(vaiseau==false){
 while(!var1.isEmpty()){
 	ArrayList<Point>varia=var1.get(0);
     var1.remove(0);
-    if(!var1.isEmpty()&&var1.get(0).size()==varia.size()){
+    if(!var1.isEmpty()&&var1.get(0).size()==varia.size()&&!varia.isEmpty()){
     	p1=varia.get(0);
     	p2=var1.get(0).get(0);
     	d=Math.sqrt(Math.pow(p1.getX()-p2.getX(), 2)+Math.pow(p1.getY()-p2.getY(), 2));
