@@ -21,7 +21,8 @@ private int debutLargeur;
 private int finLargeur;
 private int periode;
 public Timer timer;
-
+public boolean stable=false;
+public boolean mort=false;
 public Grille(){
 	celluleVivante = new ArrayList<Point>();
 	regleVie = new ArrayList<Integer>();
@@ -149,7 +150,6 @@ public String toString(){
 public void Evolution(){
 	
 	ArrayList<Point> evol = new ArrayList<Point>();
-	
 	for(int i=debutLongueur-1;i<=finLongueur+1;i++){
 		
 		for(int j=debutLargeur-1;j<=finLargeur+1;j++){
@@ -167,12 +167,21 @@ public void Evolution(){
 			
 		}
 	}
+	
+	if(evol.equals(celluleVivante)){
+		stable=true;
+	}else if(evol.isEmpty()){
+		mort=true;
+	}
 	periode++;
 	this.setCelluleVivante(evol);
 	miseAjourTaille();
 	System.out.println(this);
 	System.out.println(periode);
 }
+
+
+
 public boolean vivre(Point p){
 	
 	int voisinVivant=0;
@@ -208,6 +217,14 @@ public boolean meurt(Point p){
 	}
 	return regleMort.contains(voisinVivant);
 }
+
+
+
+
+
+
+
+
 
 public void miseAjourTaille(){
 	/*Point k = celluleVivante.get(0);
