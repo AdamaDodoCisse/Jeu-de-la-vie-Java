@@ -1,33 +1,31 @@
 package TableauDynamic;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+import javax.swing.*;
 
 import javax.swing.JOptionPane;
 
-public class Grille implements ActionListener{
+public class Grille {
 	
 private ArrayList<Point> celluleVivante;
 private ArrayList<Integer> regleVie;
 private ArrayList<Integer> regleMort;
-private ArrayList<ArrayList<Point>>oscillation;
-private ArrayList<ArrayList<Point>>vaisseau;
-private ArrayList<ArrayList<Point>>t;
+
 private int debutLongueur;
 private int finLongueur;
 private int debutLargeur;
 private int finLargeur;
 private int periode;
+
 public Timer timer;
-public boolean stable=false;
-public boolean mort=false;
-public boolean vaiseau=false;
-public boolean oscitia=false;
+
 public Grille(){
 	celluleVivante = new ArrayList<Point>();
 	regleVie = new ArrayList<Integer>();
@@ -44,9 +42,7 @@ public Grille(String source) throws IOException{
 	celluleVivante = new ArrayList<Point>();
 	regleVie = new ArrayList<Integer>();
 	regleMort = new ArrayList<Integer>();
-	oscillation=new ArrayList<ArrayList<Point>>();
-	vaisseau=new ArrayList<ArrayList<Point>>();
-	t=new ArrayList<ArrayList<Point>>();
+	
 	debutLargeur = 0;
 	finLargeur = 0;
 	debutLongueur = 0;
@@ -137,23 +133,12 @@ public Grille(String source) throws IOException{
 	else{
 		JOptionPane.showMessageDialog(null, "Erreur de lecture du fichier", "Erreur de lecture", JOptionPane.ERROR_MESSAGE);
 	}
-	oscillation.add(celluleVivante);
-	vaisseau.add(celluleVivante);
-	t.add(celluleVivante);
-}
-
-public ArrayList<ArrayList<Point>> getOscillation() {
-	return oscillation;
-}
-
-
-public void setOscillation(ArrayList<ArrayList<Point>> oscillation) {
-	this.oscillation = oscillation;
 }
 
 
 public String toString(){
 	String echiquier = "";
+	
 	for(int i=debutLongueur;i<=finLongueur;i++){
 		for(int j=debutLargeur;j<=finLargeur;j++){
 			Point p = new Point(i,j);
@@ -165,11 +150,11 @@ public String toString(){
 		}
 		echiquier = echiquier+"\n";
 	}
-	return echiquier;
+	return echiquier+"Periode = "+periode;
 }
 
-public void Evolution(){
-	
+public void Evolution(int a){
+   for(int k=1;k<=a;k++){
 	ArrayList<Point> evol = new ArrayList<Point>();
 	for(int i=debutLongueur-1;i<=finLongueur+1;i++){
 		
@@ -189,26 +174,12 @@ public void Evolution(){
 		}
 	}
 	
-	if(evol.equals(celluleVivante)){
-		stable=true;
-		oscitia=true;
-		vaiseau=true;
-	}else if(evol.isEmpty()){
-		mort=true;
-		vaiseau=true;
-		oscitia=true;
-		stable=true;
-	}
-	oscillation.add(evol);
-	verifoscillation();
-	vaisseau.add(evol);
-	verifvaisseau();
-	t.add(evol);
 	periode++;
+	
+	
 	this.setCelluleVivante(evol);
 	miseAjourTaille();
-	System.out.println(this);
-	System.out.println(periode);
+   }
 }
 
 
@@ -217,71 +188,8 @@ public void Evolution(){
 
 //verification de l'osciation
 
-public void verifoscillation(){
-	
-	ArrayList<ArrayList<Point>>Oscillateur=new ArrayList<ArrayList<Point>>();
-	Oscillateur.addAll(oscillation);
-	while(!Oscillateur.isEmpty()){
-		ArrayList<Point>var=Oscillateur.get(0);
-		Oscillateur.remove(0);
-		for(ArrayList<Point>variable:Oscillateur){
-			
-			if(var.equals(variable)){
-				oscitia=true;
-		
-				break;
-			}
-		}
-		
-	}
-	
-	
-}
 
 
-
-
-
-// verifcation de vaisseau
-
-public void verifvaisseau(){
-Point p1,p2; double d;	int i=0;
-ArrayList<ArrayList<Point>>var1=new ArrayList<ArrayList<Point>>();
-var1.addAll(t);
-boolean v=false;
-if(vaiseau==false){
-while(!var1.isEmpty()){
-	ArrayList<Point>varia=var1.get(0);
-    var1.remove(0);
-    if(!var1.isEmpty()&&var1.get(0).size()==varia.size()&&!varia.isEmpty()){
-    	p1=varia.get(0);
-    	p2=var1.get(0).get(0);
-    	d=Math.sqrt(Math.pow(p1.getX()-p2.getX(), 2)+Math.pow(p1.getY()-p2.getY(), 2));
-    	i=0;
-    	
-    while(i< var1.size()){
-    	
-    	p1=varia.get(i);
-    	p2=var1.get(0).get(i);
-    	i++;
-    	double d1=Math.sqrt(Math.pow(p1.getX()-p2.getX(), 2)+Math.pow(p1.getY()-p2.getY(), 2));
-    	if(d!=d1){
-    		v=true;
-    		break;
-    	}
-    	
-    }
-
-    if(v!=true){
-    	vaiseau=true;
-    	break;
-    	}
-    
-    }
-}
-}
-	
-}
 
 
 public boolean vivre(Point p){
@@ -301,10 +209,6 @@ public boolean vivre(Point p){
 	}
 	return regleVie.contains(voisinVivant);
 }
-
-
-
-
 
 
 public boolean meurt(Point p){
@@ -330,11 +234,6 @@ public boolean meurt(Point p){
 
 
 public void miseAjourTaille(){
-	/*Point k = celluleVivante.get(0);
-	debutLargeur = k.getY();
-	finLargeur = k.getY();
-	debutLongueur = k.getX();
-	finLongueur = k.getX();*/
 	debutLongueur = Integer.MAX_VALUE;
 	finLongueur = Integer.MIN_VALUE;
 	debutLargeur = Integer.MAX_VALUE;
@@ -425,11 +324,21 @@ public void afficher(){
 	}
 }
 
+public int getPeriode() {
+	return periode;
+}
+public void setPeriode(int periode) {
+	this.periode = periode;
+}
 
-@Override
-public void actionPerformed(ActionEvent e) {
-	// TODO Auto-generated method stub
-	Evolution();
-	
+public void clone(Grille p){
+	p.setCelluleVivante(celluleVivante);
+	p.setDebutLargeur(debutLargeur);
+	p.setDebutLongueur(debutLongueur);
+	p.setFinLargeur(finLargeur);
+	p.setFinLongueur(finLongueur);
+	p.setPeriode(periode);
+	p.regleMort=regleMort;
+	p.regleVie = regleVie;
 }
 }
