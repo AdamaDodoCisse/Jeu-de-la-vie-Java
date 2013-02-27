@@ -13,20 +13,31 @@ public static void main(String[]args){
 		
 		final Timer timer = new Timer(1000,new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				grille.Evolution();
-				if(grille.typeMort()){
+				grille.Evolution(grille.getCelluleVivante(),2);
+				grille.setPeriode(grille.getPeriode()+1);
+				System.out.println(grille);
+				grille.Evolution(grille.getCelluleVivante2(),1);
+				
+				grille.mort=grille.getCelluleVivante().size()==0 ;
+				
+				//grille.stable=grille.mort ||false;;
+				
+				//grille.vaiseau=grille.oscitia || false;;	
+				
+				if(grille.mort){
 					System.out.println("Type : Mort ");
 				}
 				if(grille.stable){
 					System.out.println("Type : Stable ");
 				}
-				if(grille.oscitia){
+				if(grille.getCelluleVivante().equals(grille.getCelluleVivante2()) || grille.stable){
 					System.out.println("Type : Oscillation ");
 				}
 				if(grille.vaiseau){
 					System.out.println("Type : Vaisseau ");
 				}
 				
+				System.out.println("Evolution : 1 = "+grille.getPeriode()+"\nEvolution 2 : "+grille.getPeriode()*2);
 			}
 		});
 		
