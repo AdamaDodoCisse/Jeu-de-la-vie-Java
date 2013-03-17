@@ -1,19 +1,19 @@
 package TableauDynamic;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class ReconnaissanceType {
 
 	private Grille PrimoG ;
 	private Grille SeconG ;
 	
+	protected int periodeFinal = 0;
+	
 	private int tailleQueue;
 	private boolean oscillation=false;
 	private boolean stabilite =false;
 	private boolean mort=false;
 	private boolean vaisceau=false;
-private boolean inconnu=true;
+	private boolean inconnu=true;
 	public ReconnaissanceType(String source) throws IOException{
 		PrimoG = new Grille(source);
 		SeconG = new Grille(source);
@@ -23,6 +23,9 @@ private boolean inconnu=true;
 
     public void structure(){
     	
+    	if(!isVaisceau()){
+    		periodeFinal++;
+    	}
     	if(PrimoG.getCelluleVivante().isEmpty()){
     		
     		mort=true;
@@ -46,12 +49,7 @@ private boolean inconnu=true;
     	if(verifVaisceau()){
     		vaisceau=true;
     		inconnu=false;
-    	}else{
-    		inconnu=true;
     	}
-    	
-    	
-    		
     	
     }
     
@@ -160,5 +158,37 @@ private boolean inconnu=true;
 	public void setVaisceau(boolean vaisceau) {
 		this.vaisceau = vaisceau;
 	}
-
+	
+	
+	public String Resultat(String Fichier,int time){
+		String d = "d' ";
+		if(!((Fichier.charAt(0)+"").equalsIgnoreCase("U") ||(Fichier.charAt(0)+"").equalsIgnoreCase("I") 
+			||(Fichier.charAt(0)+"").equalsIgnoreCase("A")||(Fichier.charAt(0)+"").equalsIgnoreCase("O"))
+			||(Fichier.charAt(0)+"").equalsIgnoreCase("E"))
+				d="de ";
+		if (isMort()){
+			return "<p  class=\"Titre\">"+Fichier.substring(0, Fichier.length()-4).toUpperCase()+"</p>\n" +
+					   "<p class=\"Resultat\">L'evolution Asymptotique "+d+Fichier.substring(0, Fichier.length()-4)+" est de type ['Mort'] sur une durée de "+time+"" +
+					   		"\net sa periode = "+periodeFinal+" on deduit qu'il est stable, oscillant, et vaisseau</p>\n";
+		}
+		else if (isStabilite()){
+			return "<p class=\"Titre\">"+Fichier.substring(0, Fichier.length()-4).toUpperCase()+"</p>\n" +
+					   "<p class=\"Resultat\">L'evolution Asymptotique "+d+Fichier.substring(0, Fichier.length()-4)+" est de type ['Stable'] sur une durée de "+time+" \n" +
+					   	"et sa Periode de stabilité = "+periodeFinal+" Vu qu'il est stable on deduit " +
+					   			"qu'il est oscillant et Vaisseau </p>\n";
+		}else if( isOscillation()){
+			return "<p class=\"Titre\">"+Fichier.substring(0, Fichier.length()-4).toUpperCase()+"</p>\n" +
+					   "<p class=\"Resultat\">L'evolution Asymptotique "+d+Fichier.substring(0, Fichier.length()-4)+" est de type ['Oscillant'] sur une durée de "+time+" \n" +
+					   	"et sa Periode d'oscillation = "+periodeFinal+" Vu qu'il est oscillant on deduit " +
+					   	"qu'il est Vaisseau </p>\n";
+		}else if(isVaisceau()){
+			return "<p class=\"Titre\">"+Fichier.substring(0, Fichier.length()-4)+"</p>\n" +
+					   "<p class=\"Resultat\">L'evolution Asymptotique "+d+Fichier.substring(0, Fichier.length()-4)+" est de type ['Vaisseau'] sur une durée de "+time+"\n" +
+					   		"et periode = "+periodeFinal+"</p>\n";
+		}else{
+			return "<p class=\"Titre\">"+Fichier.substring(0, Fichier.length()-4).toUpperCase()+"</p>\n" +
+					   "<p class=\"Resultat\">L'evolution Asymptotique "+d+Fichier.substring(0, Fichier.length()-4)+" est de type ['Inconnu'] sur une durée de "+time+"</p>\n";
+		}
+	}
+	
 }
