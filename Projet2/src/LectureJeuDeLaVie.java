@@ -1,5 +1,4 @@
 import java.awt.HeadlessException;
-import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -58,7 +57,13 @@ public class LectureJeuDeLaVie {
 			}catch(FileNotFoundException e){
 				
 			}
-				
+			if(jeu.getRegleMortCellule().size()==0){
+				jeu.getRegleMortCellule().add(2);
+				jeu.getRegleMortCellule().add(3);
+			}
+			if(jeu.getRegleVieCellule().size()==0){
+				jeu.getRegleVieCellule().add(3);
+			}
 			
 		} else {
 			JOptionPane.showMessageDialog(null, "Erreur de lecture du fichier", "Erreur de lecture", JOptionPane.ERROR_MESSAGE);

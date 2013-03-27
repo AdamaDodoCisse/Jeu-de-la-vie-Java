@@ -1,4 +1,5 @@
 
+
 public class MondeAvecFrontiere extends JeuDeLaVie{
 
 	public MondeAvecFrontiere(String nomFichier){
