@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 /*
  * 
@@ -18,10 +19,12 @@ public class MondeInfini extends JeuDeLaVie{
 		ArrayList<Point> listeSuivante = new ArrayList<Point>();
 		while(iterator.hasNext()){
 			Point p = (Point)iterator.next();
+			System.out.println(nombreVoisinCellule(p));
 			verifieCelluleVivante(p,listeSuivante);
 		}
 		
 		this.setCelluleVivante(listeSuivante);
+		Collections.sort(this.getCelluleVivante());
 	}
 
 	
@@ -39,11 +42,13 @@ public class MondeInfini extends JeuDeLaVie{
 				Point k = new Point(i,j);
 				int nombreVoisin = nombreVoisinCellule(k);
 				if(this.getCelluleVivante().contains(k)){
-					if(this.getRegleMortCellule().contains(nombreVoisin)){
+					if(this.getRegleMortCellule().contains(nombreVoisin)
+							&& ! listeSuivante.contains(k)){
 						listeSuivante.add(k);
 					}
 				} else {
-					if(this.getRegleVieCellule().contains(nombreVoisin)){
+					if(this.getRegleVieCellule().contains(nombreVoisin)
+							&& ! listeSuivante.contains(k)){
 						listeSuivante.add(k);
 					}
 				}
@@ -59,7 +64,7 @@ public class MondeInfini extends JeuDeLaVie{
 
 				Point k = new Point(i,j);
 
-				if(this.getCelluleVivante().contains(k))
+				if(this.getCelluleVivante().contains(k) && ! k.equals(p))
 
 					voisinVivant++;
 			}
