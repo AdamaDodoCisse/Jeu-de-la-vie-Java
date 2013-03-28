@@ -29,16 +29,17 @@ public class MondeInfini extends JeuDeLaVie{
 
 	
 	public void testeCelluleVivante(Point p){
-		
+
 	}
 	
-	public void verifieCelluleVivante(Point p,ArrayList<Point> listeSuivante){
-		
 	
+	
+	
+	
+	
+	public void verifieCelluleVivante(Point p,ArrayList<Point> listeSuivante){
 		for(int i=p.getX()-1;i<=p.getX()+1;i++){
-
 			for(int j=p.getY()-1;j<=p.getY()+1;j++){
-
 				Point k = new Point(i,j);
 				int nombreVoisin = nombreVoisinCellule(k);
 				if(this.getCelluleVivante().contains(k)){
@@ -55,6 +56,12 @@ public class MondeInfini extends JeuDeLaVie{
 			}
 		}
 	}
+	
+	
+	
+	
+	
+	
 	
 	public int nombreVoisinCellule(Point p){
 		int voisinVivant = 0 ;
