@@ -73,8 +73,7 @@ public class LectureJeuDeLaVie {
 
 
 
-public static void ajouterCelluleVivante(String line , int abscisse ,
-										 int ordonnee, JeuDeLaVie jeu){
+public static void ajouterCelluleVivante(String line , int abscisse, int ordonnee, JeuDeLaVie jeu){
 	int i = 0;
 	while(i<line.length()){
 		if(line.charAt(i)=='*'){
