@@ -26,11 +26,13 @@ public class Grille<T> implements StructureDeDonnee<T>{
 		if(this.celluleVivante.contains(cellule)){
 			return false;
 		}
-		
-		return celluleVivante.add(cellule);
+		celluleVivante.add(cellule);
+		return true;
 	}
 	
-	
+	public int taille(){
+		return getCelluleVivante().size();
+	}
 
 	@Override
 	public boolean ajouterRegleVie(Integer regle) {
@@ -91,7 +93,7 @@ public class Grille<T> implements StructureDeDonnee<T>{
 		return celluleVivante.remove(cellule);
 	}
 
-
+	
 	@Override
 	public boolean estVide() {
 	return celluleVivante.size()==0;

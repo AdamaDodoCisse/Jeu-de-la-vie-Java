@@ -17,8 +17,8 @@ public class LectureJeuDeLaVie {
 		int ordonnee=0;
 		String line = null; 
 		Scanner scanner  = null;
-		if( fichier.isFile() && fichier.getAbsolutePath().matches("*.[Ll][Ii][Ff]$")
-				|| fichier.isFile() && fichier.getAbsolutePath().endsWith(".lif")){
+		if( fichier.isFile() && ! fichier.getAbsolutePath().matches(".[Ll][Ii][Ff]$")
+				|| fichier.isFile() && fichier.getAbsolutePath().endsWith(".LIF")){
 			
 			reader = new BufferedReader(new FileReader(fichier));
 			try {
@@ -67,7 +67,6 @@ public class LectureJeuDeLaVie {
 
 	
 	public static void ajouterRegle(String line,Grille<Point> grille){
-		
 		line = line.replaceAll("[^0-9/]", "");
 		StringTokenizer regle = new StringTokenizer(line,"/");
 		if(regle.countTokens()==2){

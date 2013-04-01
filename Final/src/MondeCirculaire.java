@@ -162,5 +162,6 @@ public class MondeCirculaire extends JeuDeLaVie{
 		} 
 		return nombreVoisin;
 	}
+	public void update(){}
 }
 
