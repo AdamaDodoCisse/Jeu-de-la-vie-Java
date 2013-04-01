@@ -19,6 +19,7 @@ public class Client {
 	while(sc.hasNextInt()){
 		System.out.println(sc.next());
 	}
+	System.out.println("Tout");
 	}
 
 }
