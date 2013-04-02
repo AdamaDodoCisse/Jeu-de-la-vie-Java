@@ -3,10 +3,6 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-
-import javax.swing.text.html.CSS;
-
-
 public class HTML {
 	private String balise;
 	public HTML(String fileName,int temps,int jeu,String nouveauFichier)throws HtmlException{
@@ -17,25 +13,25 @@ public class HTML {
 	private void preparerBailse(String filename, int temps,int jeu) throws HtmlException{
 		balise = "<html>" +
 				"	<head>" +
-				"		<title>" +
-						
+				"		<title> Jeu de la vie" +
+							
 				"		</title>" +
 						css() +
 				"	</head>" +
 				"	<body> " + 
-						resultat(filename,temps,jeu)
+						resultat(filename,jeu,temps)
 				+"	</body>" +
 				"</html>";
 	}
 	
 	private void executer(String nouveau){
 		try{
-			File f1 = new File(nouveau);
+			File f1 = new File(nouveau+".html");
 			FileWriter f2 =new FileWriter(f1) ;
 			BufferedWriter f3 = new BufferedWriter(f2);
 			f3.write(balise);
 			f3.close();
-			System.out.println("Fichier creer sous le nom de : "+nouveau);
+			System.out.println("Fichier creer sous le nom de : "+nouveau+".html");
 			System.out.println("Terminer");
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -43,7 +39,12 @@ public class HTML {
 	}
 	
 	private String css(){
-		return null;
+		return "<style>" +
+				"" +
+				"" +
+				"" +
+				"" +
+				"</style>";
 	}
 	
 	private String resultat(String fileName,int jeu,int temps)throws HtmlException {
@@ -64,9 +65,9 @@ public class HTML {
 				for(int i=0;i<lesFichiers.length;i++){
 						try {
 							ReconnaissanceType nouveauRec = new ReconnaissanceType(
-															jeu,
 															temps,
-															lesFichiers[i].getName());
+															jeu,
+															lesFichiers[i].getAbsolutePath());
 							body+=nouveauRec.Resultat();
 						} catch (FileNotFoundException e) {}
 						
@@ -76,8 +77,12 @@ public class HTML {
 							      "le dossier " +fileName);}
 		}else 
 			throw new HtmlException("Le chemin : << "+fileName+" << n'est pas un dossier");
-		
 	}
 	
-	
+	public static void main(String []args){
+		try {
+			new HTML("html", 1, 2, "nouveau teste");
+		} catch (HtmlException e) {
+		}
+	}
 }

@@ -1,6 +1,8 @@
 import java.io.FileNotFoundException;
 import java.util.Iterator;
 
+import org.omg.CosNaming.IstringHelper;
+
 
 public class ReconnaissanceType {
 	private JeuDeLaVie configuration1;
@@ -17,6 +19,7 @@ public class ReconnaissanceType {
 		
 		configuration1 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier);
 		configuration2 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier);
+		
 		
 		for(int i=1;i<= temp;i++){
 			tailleQueue = i;

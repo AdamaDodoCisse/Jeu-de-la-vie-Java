@@ -21,7 +21,7 @@ public class JeuDeLaVieFactory {
 			jeu = new MondeAvecFrontiere(nomFichier);
 			break;
 		default : 
-			throw new IllegalArgumentException("Type de jeu Inconnu");
+			throw new IllegalArgumentException("Type de jeu Inconnu "+typeJeu);
 			
 		}
 		return jeu;
