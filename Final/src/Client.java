@@ -13,6 +13,7 @@ public class Client {
 		JeuDeLaVie jeu = new MondeInfini("jeu.LIF");
 		//Simulation sim = new Simulation(100,jeu);
 		
-		ReconnaissanceType rec = new ReconnaissanceType(1, 5,"jeu.LIF");
+		ReconnaissanceType rec = new ReconnaissanceType(1, 200,"jeu.LIF");
+		System.out.println(rec.isOscillation());
 	}
 }

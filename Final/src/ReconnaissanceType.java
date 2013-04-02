@@ -14,6 +14,7 @@ public class ReconnaissanceType {
 	private boolean inconnu=true;
 	
 	public ReconnaissanceType(int type,int temp,String nomFichier) throws FileNotFoundException{
+		
 		configuration1 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier);
 		configuration2 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier);
 		
@@ -154,6 +155,12 @@ public class ReconnaissanceType {
 	public void setInconnu(boolean inconnu) {
 		this.inconnu = inconnu;
 	}
+	public String Resultat(){
+		return null;
+	}
 	
+	public String toString(){
+		return null;
+	}
 
 }
