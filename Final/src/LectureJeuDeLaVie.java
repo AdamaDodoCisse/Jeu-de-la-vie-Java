@@ -49,6 +49,13 @@ public class LectureJeuDeLaVie {
 			}
 			Collections.sort(grille.getCelluleVivante());
 		}
+		if(grille.getRegleMortCellule().size()==0){
+			grille.ajouterRegleMort(2);
+			grille.ajouterRegleMort(3);
+		}
+		if(grille.getRegleVieCellule().size()==0){
+			grille.ajouterRegleVie(3);
+		}
 	}
 
 	public static void ajouterCelluleVivante(String line ,int abscisse,int ordonnee,Grille<Point> grille){
