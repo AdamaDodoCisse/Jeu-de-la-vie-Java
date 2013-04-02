@@ -1,9 +1,6 @@
 import java.io.FileNotFoundException;
 import java.util.Iterator;
 
-import org.omg.CosNaming.IstringHelper;
-
-
 public class ReconnaissanceType {
 	private JeuDeLaVie configuration1;
 	private JeuDeLaVie configuration2;
@@ -22,12 +19,12 @@ public class ReconnaissanceType {
 		
 		
 		for(int i=1;i<= temp;i++){
-			tailleQueue = i;
+			
 			calculerStructure();
 			
 			if(!inconnu){
 				break;
-			}
+			}tailleQueue = i;
 			if(estMort()){
 				inconnu = false;
 				mort = true;
@@ -35,18 +32,33 @@ public class ReconnaissanceType {
 			if(estStable()){
 				inconnu = false;
 				stabilite =true;
+				
 			}
 			if(estOscillation()){
 				inconnu = false;
 				oscillation=true;
+				//		Calcule de la periode
+				while(true){
+					calculerStructure();
+					periodeFinal++;
+					if(estOscillation())
+						break;
+				}
 			}
 			if(estVaiseau()){
 				inconnu = false;
 				vaisceau=true;
+				if(!isOscillation())
+						//		Calcule de la periode		
+					while(true){
+						calculerStructure();
+						periodeFinal++;
+						if(estVaiseau())
+							break;
+					}
 			}
 		}
 	}
-	
 	public void calculerStructure(){
 		configuration1.evolutionSuivante(); 
 		configuration2.evolutionSuivante(); 

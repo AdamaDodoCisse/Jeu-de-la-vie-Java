@@ -124,6 +124,7 @@ public class Grille<T> implements StructureDeDonnee<T>{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+		@SuppressWarnings("unchecked")
 		Grille <T> other = (Grille <T>) obj;
 		if (celluleVivante == null) {
 			if (other.celluleVivante != null)
