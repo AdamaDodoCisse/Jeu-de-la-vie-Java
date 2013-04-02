@@ -13,6 +13,6 @@ public class Client {
 		JeuDeLaVie jeu = new MondeInfini("jeu.LIF");
 		//Simulation sim = new Simulation(100,jeu);
 		
-		ReconnaissanceType rec = new ReconnaissanceType(jeu, 100);
+		ReconnaissanceType rec = new ReconnaissanceType(1, 2,"jeu.LIF");
 	}
 }

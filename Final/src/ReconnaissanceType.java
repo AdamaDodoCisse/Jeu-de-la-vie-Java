@@ -3,8 +3,8 @@ import java.util.Iterator;
 
 
 public class ReconnaissanceType {
-	private JeuDeLaVie configuration1=new JeuDeLaVie();
-	JeuDeLaVie configuration2=new JeuDeLaVie();
+	private JeuDeLaVie configuration1;
+	private JeuDeLaVie configuration2;
 	protected int periodeFinal = 0;
 	private int tailleQueue=0;
 	private boolean oscillation=false;
@@ -12,12 +12,13 @@ public class ReconnaissanceType {
 	private boolean mort=false;
 	private boolean vaisceau=false;
 	private boolean inconnu=true;
-	public ReconnaissanceType(JeuDeLaVie jeu,int temp) throws FileNotFoundException{
+	
+	public ReconnaissanceType(int type,int temp,String nomFichier) throws FileNotFoundException{
+		configuration1 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier);
+		configuration2 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier);
+		System.out.println(configuration1.getJeux().getCelluleVivante());
 		
-		configuration1 =jeu;
-		configuration2 = jeu;
-		
-		for(int i=0;i< temp;i++){
+		for(int i=1;i<= temp;i++){
 			if(!inconnu){
 				break;
 			}
