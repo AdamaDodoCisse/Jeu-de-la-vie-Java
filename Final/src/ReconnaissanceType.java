@@ -16,9 +16,11 @@ public class ReconnaissanceType {
 	public ReconnaissanceType(int type,int temp,String nomFichier) throws FileNotFoundException{
 		configuration1 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier);
 		configuration2 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier);
-		System.out.println(configuration1.getJeux().getCelluleVivante());
 		
 		for(int i=1;i<= temp;i++){
+			tailleQueue = i;
+			calculerStructure();
+			
 			if(!inconnu){
 				break;
 			}
@@ -38,8 +40,6 @@ public class ReconnaissanceType {
 				inconnu = false;
 				vaisceau=true;
 			}
-			tailleQueue = i;
-			calculerStructure();
 		}
 	}
 	
@@ -47,10 +47,6 @@ public class ReconnaissanceType {
 		configuration1.evolutionSuivante(); 
 		configuration2.evolutionSuivante(); 
 		configuration2.evolutionSuivante();
-		
-		System.out.println(configuration1.getJeux().getCelluleVivante());
-		System.out.println();
-		System.out.println(configuration2.getJeux().getCelluleVivante());
 	}
 	
 	public boolean estOscillation(){

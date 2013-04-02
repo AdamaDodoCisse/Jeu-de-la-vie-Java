@@ -56,7 +56,7 @@ public class JeuDeLaVie implements Jeu{
 	
 	public void calclulercelluleVivante(Grille<Point> grille,Point p){
 		for(int i=p.getX()-1;i<=p.getX()+1;i++){
-			for(int j=p.getY()-1;j<=p.getY();j++){
+			for(int j=p.getY()-1;j<=p.getY()+1;j++){
 				Point k = new Point(i,j);
 				if(jeux.contains(k)){
 					if( ! celluleMourante(k)
