@@ -8,7 +8,7 @@ public class Commande {
 	
 	public Commande(String []args){
 		try {
-			initialiser(args);
+			executer(args);
 			
 		} catch (CommandeException e) {
 			System.out.println(e.getMessage());
@@ -28,6 +28,9 @@ public class Commande {
 				"5 : java -jar JeuDeLaVie.jar -w max dossier calcule le type d’évolution de tous les\n"+
 				"jeux contenus dans le dossier passé en paramètre et affiche les résultats sous la forme d’un fichier html.\n");
 	}
+	/**
+	 * Affiche la liste des realisateurs du jeu
+	 */
 	
 	private void groupe(){
 		System.out.println(
@@ -36,6 +39,13 @@ public class Commande {
 				"Diallo Youssouf\n" +
 				"Cissé Adama Dodo\n");
 	}
+	
+	/**
+	 * Fais la simulation d'un jeu sur un temps donné
+	 * @param fichier
+	 * @param temps
+	 * @param jeu
+	 */
 	
 	private void simuler(String fichier,int temps,int jeu){
 		JeuDeLaVie j;
@@ -47,7 +57,15 @@ public class Commande {
 		}
 	
 	}
-	
+	/**
+	 * Création d'un nouveau fichier Html contenant le resultat de
+	 * toutes les fichiers Lif dans le dossiers passer en parametre 
+	 * sur un temps donné
+	 * @param Dossier
+	 * @param temps
+	 * @param jeu
+	 * @param nouveauFichier
+	 */
 	private void nouveauHtml(String Dossier,int temps,int jeu,String nouveauFichier) {
 		try {
 			new HTML(Dossier, temps, jeu, nouveauFichier);
@@ -56,32 +74,59 @@ public class Commande {
 		}
 	}
 	
-	private void initialiser(String []args)throws CommandeException{
+	/**
+	 * Analyse du fichier passer en paramètre sur un temps donné 
+	 * et Affiche les caracteristiques (
+	 * Période , taille queue et déplacement)
+	 * @param jeu
+	 * @param temps
+	 * @param nomfichier
+	 */
+	
+	private void analyserFichier(int jeu,int temps,String nomfichier){
+		try {
+			ReconnaissanceType re = new ReconnaissanceType(1, temps, nomfichier);
+			System.out.println(re);
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	/**
+	 * Executer la commande passer en paramètre
+	 * @param args
+	 * @throws CommandeException
+	 */
+	
+	private void executer(String []args)throws CommandeException{
 		if(args.length ==1  ||( args.length ==3 || args.length ==4)){
 			if(args.length==1){
 				if(args[0].equals("-name"))
 						groupe();
+				
 				else if(args[0].equals("-h"))
-					aider();
+						aider();
+				
 				else
 					throw new CommandeException("Commande inconnu !");
 			}else if(args.length == 3){
 				if(args[1].matches("^[0-9]+$")){
+					
 					int temps = Integer.parseInt(args[1]);
+					String nomRepertoire = args[2];
+					
 					if(args[0].equals("-s"))
-						simuler(args[2],temps,1);
-					else if(args[0].equals("-c")){
-						try {
-							ReconnaissanceType re = new ReconnaissanceType(1, temps, args[2]);
-							System.out.println(re);
-						} catch (FileNotFoundException e) {
-							System.out.println(e.getMessage());
-						}
-					}else if(args[0].equals("-w")){
-							nouveauHtml(args[2], temps, 1, "Jeu de la vie");
+						simuler(nomRepertoire,temps,1);
+					
+					else if(args[0].equals("-c"))
+						analyserFichier(1, temps, nomRepertoire);
+					
+					else if(args[0].equals("-w")){
+						nouveauHtml(nomRepertoire, temps, 1, "Jeu de la vie");
 					}
 				}else
 					throw new CommandeException("Le deuxième Argument n'est pas un entier");
+			}else{
+				
 			}
 		}else{
 			throw new CommandeException("Commande invalide");
