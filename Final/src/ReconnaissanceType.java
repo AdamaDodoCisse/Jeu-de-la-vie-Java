@@ -18,7 +18,7 @@ public class ReconnaissanceType {
 		configuration2 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier);
 		
 		
-		for(int i=1;i<= temp;i++){
+		for(int i=1;i<=temp;i++){
 			
 			calculerStructure();
 			
@@ -29,11 +29,6 @@ public class ReconnaissanceType {
 				inconnu = false;
 				mort = true;
 			}
-			if(estStable()){
-				inconnu = false;
-				stabilite =true;
-				
-			}
 			if(estOscillation()){
 				inconnu = false;
 				oscillation=true;
@@ -43,7 +38,8 @@ public class ReconnaissanceType {
 					periodeFinal++;
 					if(estOscillation())
 						break;
-				}
+				}if(periodeFinal == 1)
+					stabilite = true;
 			}
 			if(estVaiseau()){
 				inconnu = false;
@@ -67,10 +63,7 @@ public class ReconnaissanceType {
 	
 	public boolean estOscillation(){
 	return configuration1.getJeux().getCelluleVivante().equals(
-			configuration2.getJeux().getCelluleVivante()) || estStable();
-	}
-	public boolean estStable(){
-		return configuration1.estStable() || estMort();
+			configuration2.getJeux().getCelluleVivante()) ;
 	}
 	
 	public boolean estMort(){
@@ -80,23 +73,18 @@ public class ReconnaissanceType {
 	public boolean estVaiseau(){
 		if(estMort() || estOscillation())
 			return true;
-		Iterator<Point> it1 = configuration1.getJeux().iterer();
-		Iterator<Point> it2 = configuration2.getJeux().iterer();
 		if(configuration1.getJeux().taille() == configuration2.getJeux().taille()){
-			int i=0;
-			double distance=0;
-		while(it1.hasNext()){
-			Point p1=it1.next();
-			it2 = configuration2.getJeux().iterer();
-			while(it2.hasNext()){
-				if(i!=0)
-					if(distance !=(distance(p1, it2.next())))
-						return false;
-				else
-					distance = (distance(p1,it2.next()));
-				i++;
-			}
-		}return true;}return false;
+			Point p1 = configuration1.getJeux().getPoint(0);
+			Point p2 = configuration2.getJeux().getPoint(0);
+			int taille = configuration1.getJeux().taille();
+			double distance = distance(p1, p2);
+			for(int i = 1;i<=taille;i++){
+				Point a = configuration1.getJeux().getPoint(i);
+				Point b = configuration2.getJeux().getPoint(i);
+				if(distance(a, b) !=distance)
+					return false;
+			}return true;
+		}return false;
 		
 	}
 	
