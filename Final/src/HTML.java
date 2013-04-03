@@ -65,8 +65,8 @@ public class HTML {
 				for(int i=0;i<lesFichiers.length;i++){
 						try {
 							ReconnaissanceType nouveauRec = new ReconnaissanceType(
-															temps,
 															jeu,
+															temps,
 															lesFichiers[i].getAbsolutePath());
 							body+=nouveauRec.Resultat();
 						} catch (FileNotFoundException e) {}

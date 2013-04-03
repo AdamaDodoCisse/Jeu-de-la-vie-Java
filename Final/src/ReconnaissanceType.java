@@ -171,11 +171,37 @@ public class ReconnaissanceType {
 		this.inconnu = inconnu;
 	}
 	public String Resultat(){
-		return null;
+		if(isInconnu())
+			return  "<p class=\"\"> Type inconnu</p>";
+		else if(isMort())
+			return  "<p class=\"\"> Type Mort donc Stable ,Oscillation et Vaisseau \n" +
+					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+" </p>";
+		else if(isStabilite())
+			return  "<p class=\"\"> Type Stable donc Oscillation et Vaisseau \n" +
+					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+" </p>";
+		else if(isOscillation())
+			return  "<p class=\"\"> Type Oscillation donc Vaisseau \n" +
+					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+" </p>";
+		else
+			return  "<p class=\"\"> Type Vaisseau \n" +
+					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+" </p>";
 	}
 	
 	public String toString(){
-		return null;
+		if(isInconnu())
+			return  "Type inconnu";
+		else if(isMort())
+			return  "Type Mort donc Stable ,Oscillation et Vaisseau \n" +
+					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+"";
+		else if(isStabilite())
+			return  "Type Stable donc Oscillation et Vaisseau \n" +
+					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+"";
+		else if(isOscillation())
+			return  "Type Oscillation donc Vaisseau \n" +
+					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+"";
+		else
+			return  "Type Vaisseau \n" +
+					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+"";
 	}
 
 }
