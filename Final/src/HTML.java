@@ -95,11 +95,5 @@ public class HTML {
 			return  "<p class=\"\"> Type Vaisseau \n" +
 					"sur une periode de : "+re.getPeriodeFinal()+" et sa queue est de : "+re.getTailleQueue()+" </p>";
 	}
-	
-	public static void main(String []args){
-		try {
-			new HTML("html", 1, 2, "nouveau teste");
-		} catch (HtmlException e) {
-		}
-	}
+
 }

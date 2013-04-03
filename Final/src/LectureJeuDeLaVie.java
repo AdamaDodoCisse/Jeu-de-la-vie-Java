@@ -102,7 +102,6 @@ public class LectureJeuDeLaVie {
 				i++;
 			}
 		}
-		System.out.println(grille.getRegleVieCellule()+"regle"+grille.getRegleMortCellule());
 	}
 }
 

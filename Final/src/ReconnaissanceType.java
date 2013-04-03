@@ -1,5 +1,4 @@
 import java.io.FileNotFoundException;
-import java.util.Iterator;
 
 public class ReconnaissanceType {
 	private JeuDeLaVie configuration1;
