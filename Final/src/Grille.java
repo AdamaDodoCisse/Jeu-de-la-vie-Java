@@ -51,7 +51,9 @@ public class Grille<T> implements StructureDeDonnee<T>{
 		}
 		return regleMortCellule.add(regle);
 	}
-	
+	public T getPoint(int i){
+		return celluleVivante.get(i);
+	}
 	public ArrayList<T> getCelluleVivante() {
 		return celluleVivante;
 	}
