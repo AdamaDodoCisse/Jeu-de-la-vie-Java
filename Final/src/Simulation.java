@@ -13,8 +13,7 @@ public class Simulation {
 	public Simulation(int d,JeuDeLaVie j){
 		this.dureeSimulation = d;
 		this.jeu = j;
-		x1=y1=-25;
-		x2=y2=25;
+		
 		simuler();
 	}
 	
@@ -47,8 +46,8 @@ public class Simulation {
 	}
 	public void afficher(){
 		String s = "";
-		for(int i=x1;i<=x2;i++){
-			for(int j=y1;j<=y2;j++){
+		for(int i=jeu.getMinX();i<=jeu.getMaxX();i++){
+			for(int j=jeu.getMinY();j<=jeu.getMaxY();j++){
 				Point p = new Point(i,j);
 				if(jeu.getJeux().contains(p)){
 					s = s + " 0 ";
