@@ -10,7 +10,7 @@ public class Client {
 	public static void main(String[] args) throws FileNotFoundException {
 		// TODO Auto-generated method stub
 		JeuDeLaVie jeu = new MondeInfini("jeu.LIF");
-		Simulation simule = new Simulation(4,jeu);
+		Simulation simule = new Simulation(6,jeu);
 	}
 
 }
