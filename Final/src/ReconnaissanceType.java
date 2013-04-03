@@ -158,22 +158,6 @@ public class ReconnaissanceType {
 	public void setInconnu(boolean inconnu) {
 		this.inconnu = inconnu;
 	}
-	public String Resultat(){
-		if(isInconnu())
-			return  "<p class=\"\"> Type inconnu</p>";
-		else if(isMort())
-			return  "<p class=\"\"> Type Mort donc Stable ,Oscillation et Vaisseau \n" +
-					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+" </p>";
-		else if(isStabilite())
-			return  "<p class=\"\"> Type Stable donc Oscillation et Vaisseau \n" +
-					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+" </p>";
-		else if(isOscillation())
-			return  "<p class=\"\"> Type Oscillation donc Vaisseau \n" +
-					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+" </p>";
-		else
-			return  "<p class=\"\"> Type Vaisseau \n" +
-					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+" </p>";
-	}
 	
 	public String toString(){
 		if(isInconnu())
