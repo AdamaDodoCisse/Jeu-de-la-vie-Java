@@ -9,7 +9,6 @@ import java.util.*;
 public class JeuDeLaVie implements Jeu{
 	private Grille<Point> jeux;
 	private int minX,minY,maxX,maxY;
-	private boolean estStable = false;
 	public JeuDeLaVie(){
 		jeux = new Grille<Point>();
 		minX = minY = maxY = maxX = 0;
@@ -46,8 +45,6 @@ public class JeuDeLaVie implements Jeu{
 			Point p = iterator.next();
 			calclulercelluleVivante(g, p);
 		}
-		
-		estStable = g.getCelluleVivante().equals(getJeux().getCelluleVivante());
 		
 		jeux.setCelluleVivante(g.getCelluleVivante());
 		Collections.sort(jeux.getCelluleVivante());
@@ -93,7 +90,6 @@ public class JeuDeLaVie implements Jeu{
 	public int nombreVoisinCellule(Point p){
 		int voisinVivant = 0 ;
 		for(int i=p.getX()-1;i<=p.getX()+1;i++){
-
 			for(int j=p.getY()-1;j<=p.getY()+1;j++){
 
 				Point k = new Point(i,j);
@@ -112,9 +108,6 @@ public class JeuDeLaVie implements Jeu{
 		return false;
 	}
 	
-	public boolean estStable(){
-		return estStable;
-	}
 
 	public Grille<Point> getJeux() {
 		return jeux;
