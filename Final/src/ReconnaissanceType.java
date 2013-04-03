@@ -77,7 +77,7 @@ public class ReconnaissanceType {
 			Point p2 = configuration2.getJeux().getPoint(0);
 			int taille = configuration1.getJeux().taille();
 			double distance = distance(p1, p2);
-			for(int i = 1;i<=taille;i++){
+			for(int i = 1;i<taille;i++){
 				Point a = configuration1.getJeux().getPoint(i);
 				Point b = configuration2.getJeux().getPoint(i);
 				if(distance(a, b) !=distance)
