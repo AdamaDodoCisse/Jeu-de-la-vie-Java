@@ -13,8 +13,8 @@ public class Simulation {
 	public Simulation(int d,JeuDeLaVie j){
 		this.dureeSimulation = d;
 		this.jeu = j;
-		x1=y1=-5;
-		x2=y2=20;
+		x1=y1=-25;
+		x2=y2=25;
 		simuler();
 	}
 	
@@ -54,7 +54,7 @@ public class Simulation {
 					s = s + " 0 ";
 				}
 				else 
-					s = s + "   ";
+					s = s + " - ";
 			}
 			s = s + "\n";
 		}
