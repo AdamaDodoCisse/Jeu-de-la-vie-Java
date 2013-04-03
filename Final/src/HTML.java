@@ -68,7 +68,7 @@ public class HTML {
 															jeu,
 															temps,
 															lesFichiers[i].getAbsolutePath());
-							body+=nouveauRec.Resultat();
+							body+=Resultat(nouveauRec);
 						} catch (FileNotFoundException e) {}
 						
 				}return body;
@@ -77,6 +77,23 @@ public class HTML {
 							      "le dossier " +fileName);}
 		}else 
 			throw new HtmlException("Le chemin : << "+fileName+" << n'est pas un dossier");
+	}
+	
+	public String Resultat(ReconnaissanceType re){
+		if(re.isInconnu())
+			return  "<p class=\"\"> Type inconnu</p>";
+		else if(re.isMort())
+			return  "<p class=\"\"> Type Mort donc Stable ,Oscillation et Vaisseau \n" +
+					"sur une periode de : "+re.getPeriodeFinal()+" et sa queue est de : "+re.getTailleQueue()+" </p>";
+		else if(re.isStabilite())
+			return  "<p class=\"\"> Type Stable donc Oscillation et Vaisseau \n" +
+					"sur une periode de : "+re.getPeriodeFinal()+" et sa queue est de : "+re.getTailleQueue()+" </p>";
+		else if(re.isOscillation())
+			return  "<p class=\"\"> Type Oscillation donc Vaisseau \n" +
+					"sur une periode de : "+re.getPeriodeFinal()+" et sa queue est de : "+re.getTailleQueue()+" </p>";
+		else
+			return  "<p class=\"\"> Type Vaisseau \n" +
+					"sur une periode de : "+re.getPeriodeFinal()+" et sa queue est de : "+re.getTailleQueue()+" </p>";
 	}
 	
 	public static void main(String []args){

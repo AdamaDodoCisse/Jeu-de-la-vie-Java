@@ -13,14 +13,12 @@ public class Simulation {
 	public Simulation(int d,JeuDeLaVie j){
 		this.dureeSimulation = d;
 		this.jeu = j;
-		
 		simuler();
 	}
 	
 	public void simuler(){
 	    
 		afficher();
-		System.out.println("taille"+jeu.getJeux().getCelluleVivante().size());
 		time = new Timer(1000,new ActionListener(){
 			int temps = 0;
 			public void actionPerformed(ActionEvent e){

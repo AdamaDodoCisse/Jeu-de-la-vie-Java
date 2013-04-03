@@ -28,16 +28,28 @@ public class LectureJeuDeLaVie {
 						scanner = new Scanner(line);
 						abscisse = scanner.nextInt();
 						ordonnee = scanner.nextInt();
-					} else if (line.matches("^#R[\\s0-9]+/[0-9]+")){
+					} else if (line.matches("^#R[\\s0-9]+/[0-9]+$")){
 						
 						ajouterRegle(line,grille);
 						
 					} else if (line.matches("^[.*]+")){
 						
-						ajouterCelluleVivante(line,abscisse,ordonnee,grille);
+						int i = 0;
+						int tmp=ordonnee;
+						while(i<line.length()){
+							if(line.charAt(i)=='*'){
+								grille.ajouterCellule(new Point(abscisse,ordonnee));
+							}
+							ordonnee++;
+							i++;
+						}
+						abscisse++;
+						ordonnee=tmp;
 						
 					} else if (line.matches("^#N$")){
-						
+						/*grille.ajouterRegleVie(2);
+						grille.ajouterRegleVie(3);
+						grille.ajouterRegleMort(3);*/
 						grille.ajouterRegleVie(3);
 						grille.ajouterRegleMort(2);
 						grille.ajouterRegleMort(3);
@@ -80,16 +92,17 @@ public class LectureJeuDeLaVie {
 			String k = regle.nextToken();
 			int i=0;
 			while(i<=k.length()-1){
-				grille.ajouterRegleVie(Integer.valueOf(k.charAt(i)));
+				grille.ajouterRegleVie(Integer.parseInt(k.charAt(i)+""));
 				i++;
 			}
 			k = regle.nextToken();
 			i=0;
 			while(i<=k.length()-1){
-				grille.ajouterRegleMort((Integer.valueOf(k.charAt(i))));
+				grille.ajouterRegleMort(Integer.parseInt(k.charAt(i)+""));
 				i++;
 			}
 		}
+		System.out.println(grille.getRegleVieCellule()+"regle"+grille.getRegleMortCellule());
 	}
 }
 
