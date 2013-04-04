@@ -49,7 +49,7 @@ public class Simulation {
 			for(int j=jeu.getMinY();j<=jeu.getMaxY();j++){
 				Point p = new Point(i,j);
 				if(jeu.getJeux().contains(p)){
-					s = s + " A ";
+					s = s + " O ";
 				}
 				else 
 					s = s + " - ";
