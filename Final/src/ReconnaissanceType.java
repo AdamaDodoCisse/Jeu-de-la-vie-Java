@@ -18,7 +18,6 @@ public class ReconnaissanceType {
 		
 		
 		for(int i=1;i<=temp;i++){
-			
 			calculerStructure();
 			
 			if(!inconnu){
