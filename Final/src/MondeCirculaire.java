@@ -1,167 +1,121 @@
 import java.io.FileNotFoundException;
-
-
 public class MondeCirculaire extends JeuDeLaVie{
 	
 	public MondeCirculaire(String nomFichier) throws FileNotFoundException{
 		super(nomFichier);
+		
 	}
 	public int nombreVoisinCellule(Point p){
-		int nombreVoisin = 0;
-		if(p.getX()==getMinX() && p.getY()==getMinY()){
-			Point t=new Point(getMinX(),p.getY()+1);
-			Point y=new Point (p.getX()+1,p.getY());
-			Point k=new Point(getMinX(),getMaxY());
-			Point x =new Point(getMaxX(),getMinY()); 
-			Point z=new Point(p.getX()+1,p.getY()+1);
-			if(getJeux().contains(t)){
-				nombreVoisin++;
-			}if(getJeux().contains(y)){
-				nombreVoisin++;
+		int voisinVivant = 0 ;
+		for(int i=p.getX()-1;i<=p.getX()+1;i++){
+			for(int j=p.getY()-1;j<=p.getY()+1;j++){
+				Point k = new Point(i,j);
+				if(getJeux().contains(k) && ! k.equals(p))
+					voisinVivant ++ ;
+				if(k.equals(p))
+					voisinVivant +=bordure(p);
 			}
-			if(getJeux().contains(k)){
-				nombreVoisin++;
-			}
-			if(getJeux().contains(x)){
-				nombreVoisin++;
-			}
-			
-			if(getJeux().contains(z)){
-				nombreVoisin++;
-			}
-			
-		}
-		else if (p.getX()==getMinX() && p.getY()==getMaxY()){
-			Point t=new Point (getMinX(),getMaxY()-1);
-			Point z=new Point(getMinX()+1,getMaxY());
-			Point y=new Point(getMinX()+1,getMaxY()-1);
-			Point k=new Point (getMinX(),getMinY());
-			Point x=new Point (getMaxX(),getMaxY());
-			
-			if(getJeux().contains(t)){
-				nombreVoisin++;
-				
-			}
-			
-			if(getJeux().contains(y)){
-				nombreVoisin++;
-				
-			}
-			
-			if(getJeux().contains(z)){
-				nombreVoisin++;
-				
-			}
-			
-			if(getJeux().contains(k)){
-				nombreVoisin++;
-				
-			}
-			if(getJeux().contains(x)){
-				nombreVoisin++;
-			
-			}
-		} else if(p.getX()==getMaxX() && p.getY()==getMinY()){
-			
-			Point t=new Point(getMaxX(),getMinY()+1);
-			Point z=new Point(getMaxX()-1,getMinY());
-			
-			Point y=new Point(getMaxX()-1,getMinY()+1);
-			Point k=new Point (getMinX(),getMinY());
-			Point x=new Point (getMaxX(),getMaxY());
-			
-			
-
-			if(getJeux().contains(t)){
-				nombreVoisin++;
-				
-			}
-
-			if(getJeux().contains(y)){
-				nombreVoisin++;
-				
-			}
-
-			if(getJeux().contains(z)){
-				nombreVoisin++;
-				
-			}
-			
-			if(getJeux().contains(k)){
-				nombreVoisin++;
-				
-			}
-			if(getJeux().contains(x)){
-				nombreVoisin++;
-			
-			}
-			
-		}else if (p.getX()==getMaxX() && p.getY()==getMaxY()){
-			Point t=new Point (getMaxX(), getMaxY()-1);
-			Point z=new Point (getMaxX()-1,getMaxY()-1);
-			Point y=new Point(getMaxX()-1,getMaxY());
-
-			Point k=new Point (getMinX(),getMaxY());
-			Point x=new Point (getMaxX(),getMinY());
-			
-
-			if(getJeux().contains(t)){
-				nombreVoisin++;
-				
-			}
-			
-
-			if(getJeux().contains(z)){
-				nombreVoisin++;
-				
-			}
-
-			if(getJeux().contains(y)){
-				nombreVoisin++;
-				
-			}
-			
-			if(getJeux().contains(k)){
-				nombreVoisin++;
-				
-			}
-			if(getJeux().contains(x)){
-				nombreVoisin++;
-			
-			}
-			
-		}else if(p.getX()==getMaxX() && p.getY() > getMinY()){
-			Point t=new Point (p.getX(),p.getY()-1);
-			Point y=new Point (p.getX(),p.getY()+1);
-			Point z=new Point (p.getX()-1,p.getY()-1);
-			
-		Point k=new Point (getMinX(),p.getY());
-		Point x=new Point (p.getX()-1,p.getY()+1);		
-		
-		if(getJeux().contains(t)){
-			nombreVoisin++;
-		
 		}
 		
-		if(getJeux().contains(y)){
-			nombreVoisin++;
-		
-		}
-		if(getJeux().contains(z)){
-			nombreVoisin++;
-		
-		}
-		if(getJeux().contains(k)){
-			nombreVoisin++;
-		
-		}
-		if(getJeux().contains(x)){
-			nombreVoisin++;
-		
-		}
-		} 
-		return nombreVoisin;
+		return	voisinVivant;
 	}
-	public void update(){}
+	
+	private Point opposerVertical(Point p){
+		if(p.getX()==getMinX()){
+			return new Point(getMaxX(),p.getY());
+		}else {
+			return new Point(getMinX(),p.getY());
+		}
+	}
+	private Point opposerHorizontal(Point p){
+		if(p.getY()==getMinY()){
+			return new Point(p.getX(), getMaxY());
+		}else {
+			return new Point(p.getX(),getMinX());
+		}
+	}
+	
+	private int bordure(Point p){
+		int nombre =0;
+		Point hautGauche=new Point(getMinX(), getMinY());
+		Point hautDroite=new Point(getMinX(), getMaxY());
+		Point basGauche = new Point(getMaxX(),getMinY());
+		Point basDroite = new Point(getMaxX(),getMaxY());		
+				if(p.equals(hautGauche)
+				|| p.equals(hautDroite)
+				|| p.equals(basGauche)
+				|| p.equals(basDroite)){
+					if(getJeux().contains(opposerHorizontal(p)))
+						nombre++;
+					if(getJeux().contains(opposerVertical(p)))
+						nombre++;
+					if(getJeux().contains(opposerVertical(opposerHorizontal(p))))
+						nombre++;
+					if(p.equals(hautGauche)){
+						if(getJeux().contains(opposerVertical(new Point(p.getX()+1,p.getY()))))
+							nombre++;
+						if(getJeux().contains(opposerHorizontal(new Point(p.getX(),p.getY()+1))));
+							nombre++;
+					}
+					
+					if(p.equals(hautDroite)){
+						if(getJeux().contains(opposerVertical(new Point(p.getX()+1,p.getY()))))
+							nombre++;
+						if(getJeux().contains(opposerHorizontal(new Point(p.getX(),p.getY()-1))));
+							nombre++;
+					}
+					if(p.equals(basGauche)){
+						if(getJeux().contains(opposerVertical(new Point(p.getX()-1,p.getY()))))
+							nombre++;
+						if(getJeux().contains(opposerHorizontal(new Point(p.getX(),p.getY()+1))));
+							nombre++;
+						
+					}
+					if(p.equals(basDroite)){
+						if(getJeux().contains(opposerVertical(new Point(p.getX()-1,p.getY()))))
+							nombre++;
+						if(getJeux().contains(opposerHorizontal(new Point(p.getX(),p.getY()-1))));
+							nombre++;
+						
+					}
+					
+						
+				}else if(p.getX()==getMinX() || p.getX()==getMaxX()){
+					if(getJeux().contains(opposerVertical(p)))
+						nombre++;
+					if(getJeux().contains(opposerVertical(new Point(p.getX()-1,p.getY()))))
+						nombre++;
+					if(getJeux().contains(opposerVertical(new Point(p.getX()+1,p.getY()))))
+						nombre++;
+				}else if(p.getY()==getMinY() || p.getY()==getMaxY()){
+					if(getJeux().contains(opposerVertical(p)))
+						nombre++;
+					if(getJeux().contains(opposerHorizontal(new Point(p.getX(),p.getY()+1))))
+						nombre++;
+					if(getJeux().contains(opposerHorizontal(new Point(p.getX(),p.getY()-1))))
+						nombre++;
+				}
+				
+				return nombre;
+	}
+	public void update(){
+		
+		setMinX(0);
+		setMaxX(10);
+		setMinY(0);
+		setMaxY(10);
+	}
+	
+	public static void main(String[]args){
+		JeuDeLaVie j;
+		try {
+			j = new MondeCirculaire("html/jeu.LIF");
+			new Simulation(20, j);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }
 

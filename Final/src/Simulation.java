@@ -22,8 +22,8 @@ public class Simulation {
 		time = new Timer(150,new ActionListener(){
 			int temps = 0;
 			public void actionPerformed(ActionEvent e){
-				System.out.print((char)Event.ESCAPE + "8");
-				System.out.print((char)Event.ESCAPE + "[2J");
+				System.out.println((char)Event.ESCAPE + "8");
+				System.out.println((char)Event.ESCAPE + "[2J");
 				jeu.evolutionSuivante();
 				afficher();
 				temps++;
