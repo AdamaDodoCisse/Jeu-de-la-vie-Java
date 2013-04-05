@@ -1,5 +1,4 @@
 import java.io.FileNotFoundException;
-
 public class ReconnaissanceType {
 	private JeuDeLaVie configuration1;
 	private JeuDeLaVie configuration2;
@@ -15,7 +14,6 @@ public class ReconnaissanceType {
 		
 		configuration1 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier);
 		configuration2 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier);
-		
 		
 		for(int i=1;i<=temp;i++){
 			calculerStructure();
