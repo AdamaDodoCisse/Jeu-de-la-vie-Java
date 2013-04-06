@@ -110,11 +110,12 @@ public class MondeCirculaire extends JeuDeLaVie{
 				if(getJeux().contains(opposerHorizontal(new Point(p.getX()-1, p.getY())))){
 					nombre++;
 				}
-	
+
 			}
 		}
 		return nombre;
 	}
+	@SuppressWarnings("unused")
 	private void bordure(Point p,ArrayList<Point>m){
 		Point hautGauche=new Point(getMinX(), getMinY());
 		Point hautDroite=new Point(getMinX(), getMaxY());
@@ -148,8 +149,8 @@ public class MondeCirculaire extends JeuDeLaVie{
 			}
 
 			else if(p.equals(hautDroite)){
-				 a = opposerHorizontal(new Point(p.getX()+1,p.getY()));
-				 b = opposerVertical(new Point(p.getX(),p.getY()-1));
+				a = opposerHorizontal(new Point(p.getX()+1,p.getY()));
+				b = opposerVertical(new Point(p.getX(),p.getY()-1));
 				if(getJeux().contains(a) && !m.contains(a)){
 					m.add(a);
 				}
@@ -168,8 +169,8 @@ public class MondeCirculaire extends JeuDeLaVie{
 				}
 			}
 			if(p.equals(basDroite)){
-				 a = opposerHorizontal(new Point(p.getX()-1,p.getY()));
-				 b = opposerVertical(new Point(p.getX(),p.getY()-1));
+				a = opposerHorizontal(new Point(p.getX()-1,p.getY()));
+				b = opposerVertical(new Point(p.getX(),p.getY()-1));
 				if(getJeux().contains(a) && !m.contains(a)){
 					m.add(a);
 				}
@@ -207,7 +208,7 @@ public class MondeCirculaire extends JeuDeLaVie{
 						&& !m.contains(c)){
 					m.add(c);
 				}
-	
+
 			}
 		}
 	}
@@ -218,7 +219,7 @@ public class MondeCirculaire extends JeuDeLaVie{
 		setMinY(0);
 		setMaxY(10);
 	}
-	
+
 	public void evolutionSuivante(){
 		Grille<Point> grille = new Grille<Point>();
 		for(int i=getMinX();i<=getMaxY();i++){
