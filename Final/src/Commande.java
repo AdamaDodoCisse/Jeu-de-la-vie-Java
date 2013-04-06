@@ -85,7 +85,7 @@ public class Commande {
 	
 	private void analyserFichier(int jeu,int temps,String nomfichier){
 		try {
-			ReconnaissanceType re = new ReconnaissanceType(1, temps, nomfichier);
+			ReconnaissanceType re = new ReconnaissanceType(jeu, temps, nomfichier);
 			System.out.println(re);
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -108,20 +108,50 @@ public class Commande {
 				
 				else
 					throw new CommandeException("Commande inconnu !");
-			}else if(args.length == 3){
+			}else if(args.length == 3 || args.length == 4){
 				if(args[1].matches("^[0-9]+$")){
 					
 					int temps = Integer.parseInt(args[1]);
 					String nomRepertoire = args[2];
 					
-					if(args[0].equals("-s"))
+					if(args[0].equals("-s") && args.length==3)
 						simuler(nomRepertoire,temps,1);
-					
-					else if(args[0].equals("-c"))
+					else if(args[0].equals("-s")){
+						try{
+							int a = Integer.parseInt(args[3]);
+							if(a >=1 && a<=3)
+								simuler(nomRepertoire,temps,a);
+							else
+								throw new CommandeException("l'entier doit etre entre 1 et 3");
+						}catch(Exception e){
+							throw new CommandeException("le quatrième arguments est un entier");
+						}
+					}
+					if(args[0].equals("-c") && args.length==3)
 						analyserFichier(1, temps, nomRepertoire);
-					
-					else if(args[0].equals("-w")){
+					else if(args[0].equals("-c")){
+						try{
+							int a = Integer.parseInt(args[3]);
+							if(a >=1 && a<=3)
+								analyserFichier(a, temps, nomRepertoire);
+							else
+								throw new CommandeException("l'entier doit etre entre 1 et 3");
+						}catch(Exception e){
+							throw new CommandeException("le quatrième arguments est un entier");
+						}
+					}
+					if(args[0].equals("-w") && args.length==3){
 						nouveauHtml(nomRepertoire, temps, 1, "Jeu de la vie");
+					}else if(args[0].equals("-w")){
+						try{
+							int a = Integer.parseInt(args[3]);
+							if(a >=1 && a<=3)
+								nouveauHtml(nomRepertoire, temps, a, "Jeu de la vie");
+							else
+								throw new CommandeException("l'entier doit etre entre 1 et 3");
+						}catch(Exception e){
+							throw new CommandeException("le quatrième arguments est un entier");
+						}
 					}
 				}else
 					throw new CommandeException("Le deuxième Argument n'est pas un entier");

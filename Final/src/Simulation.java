@@ -19,7 +19,7 @@ public class Simulation {
 	public void simuler(){
 	    
 		afficher();
-		time = new Timer(150,new ActionListener(){
+		time = new Timer(500,new ActionListener(){
 			int temps = 0;
 			public void actionPerformed(ActionEvent e){
 				System.out.println((char)Event.ESCAPE + "8");
