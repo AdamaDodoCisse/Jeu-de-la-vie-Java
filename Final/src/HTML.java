@@ -67,7 +67,7 @@ public class HTML {
 							ReconnaissanceType nouveauRec = new ReconnaissanceType(
 															jeu,
 															temps,
-															lesFichiers[i].getAbsolutePath());
+															lesFichiers[i].getAbsolutePath(),new Grille());
 							body+=Resultat(nouveauRec);
 						} catch (FileNotFoundException e) {}
 						
