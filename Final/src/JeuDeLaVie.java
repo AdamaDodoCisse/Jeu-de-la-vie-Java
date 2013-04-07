@@ -7,20 +7,21 @@ import java.util.*;
  *
  */
 public class JeuDeLaVie implements Jeu{
-	private Grille<Point> jeux;
+	private StructureDeDonnee<Point> jeux;
 	private int minX,minY,maxX,maxY;
-	public JeuDeLaVie(){
-		jeux = new Grille<Point>();
+	public JeuDeLaVie(StructureDeDonnee<Point> grille){
+		jeux = grille;
 		minX = minY = maxY = maxX = 0;
 	}
-	
-	public JeuDeLaVie(String nomFichier) throws FileNotFoundException{
+
+
+	public JeuDeLaVie(String nomFichier,StructureDeDonnee<Point> grille) throws FileNotFoundException{
 		minX = minY = maxY = maxX = 0;
-		jeux = new Grille<Point>();
-		 LectureJeuDeLaVie.LectureJeu(nomFichier,jeux);
-		 update();
+		jeux = grille;
+		LectureJeuDeLaVie.LectureJeu(nomFichier,jeux);
+		update();
 	}
-	
+
 	public void update(){
 		Iterator<Point> iterator = jeux.iterer();
 		while(iterator.hasNext()){
@@ -35,24 +36,24 @@ public class JeuDeLaVie implements Jeu{
 				maxY = p.getY();
 		}
 	}
-	
+
 	public void evolutionSuivante(){
-		Grille<Point> g = new Grille<Point>();
-		
+		Grille g = new Grille();
+
 		Iterator<Point> iterator =jeux.iterer();
-		
+
 		while(iterator.hasNext()){
 			Point p = iterator.next();
 			calclulercelluleVivante(g, p);
 		}
-		
+
 		jeux.setCelluleVivante(g.getCelluleVivante());
 		Collections.sort(jeux.getCelluleVivante());
 		update();
-		
+
 	}
-	
-	public void calclulercelluleVivante(Grille<Point> grille,Point p){
+
+	public void calclulercelluleVivante(StructureDeDonnee<Point> grille,Point p){
 		for(int i=p.getX()-1;i<=p.getX()+1;i++){
 			for(int j=p.getY()-1;j<=p.getY()+1;j++){
 				Point k = new Point(i,j);
@@ -71,7 +72,7 @@ public class JeuDeLaVie implements Jeu{
 			}
 		}
 	}
-	
+
 	public boolean celluleMourante(Point p){
 		int nombreVoisin = nombreVoisinCellule(p);
 		if( ! jeux.containsRegleMort(nombreVoisin) ){
@@ -79,7 +80,7 @@ public class JeuDeLaVie implements Jeu{
 		}
 		return false;
 	}
-	
+
 	public boolean celluleNaissante(Point p){
 		int nombreVoisin = nombreVoisinCellule(p);
 		if( jeux.containsRegleVie(nombreVoisin) ){
@@ -87,7 +88,7 @@ public class JeuDeLaVie implements Jeu{
 		}
 		return false;
 	}
-	
+
 	public int nombreVoisinCellule(Point p){
 		int voisinVivant = 0 ;
 		for(int i=p.getX()-1;i<=p.getX()+1;i++){
@@ -100,23 +101,24 @@ public class JeuDeLaVie implements Jeu{
 					voisinVivant++;
 			}
 		}
-	return voisinVivant;
+		return voisinVivant;
 	}
-	
+
 	public boolean ajouterCellule(Point p){
 		if(p.getX()>=minX && p.getX()<= maxX && p.getY()>=minY && p.getY()<=maxY)
 			return true;
 		return false;
 	}
-	
 
-	public Grille<Point> getJeux() {
+
+	public StructureDeDonnee<Point> getJeux() {
 		return jeux;
 	}
 
-	public void setJeux(Grille<Point> jeux) {
+	public void setJeux(StructureDeDonnee<Point> jeux) {
 		this.jeux = jeux;
 	}
+
 
 	public int getMinX() {
 		return minX;
