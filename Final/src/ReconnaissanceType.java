@@ -9,15 +9,15 @@ public class ReconnaissanceType {
 	private boolean mort=false;
 	private boolean vaisceau=false;
 	private boolean inconnu=true;
-	
-	public ReconnaissanceType(int type,int temp,String nomFichier) throws FileNotFoundException{
-		
-		configuration1 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier);
-		configuration2 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier);
-		
+
+	public ReconnaissanceType(int type,int temp,String nomFichier,StructureDeDonnee<Point>grille) throws FileNotFoundException{
+
+		configuration1 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier,grille);
+		configuration2 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier,grille);
+
 		for(int i=1;i<=temp;i++){
 			calculerStructure();
-			
+
 			if(!inconnu){
 				break;
 			}tailleQueue = i;
@@ -41,7 +41,7 @@ public class ReconnaissanceType {
 				inconnu = false;
 				vaisceau=true;
 				if(!isOscillation())
-						//		Calcule de la periode		
+					//		Calcule de la periode		
 					while(true){
 						calculerStructure();
 						periodeFinal++;
@@ -56,16 +56,16 @@ public class ReconnaissanceType {
 		configuration2.evolutionSuivante(); 
 		configuration2.evolutionSuivante();
 	}
-	
+
 	public boolean estOscillation(){
-	return configuration1.getJeux().getCelluleVivante().equals(
-			configuration2.getJeux().getCelluleVivante()) ;
+		return configuration1.getJeux().getCelluleVivante().equals(
+				configuration2.getJeux().getCelluleVivante()) ;
 	}
-	
+
 	public boolean estMort(){
 		return configuration1.getJeux().estVide();
 	}
-	
+
 	public boolean estVaiseau(){
 		if(estMort() || estOscillation())
 			return true;
@@ -81,13 +81,13 @@ public class ReconnaissanceType {
 					return false;
 			}return true;
 		}return false;
-		
+
 	}
-	
+
 	public double distance(Point p1,Point p2){
 		return (Math.sqrt((Math.pow(p1.getX() - p2.getX(), 2)) + (Math.pow(p1.getY() - p2.getY(), 2))));
 	}
-	
+
 	public void clone(JeuDeLaVie j1,JeuDeLaVie j2){
 		j2.setJeux(j1.getJeux());
 		j2.setMaxX(j1.getMaxY());
@@ -95,11 +95,11 @@ public class ReconnaissanceType {
 		j2.setMinX(j1.getMinX());
 		j2.setMinY(j1.getMinY());
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	public JeuDeLaVie getConfiguration1() {
 		return configuration1;
 	}
@@ -154,22 +154,22 @@ public class ReconnaissanceType {
 	public void setInconnu(boolean inconnu) {
 		this.inconnu = inconnu;
 	}
-	
+
 	public String toString(){
 		if(isInconnu())
 			return  "Type inconnu";
 		else if(isMort())
 			return  "Type Mort donc Stable ,Oscillation et Vaisseau \n" +
-					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+"";
+			"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+"";
 		else if(isStabilite())
 			return  "Type Stable donc Oscillation et Vaisseau \n" +
-					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+"";
+			"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+"";
 		else if(isOscillation())
 			return  "Type Oscillation donc Vaisseau \n" +
-					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+"";
+			"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+"";
 		else
 			return  "Type Vaisseau \n" +
-					"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+"";
+			"sur une periode de : "+periodeFinal+" et sa queue est de : "+tailleQueue+"";
 	}
 
 }
