@@ -2,7 +2,7 @@ import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;;
+import javax.swing.*;
 
 public class Simulation {
 	private int dureeSimulation;
@@ -13,6 +13,7 @@ public class Simulation {
 	public Simulation(int d,JeuDeLaVie j){
 		this.dureeSimulation = d;
 		this.jeu = j;
+
 		simuler();
 	}
 	
@@ -24,6 +25,7 @@ public class Simulation {
 			public void actionPerformed(ActionEvent e){
 				System.out.println((char)Event.ESCAPE + "8");
 				System.out.println((char)Event.ESCAPE + "[2J");
+				System.out.println((char)Event.ESCAPE + "2J" );
 				jeu.evolutionSuivante();
 				afficher();
 				temps++;
