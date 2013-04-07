@@ -1,27 +1,27 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Grille<T> implements StructureDeDonnee<T>{
+public class Grille  implements StructureDeDonnee<Point>{
 	
-	private ArrayList<T>celluleVivante;
+	private ArrayList<Point>celluleVivante;
 	private ArrayList<Integer>regleVieCellule;
 	private ArrayList<Integer>regleMortCellule;
 	
 	public Grille(){
-		this.celluleVivante = new ArrayList<T>();
+		this.celluleVivante = new ArrayList<Point>();
 		this.regleVieCellule = new ArrayList<Integer>();
 		this.regleMortCellule = new ArrayList<Integer>();
 	}
 
 	
 	@Override
-	public Iterator<T> iterer() {
+	public Iterator<Point> iterer() {
 		// TODO Auto-generated method stub
-		Iterator<T> it = celluleVivante.iterator();
+		Iterator<Point> it = celluleVivante.iterator();
 		return it;
 	}
 	@Override
-	public boolean ajouterCellule(T cellule) {
+	public boolean ajouterCellule(Point cellule) {
 		// TODO Auto-generated method stub
 		if(this.celluleVivante.contains(cellule)){
 			return false;
@@ -51,15 +51,11 @@ public class Grille<T> implements StructureDeDonnee<T>{
 		}
 		return regleMortCellule.add(regle);
 	}
-	public T getPoint(int i){
+	public Point getPoint(int i){
 		return celluleVivante.get(i);
 	}
-	public ArrayList<T> getCelluleVivante() {
+	public ArrayList<Point> getCelluleVivante() {
 		return celluleVivante;
-	}
-
-	public void setCelluleVivante(ArrayList<T> celluleVivante) {
-		this.celluleVivante = celluleVivante;
 	}
 
 	public ArrayList<Integer> getRegleVieCellule() {
@@ -78,9 +74,7 @@ public class Grille<T> implements StructureDeDonnee<T>{
 		this.regleMortCellule = regleMortCellule;
 	}
 	
-	public boolean contains(T cellule){
-		return celluleVivante.contains(cellule);
-	}
+
 	
 	public boolean containsRegleVie(Integer regle){
 		return regleVieCellule.contains(regle);
@@ -91,7 +85,7 @@ public class Grille<T> implements StructureDeDonnee<T>{
 	}
 
 	@Override
-	public boolean supprimer(T cellule) {
+	public boolean supprimer(Point cellule) {
 		return celluleVivante.remove(cellule);
 	}
 
@@ -126,8 +120,8 @@ public class Grille<T> implements StructureDeDonnee<T>{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		@SuppressWarnings("unchecked")
-		Grille <T> other = (Grille <T>) obj;
+		
+		Grille  other = (Grille ) obj;
 		if (celluleVivante == null) {
 			if (other.celluleVivante != null)
 				return false;
@@ -146,4 +140,40 @@ public class Grille<T> implements StructureDeDonnee<T>{
 		return true;
 	}
 
+
+	@Override
+	public int nombreVoisinCellule(Point  p) {
+			int voisinVivant = 0 ;
+			for(int i=p.getX()-1;i<=p.getX()+1;i++){
+				for(int j=p.getY()-1;j<=p.getY()+1;j++){
+
+					Point k = new Point(i,j);
+
+					if(contains(k) && ! k.equals(p))
+
+						voisinVivant++;
+				}
+			}
+		return voisinVivant;
+		}
+
+
+	@Override
+	public boolean contains(Point cellule) {
+		// TODO Auto-generated method stub
+		return  celluleVivante.contains(cellule);
+	}
+
+
+	@Override
+	public void setCelluleVivante(ArrayList<Point> celluleVivante) {
+		this.celluleVivante=celluleVivante;
+		
+	}
+
+
+	
 }
+
+
+	
