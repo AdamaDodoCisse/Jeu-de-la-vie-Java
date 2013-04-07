@@ -1,9 +1,9 @@
 
 public class Point implements Comparable<Point>{
-	
+
 	private int x;
 	private int y;
-	
+
 	public Point(int abs,int ord){
 		this.x = abs;
 		this.y = ord;
@@ -11,7 +11,6 @@ public class Point implements Comparable<Point>{
 
 	@Override
 	public int compareTo(Point o) {
-		// TODO Auto-generated method stub
 		if(this.getX()>o.getX())
 			return 1;
 		else if(this.getX()==o.getX()){
