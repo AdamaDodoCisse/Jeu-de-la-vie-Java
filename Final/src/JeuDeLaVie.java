@@ -49,6 +49,7 @@ public class JeuDeLaVie implements Jeu{
 		jeux.setCelluleVivante(g.getCelluleVivante());
 		Collections.sort(jeux.getCelluleVivante());
 		update();
+		
 	}
 	
 	public void calclulercelluleVivante(Grille<Point> grille,Point p){
