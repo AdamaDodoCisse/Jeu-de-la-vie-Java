@@ -50,7 +50,7 @@ public class Commande {
 	private void simuler(String fichier,int temps,int jeu){
 		JeuDeLaVie j;
 		try {
-			j = JeuDeLaVieFactory.getJeuDeLaVie(jeu, fichier);
+			j = JeuDeLaVieFactory.getJeuDeLaVie(jeu, fichier,new Grille());
 			new Simulation(temps, j);
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -85,7 +85,7 @@ public class Commande {
 	
 	private void analyserFichier(int jeu,int temps,String nomfichier){
 		try {
-			ReconnaissanceType re = new ReconnaissanceType(jeu, temps, nomfichier);
+			ReconnaissanceType re = new ReconnaissanceType(jeu, temps, nomfichier,new Grille());
 			System.out.println(re);
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
