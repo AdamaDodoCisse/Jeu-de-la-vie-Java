@@ -7,18 +7,18 @@ public class JeuDeLaVieFactory {
 	public static final int MONDE_CIRCULAIRE = 2;
 	public static final int MONDE_AVEC_FRONTIERE = 3;
 	
-	public static JeuDeLaVie getJeuDeLaVie(int typeJeu,String nomFichier) throws FileNotFoundException{
+	public static JeuDeLaVie getJeuDeLaVie(int typeJeu,String nomFichier,StructureDeDonnee<Point> grille) throws FileNotFoundException{
 		JeuDeLaVie jeu = null;
 		
 		switch(typeJeu){
 		case MONDE_INFINI : 
-			jeu = new MondeInfini(nomFichier);
+			jeu = new MondeInfini(nomFichier,grille);
 			break;
 		case MONDE_CIRCULAIRE : 
-			jeu = new MondeCirculaire(nomFichier);
+			jeu = new MondeCirculaire(nomFichier,grille);
 			break;
 		case MONDE_AVEC_FRONTIERE : 
-			jeu = new MondeAvecFrontiere(nomFichier);
+			jeu = new JeuDeLaVie(nomFichier,grille);
 			break;
 		default : 
 			throw new IllegalArgumentException("Type de jeu Inconnu "+typeJeu);
