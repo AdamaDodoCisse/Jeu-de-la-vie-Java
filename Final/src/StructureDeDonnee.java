@@ -1,6 +1,4 @@
 import java.util.Iterator;
-
-
 public interface StructureDeDonnee<T> {
 	public boolean ajouterCellule(T cellule);
 	public boolean supprimer(T cellule);
