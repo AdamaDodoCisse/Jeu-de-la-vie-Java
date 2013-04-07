@@ -2,11 +2,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 public class MondeCirculaire extends JeuDeLaVie{
-
-	public MondeCirculaire(String nomFichier) throws FileNotFoundException{
-		super(nomFichier);
+	public MondeCirculaire(String nomFichier,StructureDeDonnee<Point>grille) throws FileNotFoundException{
+		super(nomFichier,grille);
 
 	}
+	
 	public int nombreVoisinCellule(Point p){
 		int voisinVivant = 0 ;
 		ArrayList<Point> m = new ArrayList<Point>();
@@ -221,7 +221,7 @@ public class MondeCirculaire extends JeuDeLaVie{
 	}
 
 	public void evolutionSuivante(){
-		Grille<Point> grille = new Grille<Point>();
+		Grille grille = new Grille();
 		for(int i=getMinX();i<=getMaxY();i++){
 			for(int j=getMinY();j<=getMaxY();j++){
 				Point p = new Point(i, j);
@@ -240,11 +240,13 @@ public class MondeCirculaire extends JeuDeLaVie{
 	public static void main(String[]args){
 		JeuDeLaVie j;
 		try {
-			j = new MondeCirculaire("html/jeu.LIF");
+			j = new MondeCirculaire("html/jeu.LIF",new Grille());
 			new Simulation(1000, j);
 		} catch (FileNotFoundException e) {
 		}
 
 	}
+
 }
+
 
