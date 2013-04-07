@@ -9,8 +9,8 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class LectureJeuDeLaVie {
-	
-    public static void LectureJeu(String nomFichier,Grille<Point> grille) throws FileNotFoundException{
+
+	public static void LectureJeu(String nomFichier,StructureDeDonnee<Point> grille) throws FileNotFoundException{
 		BufferedReader reader = null;
 		File fichier=new File(nomFichier);
 		int abscisse=0;
@@ -19,7 +19,7 @@ public class LectureJeuDeLaVie {
 		Scanner scanner  = null;
 		if( fichier.isFile() /*|| ! fichier.getAbsolutePath().matches(".[Ll][Ii][Ff]$")*/
 				|| fichier.isFile() && fichier.getAbsolutePath().endsWith(".LIF")){
-			
+
 			reader = new BufferedReader(new FileReader(fichier));
 			try {
 				while((line = reader.readLine())!=null){
@@ -29,11 +29,11 @@ public class LectureJeuDeLaVie {
 						abscisse = scanner.nextInt();
 						ordonnee = scanner.nextInt();
 					} else if (line.matches("^#R[\\s0-9]+/[0-9]+$")){
-						
+
 						ajouterRegle(line,grille);
-						
+
 					} else if (line.matches("^[.*]+")){
-						
+
 						int i = 0;
 						int tmp=ordonnee;
 						while(i<line.length()){
@@ -45,11 +45,9 @@ public class LectureJeuDeLaVie {
 						}
 						abscisse++;
 						ordonnee=tmp;
-						
+
 					} else if (line.matches("^#N$")){
-						/*grille.ajouterRegleVie(2);
-						grille.ajouterRegleVie(3);
-						grille.ajouterRegleMort(3);*/
+
 						grille.ajouterRegleVie(3);
 						grille.ajouterRegleMort(2);
 						grille.ajouterRegleMort(3);
@@ -70,22 +68,22 @@ public class LectureJeuDeLaVie {
 		}
 	}
 
-	public static void ajouterCelluleVivante(String line ,int abscisse,int ordonnee,Grille<Point> grille){
-			int i = 0;
-			int tmp=ordonnee;
-			while(i<line.length()){
-				if(line.charAt(i)=='*'){
-					grille.ajouterCellule(new Point(abscisse,ordonnee));
-				}
-				ordonnee++;
-				i++;
+	public static void ajouterCelluleVivante(String line ,int abscisse,int ordonnee, StructureDeDonnee<Point>grille){
+		int i = 0;
+		int tmp=ordonnee;
+		while(i<line.length()){
+			if(line.charAt(i)=='*'){
+				grille.ajouterCellule(new Point(abscisse,ordonnee));
 			}
-			abscisse++;
-			ordonnee=tmp;
+			ordonnee++;
+			i++;
+		}
+		abscisse++;
+		ordonnee=tmp;
 	}
 
-	
-	public static void ajouterRegle(String line,Grille<Point> grille){
+
+	public static void ajouterRegle(String line, StructureDeDonnee<Point> grille){
 		line = line.replaceAll("[^0-9/]", "");
 		StringTokenizer regle = new StringTokenizer(line,"/");
 		if(regle.countTokens()==2){
