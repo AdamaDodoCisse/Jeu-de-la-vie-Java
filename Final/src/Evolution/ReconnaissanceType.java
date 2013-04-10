@@ -1,4 +1,11 @@
+package Evolution;
 import java.io.FileNotFoundException;
+
+import setup.Cellule;
+
+import Code_du_jeu.JeuDeLaVie;
+import Code_du_jeu.JeuDeLaVieFactory;
+import Interface_du_jeu.StructureDeDonnee;
 public class ReconnaissanceType {
 	private JeuDeLaVie configuration1;
 	private JeuDeLaVie configuration2;
@@ -10,7 +17,7 @@ public class ReconnaissanceType {
 	private boolean vaisceau=false;
 	private boolean inconnu=true;
 
-	public ReconnaissanceType(int type,int temp,String nomFichier,StructureDeDonnee<Point>grille) throws FileNotFoundException{
+	public ReconnaissanceType(int type,int temp,String nomFichier,StructureDeDonnee grille) throws FileNotFoundException{
 
 		configuration1 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier,grille);
 		configuration2 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier,grille);
@@ -70,13 +77,13 @@ public class ReconnaissanceType {
 		if(estMort() || estOscillation())
 			return true;
 		if(configuration1.getJeux().taille() == configuration2.getJeux().taille()){
-			Point p1 = configuration1.getJeux().getCellule(0);
-			Point p2 = configuration2.getJeux().getCellule(0);
+			Cellule p1 = configuration1.getJeux().getCellule(0);
+			Cellule p2 = configuration2.getJeux().getCellule(0);
 			int taille = configuration1.getJeux().taille();
 			double distance = distance(p1, p2);
 			for(int i = 1;i<taille;i++){
-				Point a = configuration1.getJeux().getCellule(i);
-				Point b = configuration2.getJeux().getCellule(i);
+				Cellule a = configuration1.getJeux().getCellule(i);
+				Cellule b = configuration2.getJeux().getCellule(i);
 				if(distance(a, b) !=distance)
 					return false;
 			}return true;
@@ -84,7 +91,7 @@ public class ReconnaissanceType {
 
 	}
 
-	public double distance(Point p1,Point p2){
+	public double distance(Cellule p1,Cellule p2){
 		return (Math.sqrt((Math.pow(p1.getX() - p2.getX(), 2)) + (Math.pow(p1.getY() - p2.getY(), 2))));
 	}
 

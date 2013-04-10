@@ -1,16 +1,17 @@
+package setup;
 
-public class Point implements Comparable<Point>{
+public class Cellule implements Comparable<Cellule>{
 
 	private int x;
 	private int y;
 
-	public Point(int abs,int ord){
+	public Cellule(int abs,int ord){
 		this.x = abs;
 		this.y = ord;
 	}
 
 	@Override
-	public int compareTo(Point o) {
+	public int compareTo(Cellule o) {
 		if(this.getX()>o.getX())
 			return 1;
 		else if(this.getX()==o.getX()){
@@ -44,7 +45,7 @@ public class Point implements Comparable<Point>{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Point other = (Point) obj;
+		Cellule other = (Cellule) obj;
 		if (x != other.x)
 			return false;
 		if (y != other.y)

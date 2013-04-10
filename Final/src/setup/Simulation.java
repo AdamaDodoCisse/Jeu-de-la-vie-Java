@@ -1,8 +1,11 @@
+package setup;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
+
+import Code_du_jeu.JeuDeLaVie;
 
 public class Simulation {
 	private int dureeSimulation;
@@ -49,7 +52,7 @@ public class Simulation {
 		String s = "";
 		for(int i=jeu.getMinX();i<=jeu.getMaxX();i++){
 			for(int j=jeu.getMinY();j<=jeu.getMaxY();j++){
-				Point p = new Point(i,j);
+				Cellule p = new Cellule(i,j);
 				if(jeu.getJeux().contains(p)){
 					s = s + " O ";
 				}

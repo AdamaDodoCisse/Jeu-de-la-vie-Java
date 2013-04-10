@@ -1,8 +1,13 @@
+package Evolution;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+
+import Code_du_jeu.Grille;
+import Exception.HtmlException;
 public class HTML {
 	private String balise;
 	public HTML(String fileName,int temps,int jeu,String nouveauFichier)throws HtmlException{
