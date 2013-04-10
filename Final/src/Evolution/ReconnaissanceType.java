@@ -1,8 +1,8 @@
 package Evolution;
 import java.io.FileNotFoundException;
 
-import setup.Cellule;
 
+import Code_du_jeu.Cellule;
 import Code_du_jeu.JeuDeLaVie;
 import Code_du_jeu.JeuDeLaVieFactory;
 import Interface_du_jeu.StructureDeDonnee;

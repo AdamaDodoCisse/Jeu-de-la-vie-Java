@@ -1,10 +1,11 @@
-package setup;
+package Evolution;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
+import Code_du_jeu.Cellule;
 import Code_du_jeu.JeuDeLaVie;
 
 public class Simulation {

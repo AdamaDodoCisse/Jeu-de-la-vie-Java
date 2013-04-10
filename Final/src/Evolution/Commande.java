@@ -2,7 +2,6 @@ package Evolution;
 
 import java.io.FileNotFoundException;
 
-import setup.Simulation;
 
 import Code_du_jeu.Grille;
 import Code_du_jeu.JeuDeLaVie;
