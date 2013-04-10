@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 
 import Interface_du_jeu.StructureDeDonnee;
 
-
+ 
 public class JeuDeLaVieFactory {
 	
 	public static final int MONDE_INFINI = 1 ;
