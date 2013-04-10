@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.Collections;
+import java.util.Iterator;
 
 /**
  * 
@@ -15,7 +16,7 @@ public class JeuDeLaVie implements Jeu{
 	}
 
 
-	public JeuDeLaVie(String nomFichier,StructureDeDonnee<?> grille) throws FileNotFoundException{
+	public JeuDeLaVie(String nomFichier,StructureDeDonnee<Object> grille) throws FileNotFoundException{
 		minX = minY = maxY = maxX = 0;
 		jeux = grille;
 		LectureJeuDeLaVie.LectureJeu(nomFichier,jeux);
@@ -38,7 +39,7 @@ public class JeuDeLaVie implements Jeu{
 	}
 
 	public void evolutionSuivante(){
-		StructureDeDonnee g ;
+		Grille g = new Grille();
 
 		Iterator<Point> iterator =jeux.iterer();
 
@@ -47,7 +48,7 @@ public class JeuDeLaVie implements Jeu{
 			calclulercelluleVivante(g, p);
 		}
 
-		jeux.setCelluleVivante(new ArrayList<Point>());
+		jeux.setCelluleVivante(g.getCelluleVivante());
 		jeux.trierCellule();
 		update();
 
@@ -111,11 +112,11 @@ public class JeuDeLaVie implements Jeu{
 	}
 
 
-	public StructureDeDonnee<?> getJeux() {
+	public StructureDeDonnee<Object> getJeux() {
 		return jeux;
 	}
 
-	public void setJeux(StructureDeDonnee<Point> jeux) {
+	public void setJeux(StructureDeDonnee<Object> jeux) {
 		this.jeux = jeux;
 	}
 

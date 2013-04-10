@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 
 public class MondeInfini extends JeuDeLaVie{
 	
-	public MondeInfini(String nomFichier,StructureDeDonnee<Point> grille) throws FileNotFoundException{
+	public MondeInfini(String nomFichier,StructureDeDonnee<Object> grille) throws FileNotFoundException{
 		super(nomFichier,grille);
 	}
 
@@ -11,7 +11,6 @@ public class MondeInfini extends JeuDeLaVie{
 	public boolean ajouterCellule(Point p){
 		return true;
 	}
-	
 }
 	
 

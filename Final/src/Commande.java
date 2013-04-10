@@ -26,7 +26,7 @@ public class Commande {
 				"    jeu avec ses caractéristiques (taille de la queue, période et déplacement); max représente la durée\n"+
 				"    maximale de simulation pour déduire les résultats du calcul.\n"+
 				"5 : java -jar JeuDeLaVie.jar -w max dossier calcule le type d’évolution de tous les\n"+
-				"jeux contenus dans le dossier passé en paramètre et affiche les résultats sous la forme d’un fichier html.\n");
+				"	 jeux contenus dans le dossier passé en paramètre et affiche les résultats sous la forme d’un fichier html.\n");
 	}
 	/**
 	 * Affiche la liste des realisateurs du jeu
@@ -98,6 +98,12 @@ public class Commande {
 	 */
 	
 	private void executer(String []args)throws CommandeException{
+		if(args.length==0){
+			System.out.println("Veuillez saisir une des commandes");
+			System.out.println();
+			aider();
+		}
+			
 		if(args.length ==1  ||( args.length ==3 || args.length ==4)){
 			if(args.length==1){
 				if(args[0].equals("-name"))

@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 public class MondeCirculaire extends JeuDeLaVie{
-	public MondeCirculaire(String nomFichier,StructureDeDonnee<Point>grille) throws FileNotFoundException{
+	public MondeCirculaire(String nomFichier,StructureDeDonnee<Object>grille) throws FileNotFoundException{
 		super(nomFichier,grille);
 
 	}
@@ -233,7 +233,7 @@ public class MondeCirculaire extends JeuDeLaVie{
 			}
 		}
 		getJeux().setCelluleVivante(grille.getCelluleVivante());
-		Collections.sort(grille.getCelluleVivante());
+		getJeux().trierCellule();
 		update();
 	}
 
