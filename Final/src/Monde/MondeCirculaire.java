@@ -124,7 +124,7 @@ public class MondeCirculaire extends JeuDeLaVie{
 		setMinY(0);
 		setMaxY(10);
 	}
-
+ 
 	public void evolutionSuivante(){
 		Grille grille = new Grille();
 		for(int i=getMinX();i<=getMaxY();i++){
