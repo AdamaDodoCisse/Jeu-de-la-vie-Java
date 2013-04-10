@@ -8,15 +8,15 @@ import java.util.Iterator;
  *
  */
 public class JeuDeLaVie implements Jeu{
-	private StructureDeDonnee<Object> jeux;
+	private StructureDeDonnee jeux;
 	private int minX,minY,maxX,maxY;
-	public JeuDeLaVie(StructureDeDonnee<Object> grille){
+	public JeuDeLaVie(StructureDeDonnee grille){
 		jeux = grille;
 		minX = minY = maxY = maxX = 0;
 	}
 
 
-	public JeuDeLaVie(String nomFichier,StructureDeDonnee<Object> grille) throws FileNotFoundException{
+	public JeuDeLaVie(String nomFichier,StructureDeDonnee grille) throws FileNotFoundException{
 		minX = minY = maxY = maxX = 0;
 		jeux = grille;
 		LectureJeuDeLaVie.LectureJeu(nomFichier,jeux);
@@ -54,7 +54,7 @@ public class JeuDeLaVie implements Jeu{
 
 	}
 
-	public void calclulercelluleVivante(StructureDeDonnee<?> grille,Point p){
+	public void calclulercelluleVivante(StructureDeDonnee grille,Point p){
 		for(int i=p.getX()-1;i<=p.getX()+1;i++){
 			for(int j=p.getY()-1;j<=p.getY()+1;j++){
 				Point k = new Point(i,j);
@@ -112,11 +112,11 @@ public class JeuDeLaVie implements Jeu{
 	}
 
 
-	public StructureDeDonnee<Object> getJeux() {
+	public StructureDeDonnee getJeux() {
 		return jeux;
 	}
 
-	public void setJeux(StructureDeDonnee<Object> jeux) {
+	public void setJeux(StructureDeDonnee jeux) {
 		this.jeux = jeux;
 	}
 

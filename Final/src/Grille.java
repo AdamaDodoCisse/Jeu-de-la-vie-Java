@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class Grille  implements StructureDeDonnee<Object>{
+public class Grille  implements StructureDeDonnee{
 	
 	private ArrayList<Point>celluleVivante;
 	private ArrayList<Integer>regleVieCellule;

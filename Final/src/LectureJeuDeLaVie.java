@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 
 public class LectureJeuDeLaVie {
 
-	public static void LectureJeu(String nomFichier,StructureDeDonnee<?> grille) throws FileNotFoundException{
+	public static void LectureJeu(String nomFichier,StructureDeDonnee grille) throws FileNotFoundException{
 		BufferedReader reader = null;
 		File fichier=new File(nomFichier);
 		int abscisse=0;
@@ -67,7 +67,7 @@ public class LectureJeuDeLaVie {
 		}
 	}
 
-	public static void ajouterCelluleVivante(String line ,int abscisse,int ordonnee, StructureDeDonnee<?>grille){
+	public static void ajouterCelluleVivante(String line ,int abscisse,int ordonnee, StructureDeDonnee grille){
 		int i = 0;
 		int tmp=ordonnee;
 		while(i<line.length()){
@@ -82,7 +82,7 @@ public class LectureJeuDeLaVie {
 	}
 
 
-	public static void ajouterRegle(String line, StructureDeDonnee<?> grille){
+	public static void ajouterRegle(String line, StructureDeDonnee grille){
 		line = line.replaceAll("[^0-9/]", "");
 		StringTokenizer regle = new StringTokenizer(line,"/");
 		if(regle.countTokens()==2){
