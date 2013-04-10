@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Iterator;
 
 
+import Interface_du_jeu.Jeu;
 import Interface_du_jeu.StructureDeDonnee;
 
 

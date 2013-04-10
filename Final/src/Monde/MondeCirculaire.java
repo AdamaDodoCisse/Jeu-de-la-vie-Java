@@ -7,6 +7,7 @@ import Interface_du_jeu.StructureDeDonnee;
 public class MondeCirculaire extends JeuDeLaVie{
 	public MondeCirculaire(String nomFichier,StructureDeDonnee grille) throws FileNotFoundException{
 		super(nomFichier,grille);
+		
 
 	}
 	
@@ -118,7 +119,6 @@ public class MondeCirculaire extends JeuDeLaVie{
 		return nombre;
 	}
 	public void update(){
-
 		setMinX(0);
 		setMaxX(10);
 		setMinY(0);
