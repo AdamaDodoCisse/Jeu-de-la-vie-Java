@@ -1,6 +1,5 @@
 package Code_du_jeu;
 
-import setup.Cellule;
 
 public interface Jeu {
 public void evolutionSuivante();

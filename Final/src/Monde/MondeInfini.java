@@ -2,7 +2,6 @@ package Code_du_jeu;
 
 import java.io.FileNotFoundException;
 
-import setup.Cellule;
 
 import Interface_du_jeu.StructureDeDonnee;
 

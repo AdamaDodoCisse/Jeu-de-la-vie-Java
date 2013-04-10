@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 
 import java.util.Iterator;
 
-import setup.Cellule;
 
 import Interface_du_jeu.StructureDeDonnee;
 

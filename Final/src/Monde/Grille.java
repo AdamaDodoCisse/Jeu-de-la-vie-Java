@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-import setup.Cellule;
 
 import Interface_du_jeu.StructureDeDonnee;
 

@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import setup.Cellule;
 
 import Interface_du_jeu.StructureDeDonnee;
 

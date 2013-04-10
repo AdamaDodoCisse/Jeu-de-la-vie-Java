@@ -1,8 +1,8 @@
 package Code_du_jeu;
 
 import java.io.FileNotFoundException;
-import setup.Cellule;
-import setup.Simulation;
+
+import Evolution.Simulation;
 import Interface_du_jeu.StructureDeDonnee;
 public class MondeCirculaire extends JeuDeLaVie{
 	public MondeCirculaire(String nomFichier,StructureDeDonnee grille) throws FileNotFoundException{
