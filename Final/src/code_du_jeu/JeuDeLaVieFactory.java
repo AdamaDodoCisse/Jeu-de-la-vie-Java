@@ -1,7 +1,8 @@
 package code_du_jeu;
+import interface_.StructureDeDonnee;
+
 import java.io.FileNotFoundException;
 
-import Interface_du_jeu.StructureDeDonnee;
 
  
 public class JeuDeLaVieFactory {

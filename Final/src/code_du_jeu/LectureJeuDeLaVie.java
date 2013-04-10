@@ -1,5 +1,7 @@
 package code_du_jeu;
 
+import interface_.StructureDeDonnee;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,7 +11,6 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 
-import Interface_du_jeu.StructureDeDonnee;
 
 public class LectureJeuDeLaVie {
 

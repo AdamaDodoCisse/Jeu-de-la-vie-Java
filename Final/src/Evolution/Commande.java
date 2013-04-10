@@ -2,10 +2,11 @@ package Evolution;
 
 import java.io.FileNotFoundException;
 
+import code_du_jeu.Grille;
+import code_du_jeu.JeuDeLaVie;
+import code_du_jeu.JeuDeLaVieFactory;
 
-import Code_du_jeu.Grille;
-import Code_du_jeu.JeuDeLaVie;
-import Code_du_jeu.JeuDeLaVieFactory;
+
 import Exception.CommandeException;
 import Exception.HtmlException;
 

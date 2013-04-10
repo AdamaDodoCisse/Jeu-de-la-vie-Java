@@ -1,12 +1,13 @@
 package code_du_jeu;
 
+import interface_.Jeu;
+import interface_.StructureDeDonnee;
+
 import java.io.FileNotFoundException;
 
 import java.util.Iterator;
 
 
-import Interface_du_jeu.Jeu;
-import Interface_du_jeu.StructureDeDonnee;
 
 
 public class JeuDeLaVie implements Jeu{

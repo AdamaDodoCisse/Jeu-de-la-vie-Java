@@ -1,11 +1,13 @@
 package Evolution;
+import interface_.StructureDeDonnee;
+
 import java.io.FileNotFoundException;
 
+import code_du_jeu.Cellule;
+import code_du_jeu.JeuDeLaVie;
+import code_du_jeu.JeuDeLaVieFactory;
 
-import Code_du_jeu.Cellule;
-import Code_du_jeu.JeuDeLaVie;
-import Code_du_jeu.JeuDeLaVieFactory;
-import Interface_du_jeu.StructureDeDonnee;
+
 public class ReconnaissanceType {
 	private JeuDeLaVie configuration1;
 	private JeuDeLaVie configuration2;

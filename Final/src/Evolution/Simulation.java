@@ -5,8 +5,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-import Code_du_jeu.Cellule;
-import Code_du_jeu.JeuDeLaVie;
+import code_du_jeu.Cellule;
+import code_du_jeu.JeuDeLaVie;
+
 
 public class Simulation {
 	private int dureeSimulation;
