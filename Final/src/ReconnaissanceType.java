@@ -70,13 +70,13 @@ public class ReconnaissanceType {
 		if(estMort() || estOscillation())
 			return true;
 		if(configuration1.getJeux().taille() == configuration2.getJeux().taille()){
-			Point p1 = configuration1.getJeux().getPoint(0);
-			Point p2 = configuration2.getJeux().getPoint(0);
+			Point p1 = configuration1.getJeux().getCellule(0);
+			Point p2 = configuration2.getJeux().getCellule(0);
 			int taille = configuration1.getJeux().taille();
 			double distance = distance(p1, p2);
 			for(int i = 1;i<taille;i++){
-				Point a = configuration1.getJeux().getPoint(i);
-				Point b = configuration2.getJeux().getPoint(i);
+				Point a = configuration1.getJeux().getCellule(i);
+				Point b = configuration2.getJeux().getCellule(i);
 				if(distance(a, b) !=distance)
 					return false;
 			}return true;

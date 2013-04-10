@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
-public class Grille  implements StructureDeDonnee<Point>{
+public class Grille  implements StructureDeDonnee<ArrayList<Point>>{
 	
 	private ArrayList<Point>celluleVivante;
 	private ArrayList<Integer>regleVieCellule;
@@ -51,13 +52,7 @@ public class Grille  implements StructureDeDonnee<Point>{
 		}
 		return regleMortCellule.add(regle);
 	}
-	public Point getPoint(int i){
-		return celluleVivante.get(i);
-	}
-	public ArrayList<Point> getCelluleVivante() {
-		return celluleVivante;
-	}
-
+	
 	public ArrayList<Integer> getRegleVieCellule() {
 		return regleVieCellule;
 	}
@@ -166,9 +161,44 @@ public class Grille  implements StructureDeDonnee<Point>{
 
 
 	@Override
+	public ArrayList<Point> getCelluleVivante() {
+		// TODO Auto-generated method stub
+		return celluleVivante;
+	}
+
+
+	@Override
 	public void setCelluleVivante(ArrayList<Point> celluleVivante) {
+		// TODO Auto-generated method stub
 		this.celluleVivante=celluleVivante;
-		
+	}
+
+
+	@Override
+	public Point getCellule(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void trierCellule() {
+		// TODO Auto-generated method stub
+		Collections.sort(getCelluleVivante());
+	}
+
+
+	@Override
+	public int tailleRegleVie() {
+		// TODO Auto-generated method stub
+		return regleVieCellule.size();
+	}
+
+
+	@Override
+	public int tailleRegleMort() {
+		// TODO Auto-generated method stub
+		return regleMortCellule.size();
 	}
 
 

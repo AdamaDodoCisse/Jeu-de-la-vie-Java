@@ -4,13 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class LectureJeuDeLaVie {
 
-	public static void LectureJeu(String nomFichier,StructureDeDonnee<Point> grille) throws FileNotFoundException{
+	public static void LectureJeu(String nomFichier,StructureDeDonnee<?> grille) throws FileNotFoundException{
 		BufferedReader reader = null;
 		File fichier=new File(nomFichier);
 		int abscisse=0;
@@ -57,18 +56,18 @@ public class LectureJeuDeLaVie {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Collections.sort(grille.getCelluleVivante());
+			grille.trierCellule();
 		}
-		if(grille.getRegleMortCellule().size()==0){
+		if(grille.tailleRegleMort()==0){
 			grille.ajouterRegleMort(2);
 			grille.ajouterRegleMort(3);
 		}
-		if(grille.getRegleVieCellule().size()==0){
+		if(grille.tailleRegleVie()==0){
 			grille.ajouterRegleVie(3);
 		}
 	}
 
-	public static void ajouterCelluleVivante(String line ,int abscisse,int ordonnee, StructureDeDonnee<Point>grille){
+	public static void ajouterCelluleVivante(String line ,int abscisse,int ordonnee, StructureDeDonnee<?>grille){
 		int i = 0;
 		int tmp=ordonnee;
 		while(i<line.length()){
@@ -83,7 +82,7 @@ public class LectureJeuDeLaVie {
 	}
 
 
-	public static void ajouterRegle(String line, StructureDeDonnee<Point> grille){
+	public static void ajouterRegle(String line, StructureDeDonnee<?> grille){
 		line = line.replaceAll("[^0-9/]", "");
 		StringTokenizer regle = new StringTokenizer(line,"/");
 		if(regle.countTokens()==2){

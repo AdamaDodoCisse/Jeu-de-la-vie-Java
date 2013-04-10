@@ -7,15 +7,15 @@ import java.util.*;
  *
  */
 public class JeuDeLaVie implements Jeu{
-	private StructureDeDonnee<Point> jeux;
+	private StructureDeDonnee<Object> jeux;
 	private int minX,minY,maxX,maxY;
-	public JeuDeLaVie(StructureDeDonnee<Point> grille){
+	public JeuDeLaVie(StructureDeDonnee<Object> grille){
 		jeux = grille;
 		minX = minY = maxY = maxX = 0;
 	}
 
 
-	public JeuDeLaVie(String nomFichier,StructureDeDonnee<Point> grille) throws FileNotFoundException{
+	public JeuDeLaVie(String nomFichier,StructureDeDonnee<?> grille) throws FileNotFoundException{
 		minX = minY = maxY = maxX = 0;
 		jeux = grille;
 		LectureJeuDeLaVie.LectureJeu(nomFichier,jeux);
@@ -38,7 +38,7 @@ public class JeuDeLaVie implements Jeu{
 	}
 
 	public void evolutionSuivante(){
-		Grille g = new Grille();
+		StructureDeDonnee g ;
 
 		Iterator<Point> iterator =jeux.iterer();
 
@@ -47,13 +47,13 @@ public class JeuDeLaVie implements Jeu{
 			calclulercelluleVivante(g, p);
 		}
 
-		jeux.setCelluleVivante(g.getCelluleVivante());
-		Collections.sort(jeux.getCelluleVivante());
+		jeux.setCelluleVivante(new ArrayList<Point>());
+		jeux.trierCellule();
 		update();
 
 	}
 
-	public void calclulercelluleVivante(StructureDeDonnee<Point> grille,Point p){
+	public void calclulercelluleVivante(StructureDeDonnee<?> grille,Point p){
 		for(int i=p.getX()-1;i<=p.getX()+1;i++){
 			for(int j=p.getY()-1;j<=p.getY()+1;j++){
 				Point k = new Point(i,j);
@@ -96,7 +96,7 @@ public class JeuDeLaVie implements Jeu{
 
 				Point k = new Point(i,j);
 
-				if(jeux.getCelluleVivante().contains(k) && ! k.equals(p))
+				if(jeux.contains(k) && ! k.equals(p))
 
 					voisinVivant++;
 			}
@@ -111,7 +111,7 @@ public class JeuDeLaVie implements Jeu{
 	}
 
 
-	public StructureDeDonnee<Point> getJeux() {
+	public StructureDeDonnee<?> getJeux() {
 		return jeux;
 	}
 
