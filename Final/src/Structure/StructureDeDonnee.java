@@ -1,8 +1,9 @@
 package Interface_du_jeu;
 
 import java.util.Iterator;
+
+import Code_du_jeu.Cellule;
  
-import setup.Cellule;
 public interface StructureDeDonnee {
 	public boolean ajouterCellule(Cellule cellule);
 	public boolean supprimer(Cellule cellule);
