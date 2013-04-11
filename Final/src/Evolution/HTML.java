@@ -1,5 +1,7 @@
 package Evolution;
 
+import interface_.StructureDeDonnee;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
@@ -11,7 +13,9 @@ import code_du_jeu.Grille;
 import Exception.HtmlException;
 public class HTML {
 	private String balise;
-	public HTML(String fileName,int temps,int jeu,String nouveauFichier)throws HtmlException{
+	private StructureDeDonnee structure;
+	public HTML(String fileName,int temps,int jeu,String nouveauFichier,StructureDeDonnee structure )throws HtmlException{
+		this.structure = structure;
 		preparerBailse(fileName, temps, jeu);
 		executer(nouveauFichier);
 	}
@@ -73,7 +77,7 @@ public class HTML {
 							ReconnaissanceType nouveauRec = new ReconnaissanceType(
 															jeu,
 															temps,
-															lesFichiers[i].getAbsolutePath(),new Grille());
+															lesFichiers[i].getAbsolutePath(),structure);
 							body+=Resultat(nouveauRec);
 						} catch (FileNotFoundException e) {}
 						

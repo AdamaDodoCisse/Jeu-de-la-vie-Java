@@ -4,9 +4,6 @@ import interface_.StructureDeDonnee;
 
 import java.io.FileNotFoundException;
 
-
-
-
 public class MondeInfini extends JeuDeLaVie{
 	
 	public MondeInfini(String nomFichier,StructureDeDonnee grille) throws FileNotFoundException{

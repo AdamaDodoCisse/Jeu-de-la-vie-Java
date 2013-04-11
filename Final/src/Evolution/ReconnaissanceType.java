@@ -4,6 +4,7 @@ import interface_.StructureDeDonnee;
 import java.io.FileNotFoundException;
 
 import code_du_jeu.Cellule;
+import code_du_jeu.Grille;
 import code_du_jeu.JeuDeLaVie;
 import code_du_jeu.JeuDeLaVieFactory;
 
@@ -18,11 +19,18 @@ public class ReconnaissanceType {
 	private boolean mort=false;
 	private boolean vaisceau=false;
 	private boolean inconnu=true;
-
+	/**
+	 * Constructueur de ReconnaissanceType
+	 * @param type
+	 * @param temp
+	 * @param nomFichier
+	 * @param grille
+	 * @throws FileNotFoundException
+	 */
 	public ReconnaissanceType(int type,int temp,String nomFichier,StructureDeDonnee grille) throws FileNotFoundException{
-
-		configuration1 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier,grille);
-		configuration2 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier,grille);
+		StructureDeDonnee s1 = grille;
+		configuration1 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier,s1);
+		configuration2 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier,new Grille());
 
 		for(int i=1;i<=temp;i++){
 			calculerStructure();

@@ -1,7 +1,6 @@
 package code_du_jeu;
 
 import interface_.StructureDeDonnee;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,11 +8,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-
-
-
 public class LectureJeuDeLaVie {
-
+	/*Methode qui permet de lire de Fichier et mettre son contenu dans une grille qui est de type StructureDeDonnee
+	 * @param String nomFichier 	et une StructuredeDonnee grille
+	 * 
+	 */
 	public static void LectureJeu(String nomFichier,StructureDeDonnee grille) throws FileNotFoundException{
 		BufferedReader reader = null;
 		File fichier=new File(nomFichier);
@@ -71,7 +70,13 @@ public class LectureJeuDeLaVie {
 			grille.ajouterRegleVie(3);
 		}
 	}
-
+/**Methode ajouterCelluleVivante
+ * 
+ * @param line
+ * @param abscisse
+ * @param ordonnee
+ * @param grille
+ */
 	public static void ajouterCelluleVivante(String line ,int abscisse,int ordonnee, StructureDeDonnee grille){
 		int i = 0;
 		int tmp=ordonnee;
@@ -86,7 +91,12 @@ public class LectureJeuDeLaVie {
 		ordonnee=tmp;
 	}
 
-
+/**Methode ajouterRegle 
+ * 
+ * 
+ * @param line
+ * @param grille
+ */
 	public static void ajouterRegle(String line, StructureDeDonnee grille){
 		line = line.replaceAll("[^0-9/]", "");
 		StringTokenizer regle = new StringTokenizer(line,"/");

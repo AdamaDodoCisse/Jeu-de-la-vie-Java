@@ -175,7 +175,7 @@ public class Grille  implements StructureDeDonnee{
 	@Override
 	public Cellule getCellule(int i) {
 		// TODO Auto-generated method stub
-		return null;
+		return  celluleVivante.get(i);
 	}
 
 

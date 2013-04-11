@@ -1,14 +1,13 @@
 package Evolution;
 
+import interface_.StructureDeDonnee;
+
 import java.io.FileNotFoundException;
-
-import code_du_jeu.Grille;
-import code_du_jeu.JeuDeLaVie;
-import code_du_jeu.JeuDeLaVieFactory;
-
 
 import Exception.CommandeException;
 import Exception.HtmlException;
+import code_du_jeu.JeuDeLaVie;
+import code_du_jeu.JeuDeLaVieFactory;
 
 //	gestion des Arguments 
 
@@ -16,7 +15,9 @@ public class Commande {
 	
 	//	construteur
 	
-	public Commande(String []args){
+	private StructureDeDonnee structure;
+	public Commande(String []args,StructureDeDonnee structure){
+		this.structure = structure;
 		try {
 			executer(args);
 			
@@ -60,7 +61,7 @@ public class Commande {
 	private void simuler(String fichier,int temps,int jeu){
 		JeuDeLaVie j;
 		try {
-			j = JeuDeLaVieFactory.getJeuDeLaVie(jeu, fichier,new Grille());
+			j = JeuDeLaVieFactory.getJeuDeLaVie(jeu, fichier,structure);
 			new Simulation(temps, j);
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -78,7 +79,7 @@ public class Commande {
 	 */
 	private void nouveauHtml(String Dossier,int temps,int jeu,String nouveauFichier) {
 		try {
-			new HTML(Dossier, temps, jeu, nouveauFichier);
+			new HTML(Dossier, temps, jeu, nouveauFichier,structure);
 		} catch (HtmlException e) {
 			System.out.println(e.getMessage());
 		}
@@ -95,7 +96,7 @@ public class Commande {
 	
 	private void analyserFichier(int jeu,int temps,String nomfichier){
 		try {
-			ReconnaissanceType re = new ReconnaissanceType(jeu, temps, nomfichier,new Grille());
+			ReconnaissanceType re = new ReconnaissanceType(jeu, temps, nomfichier,structure);
 			System.out.println(re);
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
