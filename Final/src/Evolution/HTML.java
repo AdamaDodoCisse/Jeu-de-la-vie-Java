@@ -19,21 +19,34 @@ public class HTML {
 		preparerBailse(fileName, temps, jeu);
 		executer(nouveauFichier);
 	}
-	
+
 	private void preparerBailse(String filename, int temps,int jeu) throws HtmlException{
 		balise = "<html>" +
 				"	<head>" +
 				"		<title> Jeu de la vie" +
-							
+
 				"		</title>" +
-						css() +
-				"	</head>" +
-				"	<body> " + 
-						resultat(filename,jeu,temps)
-				+"	</body>" +
+				css() +
+				"	</head> " +
+				"	<body>" +
+				"<form> " +
+				"<table border=1>" +
+				"<caption>RESULTAT D'ANALYSE DES FICHIERS LIF DU DOSSIER "+filename+" </caption>" +
+				"<tr>" +
+				"<th>Nom du fichier</th>" +
+				"<th>Inconnu</th>" +
+				"<th>Mort</th>" +
+				"<th>Stabilité</th>" +
+				"<th>Oscillation</th>" +
+				"<th>Vaisseau</th>" +
+				"<th>Periode</th>" +
+				"<th>Taille de la queue</th>" +
+				"</tr>" + 
+				resultat(filename,jeu,temps)
+				+"	</table></form></body>" +
 				"</html>";
 	}
-	
+
 	private void executer(String nouveau){
 		try{
 			File f1 = new File(nouveau+".html");
@@ -47,23 +60,32 @@ public class HTML {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private String css(){
 		return "<style>" +
+				"table tr td{" +
+				"	width:10%;" +
+				"	background:red;" +
+				"	text-align:center;" +
+				"}" +
+				"table tr td:hover{" +
+				"	background:blue;" +
+				"}" +
+				"caption{" +
+				"	background:green;" +
 				"" +
-				"" +
-				"" +
+				"}" +
 				"" +
 				"</style>";
 	}
-	
+
 	private String resultat(String fileName,int jeu,int temps)throws HtmlException {
 		File dossier = new File(fileName); 
 		String body ="";
 		if(dossier.isDirectory()){
 			//			récupperation des fichiers Lif dans un tableau 
 			File []lesFichiers = dossier.listFiles(new FileFilter() {
-				
+
 				@Override
 				public boolean accept(File pathname) {
 					if(pathname.isFile()){
@@ -73,37 +95,78 @@ public class HTML {
 			}) ;
 			if(lesFichiers.length > 0){
 				for(int i=0;i<lesFichiers.length;i++){
-						try {
-							ReconnaissanceType nouveauRec = new ReconnaissanceType(
-															jeu,
-															temps,
-															lesFichiers[i].getAbsolutePath(),structure);
-							body+=Resultat(nouveauRec);
-						} catch (FileNotFoundException e) {}
-						
+					try {
+						ReconnaissanceType nouveauRec = new ReconnaissanceType(
+								jeu,
+								temps,
+								lesFichiers[i].getAbsolutePath(),structure);
+						body+=Resultat(nouveauRec,lesFichiers[i].getName());
+					} catch (FileNotFoundException e) {}
+
 				}return body;
 			}else{throw new 
-					HtmlException("Aucun fichier Lif dans " +
-							      "le dossier " +fileName);}
+				HtmlException("Aucun fichier Lif dans " +
+						"le dossier " +fileName);}
 		}else 
 			throw new HtmlException("Le chemin : << "+fileName+" << n'est pas un dossier");
 	}
-	
-	public String Resultat(ReconnaissanceType re){
+
+	public String Resultat(ReconnaissanceType re,String file){
 		if(re.isInconnu())
-			return  "<p class=\"\"> Type inconnu</p>";
+			return  "<tr>" +
+			"	<td>"+file+"</td>" +
+			"<td> X </td>" +
+			"<td> - </td>" +
+			"<td> - </td>" +
+			"<td> - </td>" +
+			"<td> - </td>" +
+			"<td> - </td>" +
+			"</tr>" ; 
+
 		else if(re.isMort())
-			return  "<p class=\"\"> Type Mort donc Stable ,Oscillation et Vaisseau \n" +
-					"sur une periode de : "+re.getPeriodeFinal()+" et sa queue est de : "+re.getTailleQueue()+" </p>";
+			return "<tr>" +
+			"	<th>"+file+"</th>" +
+			"<td> - </td>" +
+			"<td> X </td>" +
+			"<td> X </td>" +
+			"<td> X </td>" +
+			"<td> X </td>" +
+			"<td> 0 </td>" +
+			"<td> 0 </td>" +
+			"</tr>" ; 
 		else if(re.isStabilite())
-			return  "<p class=\"\"> Type Stable donc Oscillation et Vaisseau \n" +
-					"sur une periode de : "+re.getPeriodeFinal()+" et sa queue est de : "+re.getTailleQueue()+" </p>";
+			return  "<tr>" +
+			"	<th>"+file+"</th>" +
+			"<td> - </td>" +
+			"<td> - </td>" +
+			"<td> X </td>" +
+			"<td> X </td>" +
+			"<td> X </td>" +
+			"<td> "+re.getPeriodeFinal()+" </td>" +
+			"<td> "+re.getTailleQueue()+" </td>" +
+			"</tr>" ; 
 		else if(re.isOscillation())
-			return  "<p class=\"\"> Type Oscillation donc Vaisseau \n" +
-					"sur une periode de : "+re.getPeriodeFinal()+" et sa queue est de : "+re.getTailleQueue()+" </p>";
+			return  "<tr>" +
+			"	<th>"+file+"</th>" +
+			"<td> - </td>" +
+			"<td> - </td>" +
+			"<td> - </td>" +
+			"<td> X </td>" +
+			"<td> X </td>" +
+			"<td> "+re.getPeriodeFinal()+" </td>" +
+			"<td> "+re.getTailleQueue()+" </td>" +
+			"</tr>" ; 
 		else
-			return  "<p class=\"\"> Type Vaisseau \n" +
-					"sur une periode de : "+re.getPeriodeFinal()+" et sa queue est de : "+re.getTailleQueue()+" </p>";
+			return  "<tr>" +
+			"	<td>"+file+"</td>" +
+			"<td> - </td>" +
+			"<td> - </td>" +
+			"<td> - </td>" +
+			"<td> - </td>" +
+			"<td> X </td>" +
+			"<td> "+re.getPeriodeFinal()+" </td>" +
+			"<td> "+re.getTailleQueue()+" </td>" +
+			"</tr>" ; 
 	}
 
 }

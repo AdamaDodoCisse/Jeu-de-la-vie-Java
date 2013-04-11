@@ -142,7 +142,6 @@ public class MondeCirculaire extends JeuDeLaVie{
 		}
 		getJeux().setCelluleVivante(structure.getCelluleVivante());
 		getJeux().trierCellule();
-		update();
 	}
 
 
