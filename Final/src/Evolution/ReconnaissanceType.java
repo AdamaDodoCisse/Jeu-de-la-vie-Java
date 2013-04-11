@@ -28,9 +28,10 @@ public class ReconnaissanceType {
 	 * @throws FileNotFoundException
 	 */
 	public ReconnaissanceType(int type,int temp,String nomFichier,StructureDeDonnee grille) throws FileNotFoundException{
-		StructureDeDonnee s1 = grille;
-		configuration1 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier,s1);
-		configuration2 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier,new Grille());
+		Object g1 = grille.clone();
+		Object g2 = grille.clone();
+		configuration1 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier,(StructureDeDonnee)g1);
+		configuration2 = JeuDeLaVieFactory.getJeuDeLaVie(type, nomFichier,(StructureDeDonnee)g2);
 
 		for(int i=1;i<=temp;i++){
 			calculerStructure();

@@ -209,8 +209,14 @@ public class Grille  implements StructureDeDonnee{
 		}catch(Exception e){};
 		
 	}
-
-
+	@Override
+	public StructureDeDonnee clone(){
+			try {
+				return (StructureDeDonnee) super.clone();
+			} catch (CloneNotSupportedException e) {		
+			}
+			return null;
+	}
 	
 }
 

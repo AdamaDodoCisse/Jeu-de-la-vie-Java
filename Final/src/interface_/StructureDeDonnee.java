@@ -5,7 +5,7 @@ import java.util.Iterator;
 import code_du_jeu.Cellule;
 
  
-public interface StructureDeDonnee {
+public interface StructureDeDonnee extends Cloneable{
 	public boolean ajouterCellule(Cellule cellule);
 	public boolean supprimer(Cellule cellule);
 	public boolean ajouterRegleVie(Integer regle);
@@ -23,4 +23,5 @@ public interface StructureDeDonnee {
 	public void trierCellule();
 	public int tailleRegleVie();
 	public int tailleRegleMort();
+	public StructureDeDonnee clone();
 }
