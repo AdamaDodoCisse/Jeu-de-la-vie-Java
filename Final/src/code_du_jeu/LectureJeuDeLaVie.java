@@ -14,6 +14,7 @@ public class LectureJeuDeLaVie {
 	 * 
 	 */
 	public static void LectureJeu(String nomFichier,StructureDeDonnee grille) throws FileNotFoundException{
+		grille.initialise();
 		BufferedReader reader = null;
 		File fichier=new File(nomFichier);
 		int abscisse=0;
@@ -58,7 +59,7 @@ public class LectureJeuDeLaVie {
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Une de vos methodes renvoie toujours null");
 			}
 			grille.trierCellule();
 		}

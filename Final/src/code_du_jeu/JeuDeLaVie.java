@@ -5,6 +5,7 @@ import interface_.StructureDeDonnee;
 
 import java.io.FileNotFoundException;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 
@@ -12,16 +13,19 @@ import java.util.Iterator;
 
 public class JeuDeLaVie implements Jeu{
 	private StructureDeDonnee jeux;
+	private StructureDeDonnee clone;
 	private int minX,minY,maxX,maxY;
 	public JeuDeLaVie(StructureDeDonnee grille){
-		jeux = grille;
+		jeux = grille.clone();
+		clone=grille.clone(); 
 		minX = minY = maxY = maxX = 0;
 	}
 
 
 	public JeuDeLaVie(String nomFichier,StructureDeDonnee grille) throws FileNotFoundException{
 		minX = minY = maxY = maxX = 0;
-		jeux = grille;
+		jeux = grille.clone();
+		clone=grille.clone();
 		LectureJeuDeLaVie.LectureJeu(nomFichier,jeux);
 		update();
 	}
@@ -42,16 +46,15 @@ public class JeuDeLaVie implements Jeu{
 	}
 
 	public void evolutionSuivante(){
-		Grille g = new Grille();
-
+		StructureDeDonnee g = clone.clone();
+		g.initialise();
 		Iterator<Cellule> iterator =jeux.iterer();
-
 		while(iterator.hasNext()){
 			Cellule p = iterator.next();
-			calclulercelluleVivante(g, p);
+			calclulercelluleVivante((StructureDeDonnee) g, p);
 		}
 
-		jeux.setCelluleVivante(g.getCelluleVivante());
+		jeux.setCelluleVivante(((StructureDeDonnee) g).getCelluleVivante());
 		jeux.trierCellule();
 		update();
 

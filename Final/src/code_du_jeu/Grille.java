@@ -8,18 +8,16 @@ import java.util.Iterator;
 
 
 public class Grille  implements StructureDeDonnee{
-	
+
 	private ArrayList<Cellule>celluleVivante;
 	private ArrayList<Integer>regleVieCellule;
 	private ArrayList<Integer>regleMortCellule;
-	
+
 	public Grille(){
-		this.celluleVivante = new ArrayList<Cellule>();
-		this.regleVieCellule = new ArrayList<Integer>();
-		this.regleMortCellule = new ArrayList<Integer>();
+		initialise();
 	}
 
-	
+
 	@Override
 	public Iterator<Cellule> iterer() {
 		// TODO Auto-generated method stub
@@ -35,7 +33,7 @@ public class Grille  implements StructureDeDonnee{
 		celluleVivante.add(cellule);
 		return true;
 	}
-	
+
 	public int taille(){
 		return getCelluleVivante().size();
 	}
@@ -57,7 +55,7 @@ public class Grille  implements StructureDeDonnee{
 		}
 		return regleMortCellule.add(regle);
 	}
-	
+
 	public ArrayList<Integer> getRegleVieCellule() {
 		return regleVieCellule;
 	}
@@ -73,13 +71,13 @@ public class Grille  implements StructureDeDonnee{
 	public void setRegleMortCellule(ArrayList<Integer> regleMortCellule) {
 		this.regleMortCellule = regleMortCellule;
 	}
-	
 
-	
+
+
 	public boolean containsRegleVie(Integer regle){
 		return regleVieCellule.contains(regle);
 	}
-	
+
 	public boolean containsRegleMort(Integer regle){
 		return regleMortCellule.contains(regle);
 	}
@@ -89,11 +87,11 @@ public class Grille  implements StructureDeDonnee{
 		return celluleVivante.remove(cellule);
 	}
 
-	
+
 	@Override
 	public boolean estVide() {
-	return celluleVivante.size()==0;
-		
+		return celluleVivante.size()==0;
+
 	}
 
 
@@ -120,7 +118,7 @@ public class Grille  implements StructureDeDonnee{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		
+
 		Grille  other = (Grille ) obj;
 		if (celluleVivante == null) {
 			if (other.celluleVivante != null)
@@ -143,19 +141,19 @@ public class Grille  implements StructureDeDonnee{
 
 	@Override
 	public int nombreVoisinCellule(Cellule  p) {
-			int voisinVivant = 0 ;
-			for(int i=p.getX()-1;i<=p.getX()+1;i++){
-				for(int j=p.getY()-1;j<=p.getY()+1;j++){
+		int voisinVivant = 0 ;
+		for(int i=p.getX()-1;i<=p.getX()+1;i++){
+			for(int j=p.getY()-1;j<=p.getY()+1;j++){
 
-					Cellule k = new Cellule(i,j);
+				Cellule k = new Cellule(i,j);
 
-					if(contains(k) && ! k.equals(p))
+				if(contains(k) && ! k.equals(p))
 
-						voisinVivant++;
-				}
+					voisinVivant++;
 			}
-		return voisinVivant;
 		}
+		return voisinVivant;
+	}
 
 
 	@Override
@@ -207,18 +205,28 @@ public class Grille  implements StructureDeDonnee{
 		try{
 			this.celluleVivante = (ArrayList<Cellule>) celluleVivante;
 		}catch(Exception e){};
-		
+
 	}
 	@Override
 	public StructureDeDonnee clone(){
 			try {
 				return (StructureDeDonnee) super.clone();
-			} catch (CloneNotSupportedException e) {		
+			} catch (CloneNotSupportedException e) {
+				System.out.println(e.getMessage()+"nouve");
 			}
-			return null;
+			return this;
 	}
-	
+
+
+	@Override
+	public void initialise() {
+		// TODO Auto-generated method stub
+		this.celluleVivante = new ArrayList<Cellule>();
+		this.regleVieCellule = new ArrayList<Integer>();
+		this.regleMortCellule = new ArrayList<Integer>();
+	}
+
 }
 
 
-	
+

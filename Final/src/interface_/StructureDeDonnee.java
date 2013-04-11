@@ -24,4 +24,5 @@ public interface StructureDeDonnee extends Cloneable{
 	public int tailleRegleVie();
 	public int tailleRegleMort();
 	public StructureDeDonnee clone();
+	public void initialise();
 }
