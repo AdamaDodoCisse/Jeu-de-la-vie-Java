@@ -63,13 +63,50 @@ public class HTML {
 
 	private String css(){
 		return "<style>" +
+				"table{" +
+				"	"+
+
+				"}" +
 				"table tr td{" +
 				"	width:10%;" +
 				"	background:red;" +
 				"	text-align:center;" +
+				"-webkit-border-top-left-radius: 10px"+
+				"-webkit-border-top-right-radius: 219px;"+
+				"-webkit-border-bottom-right-radius: 33px;"+
+				"-webkit-border-bottom-left-radius: 20px;"+
+				"-moz-border-radius-topleft: 10px;"+
+				"-moz-border-radius-topright: 219px;"+
+				"-moz-border-radius-bottomright: 33px;"+
+				"-moz-border-radius-bottomleft: 20px;"+
+				"border-top-left-radius: 10px;"+
+				"border-top-right-radius: 219px;"+
+				"border-bottom-right-radius: 33px;"+
+				"border-bottom-left-radius: 20px;" +
+				"color:white;"+
 				"}" +
 				"table tr td:hover{" +
 				"	background:blue;" +
+				"	font-size:22px;" +
+				"	font: bold;" +
+				"-webkit-border-top-left-radius: 10px;"+
+				"-webkit-border-top-right-radius: 20px;"+
+				"-webkit-border-bottom-right-radius: 10px;"+
+				"-webkit-border-bottom-left-radius: 100px;"+
+				"-moz-border-radius-topleft: 10px;"+
+				"-moz-border-radius-topright: 20px;"+
+				"-moz-border-radius-bottomright: 10px;"+
+				"-moz-border-radius-bottomleft: 100px;"+
+				"border-top-left-radius: 10px;"+
+				"border-top-right-radius: 20px;"+
+				"border-bottom-right-radius: 10px;"+
+				"border-bottom-left-radius: 100px;" +
+				"color:#EEE8AA;"+
+				"-moz-box-shadow: 6px 6px 40px 1px #ccc;"+
+				"-webkit-box-shadow: 6px 6px 40px 1px #ccc;"+
+				"-o-box-shadow: 6px 6px 40px 1px #ccc;"+
+				"box-shadow: 6px 6px 40px 1px #ccc;"+
+				"filter:progid:DXImageTransform.Microsoft.Shadow(color=#ccc, Direction=135, Strength=40);"+
 				"}" +
 				"caption{" +
 				"	background:green;" +
@@ -114,13 +151,14 @@ public class HTML {
 	public String Resultat(ReconnaissanceType re,String file){
 		if(re.isInconnu())
 			return  "<tr>" +
-			"	<td>"+file+"</td>" +
+			"	<th>"+file+"</th>" +
 			"<td> X </td>" +
 			"<td> - </td>" +
 			"<td> - </td>" +
 			"<td> - </td>" +
 			"<td> - </td>" +
 			"<td> - </td>" +
+			"<td> - </td>"+
 			"</tr>" ; 
 
 		else if(re.isMort())
