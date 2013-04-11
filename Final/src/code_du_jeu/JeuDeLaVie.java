@@ -24,6 +24,7 @@ public class JeuDeLaVie implements Jeu{
 
 	public JeuDeLaVie(String nomFichier,StructureDeDonnee grille) throws FileNotFoundException{
 		minX = minY = maxY = maxX = 0;
+		
 		jeux = grille.clone();
 		clone=grille.clone();
 		LectureJeuDeLaVie.LectureJeu(nomFichier,jeux);

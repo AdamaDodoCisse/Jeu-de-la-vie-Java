@@ -6,9 +6,10 @@ import java.io.FileNotFoundException;
 
 import Evolution.Simulation;
 public class MondeCirculaire extends JeuDeLaVie{
-	public MondeCirculaire(String nomFichier,StructureDeDonnee grille) throws FileNotFoundException{
-		super(nomFichier,grille);
-		
+	private StructureDeDonnee clone;
+	public MondeCirculaire(String nomFichier,StructureDeDonnee structure) throws FileNotFoundException{
+		super(nomFichier,structure);
+		clone = structure.clone();
 
 	}
 	
@@ -127,31 +128,23 @@ public class MondeCirculaire extends JeuDeLaVie{
 	}
  
 	public void evolutionSuivante(){
-		Grille grille = new Grille();
+		StructureDeDonnee structure = clone.clone();
+		structure.initialise();
 		for(int i=getMinX();i<=getMaxY();i++){
 			for(int j=getMinY();j<=getMaxY();j++){
 				Cellule p = new Cellule(i, j);
 				if(getJeux().contains(p) && getJeux().containsRegleMort(nombreVoisinCellule(p))){
-					grille.ajouterCellule(p);
+					structure.ajouterCellule(p);
 				}else if(!getJeux().contains(p) && getJeux().containsRegleVie(nombreVoisinCellule(p))){
-					grille.ajouterCellule(p);
+					structure.ajouterCellule(p);
 				}
 			}
 		}
-		getJeux().setCelluleVivante(grille.getCelluleVivante());
+		getJeux().setCelluleVivante(structure.getCelluleVivante());
 		getJeux().trierCellule();
 		update();
 	}
 
-	public static void main(String[]args){
-		JeuDeLaVie j;
-		try {
-			j = new MondeCirculaire("html/jeu.LIF",new Grille());
-			new Simulation(1000, j);
-		} catch (FileNotFoundException e) {
-		}
-
-	}
 
 }
 
