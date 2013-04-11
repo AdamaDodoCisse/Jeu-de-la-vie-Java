@@ -59,7 +59,7 @@ public class LectureJeuDeLaVie {
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				System.out.println("Une de vos methodes renvoie toujours null");
+				e.getStackTrace();
 			}
 			grille.trierCellule();
 		}
@@ -71,13 +71,13 @@ public class LectureJeuDeLaVie {
 			grille.ajouterRegleVie(3);
 		}
 	}
-/**Methode ajouterCelluleVivante
- * 
- * @param line
- * @param abscisse
- * @param ordonnee
- * @param grille
- */
+	/**Methode ajouterCelluleVivante
+	 * 
+	 * @param line
+	 * @param abscisse
+	 * @param ordonnee
+	 * @param grille
+	 */
 	public static void ajouterCelluleVivante(String line ,int abscisse,int ordonnee, StructureDeDonnee grille){
 		int i = 0;
 		int tmp=ordonnee;
@@ -92,12 +92,12 @@ public class LectureJeuDeLaVie {
 		ordonnee=tmp;
 	}
 
-/**Methode ajouterRegle 
- * 
- * 
- * @param line
- * @param grille
- */
+	/**Methode ajouterRegle 
+	 * 
+	 * 
+	 * @param line
+	 * @param grille
+	 */
 	public static void ajouterRegle(String line, StructureDeDonnee grille){
 		line = line.replaceAll("[^0-9/]", "");
 		StringTokenizer regle = new StringTokenizer(line,"/");
