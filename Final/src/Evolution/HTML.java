@@ -36,13 +36,13 @@ public class HTML {
 				"<th>Nom du fichier</th>" +
 				"<th>Inconnu</th>" +
 				"<th>Mort</th>" +
-				"<th>Stabilité</th>" +
+				"<th>Stabilite</th>" +
 				"<th>Oscillation</th>" +
 				"<th>Vaisseau</th>" +
 				"<th>Periode</th>" +
 				"<th>Taille de la queue</th>" +
 				"</tr>" + 
-				resultat(filename,jeu,temps)
+				analyser(filename,jeu,temps)
 				+"	</table></form></body>" +
 				"</html>";
 	}
@@ -116,11 +116,11 @@ public class HTML {
 				"</style>";
 	}
 
-	private String resultat(String fileName,int jeu,int temps)throws HtmlException {
+	private String analyser(String fileName,int jeu,int temps)throws HtmlException {
 		File dossier = new File(fileName); 
 		String body ="";
 		if(dossier.isDirectory()){
-			//			récupperation des fichiers Lif dans un tableau 
+			//			recuperation des fichiers Lif dans un tableau 
 			File []lesFichiers = dossier.listFiles(new FileFilter() {
 
 				@Override
@@ -133,11 +133,14 @@ public class HTML {
 			if(lesFichiers.length > 0){
 				for(int i=0;i<lesFichiers.length;i++){
 					try {
+						System.out.println(lesFichiers[i].getName()+" En cour d'analyse...");
 						ReconnaissanceType nouveauRec = new ReconnaissanceType(
 								jeu,
 								temps,
 								lesFichiers[i].getAbsolutePath(),structure);
-						body+=Resultat(nouveauRec,lesFichiers[i].getName());
+						System.out.println(lesFichiers[i].getName()+" traité...");
+						body+=parser(nouveauRec,lesFichiers[i].getName(),lesFichiers[i].getAbsolutePath());
+						
 					} catch (FileNotFoundException e) {}
 
 				}return body;
@@ -148,63 +151,63 @@ public class HTML {
 			throw new HtmlException("Le chemin : << "+fileName+" << n'est pas un dossier");
 	}
 
-	public String Resultat(ReconnaissanceType re,String file){
-		if(re.isInconnu())
+	public String parser(ReconnaissanceType re,String file,String link){
+		if(re.isInconnu()){
 			return  "<tr>" +
-			"	<th>"+file+"</th>" +
-			"<td> X </td>" +
-			"<td> - </td>" +
-			"<td> - </td>" +
-			"<td> - </td>" +
-			"<td> - </td>" +
-			"<td> - </td>" +
-			"<td> - </td>"+
-			"</tr>" ; 
+					"	<th> <a href="+link+">"+file+"</a></th>" +
+					"<td> VRAI </td>" +
+					"<td> FAUX  </td>" +
+					"<td> FAUX  </td>" +
+					"<td> FAUX  </td>" +
+					"<td> FAUX  </td>" +
+					"<td> FAUX  </td>" +
+					"<td> FAUX  </td>"+
+					"</tr>" ; 
 
-		else if(re.isMort())
+		}else if(re.isMort()){
 			return "<tr>" +
-			"	<th>"+file+"</th>" +
-			"<td> - </td>" +
-			"<td> X </td>" +
-			"<td> X </td>" +
-			"<td> X </td>" +
-			"<td> X </td>" +
-			"<td> 0 </td>" +
-			"<td> 0 </td>" +
-			"</tr>" ; 
-		else if(re.isStabilite())
+					"	<th><a href="+link+">"+file+"</a></th>" +
+					"<td> FAUX  </td>" +
+					"<td> VRAI </td>" +
+					"<td> VRAI </td>" +
+					"<td> VRAI </td>" +
+					"<td> VRAI </td>" +
+					"<td> 0 </td>" +
+					"<td> 0 </td>" +
+					"</tr>" ; }
+		else if(re.isStabilite()){
 			return  "<tr>" +
-			"	<th>"+file+"</th>" +
-			"<td> - </td>" +
-			"<td> - </td>" +
-			"<td> X </td>" +
-			"<td> X </td>" +
-			"<td> X </td>" +
-			"<td> "+re.getPeriodeFinal()+" </td>" +
-			"<td> "+re.getTailleQueue()+" </td>" +
-			"</tr>" ; 
-		else if(re.isOscillation())
+					"	<th><a href="+link+">"+file+"</a></th>" +
+					"<td> FAUX  </td>" +
+					"<td> FAUX </td>" +
+					"<td> VRAI </td>" +
+					"<td> VRAI </td>" +
+					"<td> VRaI </td>" +
+					"<td> "+re.getPeriodeFinal()+" </td>" +
+					"<td> "+re.getTailleQueue()+" </td>" +
+					"</tr>" ; }
+		else if(re.isOscillation()){
 			return  "<tr>" +
-			"	<th>"+file+"</th>" +
-			"<td> - </td>" +
-			"<td> - </td>" +
-			"<td> - </td>" +
-			"<td> X </td>" +
-			"<td> X </td>" +
-			"<td> "+re.getPeriodeFinal()+" </td>" +
-			"<td> "+re.getTailleQueue()+" </td>" +
-			"</tr>" ; 
-		else
+					"	<th><a href="+link+">"+file+"</a></th>" +
+					"<td> FAUX  </td>" +
+					"<td> FAUX  </td>" +
+					"<td> FAUX  </td>" +
+					"<td> VRAI </td>" +
+					"<td> VRAI </td>" +
+					"<td> "+re.getPeriodeFinal()+" </td>" +
+					"<td> "+re.getTailleQueue()+" </td>" +
+					"</tr>" ; }
+		else{
 			return  "<tr>" +
-			"	<td>"+file+"</td>" +
-			"<td> - </td>" +
-			"<td> - </td>" +
-			"<td> - </td>" +
-			"<td> - </td>" +
-			"<td> X </td>" +
-			"<td> "+re.getPeriodeFinal()+" </td>" +
-			"<td> "+re.getTailleQueue()+" </td>" +
-			"</tr>" ; 
+					"	<td><a href="+link+">"+file+"</a></td>" +
+					"<td> FAUX  </td>" +
+					"<td> FAUX  </td>" +
+					"<td> FAUX  </td>" +
+					"<td> FaUX  </td>" +
+					"<td> VRAI </td>" +
+					"<td> "+re.getPeriodeFinal()+" </td>" +
+					"<td> "+re.getTailleQueue()+" </td>" +
+					"</tr>" ; }
 	}
 
 }
