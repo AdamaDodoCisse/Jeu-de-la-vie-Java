@@ -1,0 +1,47 @@
+#load "str.cma";;
+open Str
+open String;;
+type balise = Open of string | Close of string ;;
+let lecture fichier = 
+  let canal = (open_in fichier) in
+  let rec aux s = 
+    try (aux (s^(input_line canal))) with 
+	_-> s in aux "";;
+
+let clean chaine = 
+  let clean1 =global_replace (regexp "<!-- .*-->") ""  chaine in
+  let clean2 =global_replace (regexp "<[?].*[?]>") ""  clean1 in
+  let clean3 =global_replace (regexp "[\n\t\r\"]*") "" clean2 in
+  let clean4 =global_replace (regexp "> *[a-zA-Z0-9 ]*[a-zA-Z0-9 ]*<") "> <" clean3 in
+  clean4;;
+let open_of_string str =
+  let x = global_replace (regexp "[ <>]") "" str in
+  Open(x);;
+let close_of_string str =
+  let x = global_replace (regexp "[ /<>]") "" str in
+  Close(x);;
+
+let is_open str =
+  string_match (regexp "^<[a-zA-Z]+>$") str 0;;
+
+let is_close str = 
+  string_match (regexp "^</[a-zA-Z]+>$") str 0;;
+
+let is_compatible op cl =
+  match op,cl with 
+    |Open(a),Close(b) -> a=b
+    |_,_ ->false ;; 
+let validiteXML = function str -> 
+  let cut = (split (regexp " ") (clean str)) in
+  let rec aux = function l1 -> function l2 ->
+    match l1,l2 with
+      |[],_ -> l2 = []
+      |h::t,[] when (is_close h) -> false
+      |h::t,[] -> if (is_open h) then  aux t ((open_of_string h)::l2) else false
+      |h::t,h1::t1 -> 
+	if is_open h then 
+	  aux t ((open_of_string h)::l2)
+	else if (is_close h) && (is_compatible h1 (close_of_string h)) then
+	  aux t t1
+	else
+	   false   in aux cut [] ;;
