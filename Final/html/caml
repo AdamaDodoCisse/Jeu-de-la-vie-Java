@@ -1,283 +1,51 @@
-(* PARTIE 1 *)
-open Str;;
-open String;;
-#load "str.cma";;
-(* Un identifiant est défini par une chaine de caractère *)
-type id = string ;;
-(* Une balise est associé à un identifiant et peut être soit ouvrante ou fermante *)
-type balise = Open of id | Close of id ;;
-(* Un entry est une liste d'entry ou une donnée dans deux balise ouvrante et fermante *)
-type entry = Id of balise * entry list * balise | Data of string ;;
-(* Un document XML est une liste d'entry *)
-type documentXML = Document of entry list ;;
 
-let clean2 chaine =
- let clean1 =global_replace (regexp "<!-- .*-->") ""  chaine in
-  let clean2 =global_replace (regexp "<[?].*[?]>") ""  clean1 in
-  let clean3 =global_replace (regexp "[\n \t\r\"]*") "" clean2 in
-  let clean4 =global_replace (regexp "><" ) "> <" clean3 in clean4 ;;
-
-let clean chaine = 
-  let clean4 =global_replace (regexp "> *[a-zA-Z0-9 ]*[a-zA-Z0-9 ]*<") "> <" (clean2 chaine) in
-  clean4;;
-
-let reforme_xml chaine = let x= clean2 chaine in let x = global_replace (regexp ">") "> " x in 
-			 let x = global_replace (regexp "<") " <" x in 
-			 let x = global_replace (regexp " +") " "x  in x ;;
-
-let open_of_string str =
-  let x = global_replace (regexp "[ <>]") "" str in
-  Open(x);;
-let close_of_string str =
-  let x = global_replace (regexp "[ /<>]") "" str in
-  Close(x);;
-
-let is_open str =
-  string_match (regexp "^<[a-zA-Z]+>$") str 0;;
-
-let is_close str = 
-  string_match (regexp "^</[a-zA-Z]+>$") str 0;;
-
-let is_compatible op cl =
-  match op,cl with 
-    |Open(a),Close(b) -> a=b
-    |_,_ ->false ;; 
-
-(*let validateurXML = function str -> 
-  let cut = (split (regexp " ") (clean str)) in
-  let rec aux = function l1 -> function l2 ->
-    match l1,l2 with
-      |[],_ -> l2 = []
-      |h::t,[] when (is_close h) -> false
-      |h::t,[] -> if (is_open h) then  aux t ((open_of_string h)::l2) else false
-      |h::t,h1::t1 -> 
-	if is_open h then 
-	  aux t ((open_of_string h)::l2)
-	else if (is_close h) && (is_compatible h1 (close_of_string h)) then
-	  aux t t1
-	else
-	   false in aux cut [] ;;
-*)
-
-let lectureFichier chemin  = let canal_open = open_in(chemin) in 
-			     let rec aux = fun chaine canal_open ->
-try aux (chaine^(input_line canal_open)) canal_open with
-  End_of_file -> chaine
- | _ -> aux (chaine^(input_line canal_open)) canal_open in aux "" canal_open;;
-(*
- let formate chaine = split (regexp " ") (clean2 chaine) ;;			     
-let xml="<contacts > <contact> <nom>nom1</nom><prenom>prenom1</prenom></contact><contact><nom>nom2</nom><prenom>prenom2</prenom></contact></contacts>";;
-*)
-let formate_chaine chaine = let rec aux = fun i copie ->
-if(i>=length chaine) then split (regexp " ") copie
-else if (chaine.[i])='>' || ((length chaine)>(succ i)) && (chaine.[i+1])='<'
-  then aux (succ i) (copie^(make 1 (chaine.[i]))^" ")
-else aux (succ i) (copie^(make 1 (chaine.[i]))) in aux 0 "" ;;
-
-(* PARTIE 2 *)
- let clean3 chaine =global_replace (regexp "[\t]") " " chaine;;
-let is_pcdata str=
-  string_match (regexp "[a-zA-Z0-9 ]+") str 0;;
-
-let premiere_balise_fermante op liste =
-  let rec aux interieur liste =
-    match liste with 
-      |[] -> failwith "error"
-      |h::t -> if is_close h && is_compatible op (close_of_string h) then (interieur,t),close_of_string h else aux (interieur@[h]) t in 
-  aux [] liste;; 
-
-let rec initialisateurXML liste_chaine  = Document(
-  let rec aux = function liste_chaine -> 
-    match liste_chaine with
-      |[] -> []
-      |h::t ->
-	if is_pcdata h then 
-	  [Data h]@(aux t)
-	else
-	  let donnee = (premiere_balise_fermante (open_of_string h) t) in
-	  let interieur = fst(fst donnee) in 
-	  let exterieur = snd(fst donnee) in
-	  let fermeture_h = snd donnee in
-	  [Id(open_of_string h,(aux interieur),fermeture_h)]@(aux exterieur) in
-  aux liste_chaine );;
-
-(initialisateurXML ["<adama>";"<moussa>";"<contact>";"lol";"</contact>";"</moussa>";"</adama>";"<salut>";"oki";"</salut>"]);;
-
-initialisateurXML(split (regexp " ") (reforme_xml (lectureFichier "teste.xml")));;
-
-
-
-type atom = I of id | Elements of elements
-
-and elements = Occur of occurence 
-| ListOccur of occurence list 
-| DansOccur of occurence list
-
-and occurence = Atom of atom 
-| AtomEtoile of atom 
-| AtomPlus of atom 
-| AtomIntero of atom ;;
-
-type model = EMPTY 
-| Donnee 
-| Model of elements ;;
-type description = Desc of id * model ;;
-type documentDTD = DocumentDTD of description list ;; 
-
-let id_of_atom atom = match atom with
-I x -> x
-  | _ -> failwith "Conversion non possible" ;;
-
-let reforme_chaine chaine = global_replace (regexp "><") "> <" (let rec aux = fun i bool ->
-if(i>=length chaine) then ""
-else if (i+1)<(length chaine) && chaine.[i+1]='(' then (make 1 chaine.[i])^" "^(aux (succ i) true)
-else if chaine.[i]='>' then (make 1 chaine.[i])^(aux (succ i) false)
-else if bool=true && chaine.[i]=' ' then aux (succ i) bool 
- else (make 1 chaine.[i])^(aux (succ i) bool) in aux 0 false) ;;
-
-let rec nettoyer_liste liste = let rec aux = fun l liste ->
- if liste=[] then l 
-  else if (List.hd liste)="" then aux l (List.tl liste)
-  else aux (l@[List.hd liste]) (List.tl liste) in aux [] liste ;; 
-
-let id_of_string chaine = ((global_replace (regexp "[^a-zA-Z]") "" chaine):id) ;;
-
-let atomI_of_string chaine = I ((global_replace (regexp "[^a-zA-Z]") "" chaine):id) ;;
 
 let occur_of_string chaine = match chaine with
-x when string_match (regexp "([a-zA-Z]+\\*)") chaine 0 -> AtomEtoile ( atomI_of_string x)
-  | x when string_match (regexp "([a-zA-Z]+\\+)") chaine 0 -> AtomPlus (atomI_of_string x)
-  | x when string_match (regexp "([a-zA-Z]+\\?)") chaine 0 -> AtomIntero (atomI_of_string x)
+x when string_match (regexp "[a-zA-Z]+[\\*]+$") x 0 -> AtomEtoile ( atomI_of_string x)
+  | x when string_match (regexp "[a-zA-Z]+[\\+]+$") x 0 -> AtomPlus (atomI_of_string x)
+  | x when string_match (regexp "[a-zA-Z]+[\\?]+$") x 0 -> AtomIntero (atomI_of_string x)
   | x -> Atom (atomI_of_string x);;
 
 let elements_of_occurrence occur = Occur occur ;;
 
-let elementsListOccur_of_string chaine = let tmp = (split (regexp ",") chaine) in 
-				 let rec aux = fun l liste ->
+let listOccur_of_string chaine = 
+let tmp = split (regexp ",") (global_replace (regexp "[(<)> ]+") "" chaine) in 
+let rec aux = fun l liste ->
 if(liste=[]) then ListOccur l
 else aux (l@[occur_of_string (List.hd liste)]) (List.tl liste) in aux [] tmp ;;
 
-let elementsDansOccur_of_string chaine = let tmp = (split (regexp "|") chaine) in 
-					 let rec aux = fun l liste ->
+let dansOccur_of_string chaine =
+let tmp = split (regexp "|") (global_replace (regexp "[(<)> ]+") "" chaine) in 
+let rec aux = fun l liste ->
 if(liste=[]) then DansOccur l
 else aux (l@[occur_of_string (List.hd liste)]) (List.tl liste) in aux [] tmp ;;
 
 let model_of_string chaine = match chaine with
 x when string_match (regexp_case_fold "( *#PCDATA *)") chaine 0 -> Donnee
   | x when string_match (regexp_case_fold "( *EMPTY *)") chaine 0  -> EMPTY
-  | x when string_match (regexp "([a-zA-Z \\+\\*\\?]+)") chaine 0 -> Model (Occur (occur_of_string chaine))
-  | x when string_match (regexp "([a-zA-Z ,\\+\\?\\*]+)") chaine 0 -> Model ( elementsListOccur_of_string chaine)
-  | _ -> Model ( elementsDansOccur_of_string chaine ) ;;
+  | x when string_match (regexp "([a-zA-Z \\+\\*\\?]+)") chaine 0 -> 
+Model (Occur (occur_of_string (global_replace (regexp "[(<)> ]+") "" chaine)))
+  | x when string_match (regexp "([a-zA-Z ,\\+\\?\\*]+)") chaine 0 -> 
+Model ( listOccur_of_string chaine)
+  | _ -> Model ( dansOccur_of_string chaine ) ;;
+
+let reforme_chaine chaine = split (regexp " ") 
+(global_replace (regexp "[\t\n\r ]+") " " (global_replace (regexp "><") "> <" (let rec aux = fun i bool ->
+if(i>=length chaine) then ""
+else if (i+1)<(length chaine) && chaine.[i+1]='(' then (make 1 chaine.[i])^" "^(aux (succ i) true)
+else if chaine.[i]='>' then (make 1 chaine.[i])^(aux (succ i) false)
+else if bool=true && chaine.[i]=' ' then aux (succ i) bool 
+ else (make 1 chaine.[i])^(aux (succ i) bool) in aux 0 false))) ;;
 
 let description_of_string id model = Desc (id_of_string id, model_of_string model);;
 
-let initier liste = if liste=[] then failwith "Le document DTD est vide !!!"
-  else let rec aux = fun l liste ->
-if liste=[] then DocumentDTD l
-else aux (l@[description_of_string (List.nth liste 1)(List.nth liste 2)])
-  (supprimer_n_element liste 3) in aux [] liste ;;
-
-let  initialiseurDTD nomFichier= initier(nettoyer_liste( split (regexp " " ) 
-				   (reforme_chaine(lectureFichier nomFichier))));;
-
-initier(nettoyer_liste( split (regexp " " ) (clean3 (reforme_chaine(lectureFichier "teste.dtd"))))) ;;
-
-reforme_chaine(lectureFichier "teste.dtd");;
-				   
-
-initialiseurDTD "teste.dtd";;
-
-let rec liste_of_listeOcurr liste = match liste with
-[] -> []
-  | Atom x::t -> [id_of_atom x]@(liste_of_listeOcurr t)
-  | AtomPlus x::t -> [id_of_atom x]@(liste_of_listeOcurr t)
-  | AtomEtoile x::t -> [id_of_atom x]@(liste_of_listeOcurr t)
-  | AtomIntero x::t -> [id_of_atom x]@(liste_of_listeOcurr t) ;;
-
-(*les fonctions de validations *)
-
-let valider_donnee id document = match document with 
-[] -> false
-  | Document (Open b1,x,Close b2)::t when b1=id -> let rec aux = fun x -> match x with 
-      Data donnee::[] -> true
-    | _ -> false in aux x
-  | Document (Open b1,x,Close b2)::t -> let rec aux = fun x -> match x with
-    | [] -> true
-    | Id (Open b1,x,Close b2)::t when b1=id -> let aux = fun x -> match x with 
-      | Data donnee::t -> true 
-      | _ -> false in aux x
-    | Id (Open b1,x,Close b2)::t -> aux t 
-    | _ -> false in aux x
-  |_ -> failwith "Erreur de fichier" ;;
-
-let rec valider_donneer id document = match document with
-[] -> false
-  | Id (Open b1,x,Close b2)::t when b1=id -> let rec aux = fun x -> match x with 
-    | Data donnee::t -> true 
-    | _ -> false in aux x
-  | Id (Open b1,x,Close b2)::t -> (aux t) && (aux x) 
-  | _ -> false in aux x ;;
-
-let valider_empty id document = match document with
-    Document (Open b1,x,Close b2) when b1=id -> let rec aux = fun x -> match x with 
-      Data donnee::t when donnee="" -> true
-    | _ -> false in aux x
-  | Document (Open b1,x,Close b2) -> let rec aux = fun x -> match x with 
-    | [] -> true
-    | Id(Open b1,x,Close b2)::t when b1=id -> let rec aux = fun x -> match x with
-      | Data donnee::t when donnee="" -> true
-      | _ -> false in aux x
-    | Id(Open b1,x,Close b2)::t -> aux t
-    | _ -> false in aux x
-  |_ -> true ;;
-
-let rec nombre_occur_balise id balise doc =
-match doc with Document (Open b1,x,Close b2) when b1=id ->  let rec aux= fun liste ->match liste with
-    [] -> 0
-  | Data donnee::[] -> 0
-  | Id (Open b1,x,Close b2)::[] when b1=balise -> 1+(aux x)
-  | Id (Open b1,x,Close b2)::[] -> 0+(aux x)
-  | Id (Open b1,x,Close b2)::t when b1=balise -> 1+(aux x)+(aux t)
-  | Id (Open b1,x,Close b2)::t -> (aux x)+(aux t) 
-  |_ -> 0 in aux x 
-|Document (Open b1,x,Close b2) ->  let rec aux = fun liste bool -> match liste with
-  [] -> 0
-  | Data donnee::[] -> 0
-  | Id (Open b1,x,Close b2)::t when b1=id -> (aux t false)+(aux x true)
-  | Id (Open b1,x,Close b2)::t when bool=true -> if b1=balise then 1+(aux x true)+(aux t true)
-    else (aux x true)+(aux t true) 
-  | Id (Open b1,x,Close b2)::t -> (aux t bool)+(aux x bool) 
-  | _ -> 0 in aux x false 
-| _ -> 0;;
-
-(*
-let valider_liste_occur id liste_occur document_xml = 
-  let rec aux = fun l -> match l with 
-[] -> true 
-  | Atom x::t -> match x with 
-    | I balise -> if (nombre_occur_balise id balise document_xml)>= 1 then false 
-      else aux t 
-  | AtomPlus x::t -> match x with 
-    | I balise -> if (nombre_occur_balise id balise document_xml)>=1 then aux t
-      else false 
-  | AtomEtoile x::t -> match x with 
-    | I balise -> if (nombre_occur_balise id balise document_xml)>=0 then true
-      else aux t
-  | AtomeIntero x::t -> match x with 
-    | I balise -> if (nombre_occur_balise id balise document_xml)<>1 && (nombre_occur_balise id balise document_xml)<>0 then false
-      else aux t 
-    | _ -> false
-
-
-let rec validateurXML_DTD document_xml document_dtd = match document_dtd with
-[] -> true
-  | Desc (id, Model(ListOccur x))::t -> (valider_liste_occur id (ListOccur x) document_xml) 
-&& validateurXML_DTD (document_xml t) 
-  | Desc (id, Model(DansOccur x))::t -> (valider_dans_occur id (DansOccur x) document_xml) 
-&& validateurXML_DTD (document_xml t)
-  | Desc (id, Donnee)::t -> (valider_donnee id ) && (validateurXML_DTD document_xml t)
-  | Desc (id, EMPTY)::t -> (valider_empty id ) && (validateurXML_DTD document_xml t)
-  | Desc (id, Model(Occur x))::t -> (valider_occur id (Occur x) document_xml) 
-&& validateurXML_DTD (document_xml t);;*)
-
- 
+let initialisateurDTD nomFichier = 
+  let chaine = (lectureFichier nomFichier) in 
+  let liste = reforme_chaine (chaine) in 
+  if liste=[] then failwith "Le document DTD est vide !!!"
+  else try
+    let rec aux = fun l liste ->
+    if liste=[] then DocumentDTD l
+    else aux (l@[description_of_string (List.nth liste 1)(List.nth liste 2)])
+      (List.tl (List.tl (List.tl liste))) in aux [] liste 
+    with Failure c -> failwith "Document DTD non valide !!!";;
