@@ -7,3 +7,53 @@ let id_of_string chaine = ((global_replace (regexp "[^a-zA-Z]") "" chaine):id) ;
 
 let atomI_of_string chaine = I ((global_replace (regexp "[^a-zA-Z]") "" chaine):id) ;;
 
+
+let occur_of_string chaine = match chaine with
+x when string_match (regexp "[a-zA-Z]+[\\*]+$") x 0 -> AtomEtoile ( atomI_of_string x)
+  | x when string_match (regexp "[a-zA-Z]+[\\+]+$") x 0 -> AtomPlus (atomI_of_string x)
+  | x when string_match (regexp "[a-zA-Z]+[\\?]+$") x 0 -> AtomIntero (atomI_of_string x)
+  | x -> Atom (atomI_of_string x);;
+
+let elements_of_occurrence occur = Occur occur ;;
+
+let listOccur_of_string chaine = 
+let tmp = split (regexp ",") (global_replace (regexp "[(<)> ]+") "" chaine) in 
+let rec aux = fun l liste ->
+if(liste=[]) then ListOccur l
+else aux (l@[occur_of_string (List.hd liste)]) (List.tl liste) in aux [] tmp ;;
+
+let dansOccur_of_string chaine =
+let tmp = split (regexp "|") (global_replace (regexp "[(<)> ]+") "" chaine) in 
+let rec aux = fun l liste ->
+if(liste=[]) then DansOccur l
+else aux (l@[occur_of_string (List.hd liste)]) (List.tl liste) in aux [] tmp ;;
+
+let model_of_string chaine = match chaine with
+x when string_match (regexp_case_fold "( *#PCDATA *)") chaine 0 -> Donnee
+  | x when string_match (regexp_case_fold "( *EMPTY *)") chaine 0  -> EMPTY
+  | x when string_match (regexp "([a-zA-Z \\+\\*\\?]+)") chaine 0 -> 
+Model (Occur (occur_of_string (global_replace (regexp "[(<)> ]+") "" chaine)))
+  | x when string_match (regexp "([a-zA-Z ,\\+\\?\\*]+)") chaine 0 -> 
+Model ( listOccur_of_string chaine)
+  | _ -> Model ( dansOccur_of_string chaine ) ;;
+
+let reforme_chaine chaine = split (regexp " ") 
+(global_replace (regexp "[\t\n\r ]+") " " (global_replace (regexp "><") "> <" (let rec aux = fun i bool ->
+if(i>=length chaine) then ""
+else if (i+1)<(length chaine) && chaine.[i+1]='(' then (make 1 chaine.[i])^" "^(aux (succ i) true)
+else if chaine.[i]='>' then (make 1 chaine.[i])^(aux (succ i) false)
+else if bool=true && chaine.[i]=' ' then aux (succ i) bool 
+ else (make 1 chaine.[i])^(aux (succ i) bool) in aux 0 false))) ;;
+
+let description_of_string id model = Desc (id_of_string id, model_of_string model);;
+
+let initialisateurDTD nomFichier = 
+  let chaine = (lectureFichier nomFichier) in 
+  let liste = reforme_chaine (chaine) in 
+  if liste=[] then failwith "Le document DTD est vide !!!"
+  else try
+    let rec aux = fun l liste ->
+    if liste=[] then DocumentDTD l
+    else aux (l@[description_of_string (List.nth liste 1)(List.nth liste 2)])
+      (List.tl (List.tl (List.tl liste))) in aux [] liste 
+    with Failure c -> failwith "Document DTD non valide !!!";;
