@@ -1,0 +1,22 @@
+
+let premiere_balise_fermante op liste =
+  let rec aux interieur liste i =
+    match liste with 
+      |[] -> failwith "error"
+      |h::t when (is_open h) && (Open h)=op -> aux (interieur@[h]) t (i+1)
+      |h::t -> 
+	if is_close h && is_compatible op (close_of_string h) && i=0 then (interieur,t),close_of_string h  
+	else if is_close h && is_compatible op (close_of_string h) && i>0 then aux (interieur@[h]) t (i+1)
+	else aux (interieur@[h]) t i in 
+  aux [] liste 0;; 
+
+let rec initialisateurXML nomFichier  = 
+  let liste_chaine = (split (regexp " ") (reforme_xml (lectureFichier nomFichier))) in
+Document(
+  let rec aux = function liste_chaine -> 
+    match liste_chaine with
+      |[] -> []
+      |h::t ->if is_pcdata h then [Data h]@(aux t) else
+	  let donnee = (premiere_balise_fermante (open_of_string h) t) in let interieur = fst(fst donnee) in  
+	  let exterieur = snd(fst donnee) in let fermeture_h = snd donnee in [Id(open_of_string h,(aux interieur),fermeture_h)]@(aux exterieur) in
+  aux liste_chaine );; 
