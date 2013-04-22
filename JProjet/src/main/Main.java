@@ -3,7 +3,11 @@ package main;
 
 import java.io.FileNotFoundException;
 import exception.LectureException;
-
+/**
+ * 
+ * @author Cissé,Diallo,Melaine,kouyate
+ *
+ */
 public class Main {
 
 	/**
