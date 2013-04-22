@@ -86,13 +86,13 @@ public class Commande {
 	
 	private void groupe(){
 		System.out.println(
-				"Kouyaté Sory\n" +
+				"Kouyate Sory\n" +
 				"Melaine\n" +
 				"Diallo Youssouf\n" +
 				"Cissé Adama Dodo\n");
 	}
 	/**
-	 * Execute une simulation d'un jeu de la vie sur une durrée donné.
+	 * Execute une simulation d'un jeu de la vie sur une durée donné.
 	 * @param nomFichier
 	 * 				Un nom fichier en chaine de caractère.
 	 * @param temps
@@ -155,6 +155,7 @@ public class Commande {
 		try {
 			plateau = StructureDeDonneeFactory.getPlateau(typePlateau, nomFichier);
 			ReconnaissanceType re = new ReconnaissanceType(temps, plateau);
+			re.calculerTypeEvolution(temps);
 			System.out.println(re);
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
