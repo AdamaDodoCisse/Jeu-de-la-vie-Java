@@ -1,33 +1,50 @@
 package affichage;
 import java.awt.Event; 
+import java.io.FileNotFoundException;
 import java.util.Iterator;
 import javax.swing.Timer;
 
+import exception.LectureException;
+
 import structureDeDonnee.Cellule;
+import structureDeDonnee.PlateauInfini;
 import jeuDeLaVie.JeuDeLaVie;
 /**
- * 
+ * <b>Simulation est la classe qui simule l'evolution d'un jeu de la vie dans </br>
+ * un temps déterminer dans un terminale</b>
+ * <p>
+ * Une 
+ * </p>
  * @author kouyate
  *
  */
 public class Simulation {
 	/**
-	 * 
+	 * Jeu de la vie à simuler.
+	 * @see Simulation#getJeu()
+	 * @see Simulation#setJeu(JeuDeLaVie)
+	 * @see JeuDeLaVie
 	 */
 	private JeuDeLaVie jeu;
 	/**
-	 * 
+	 * Durrée de la simulation du jeu de la vie.
+	 * @see Simulation#dureeSimulation
+	 * @see Simulation#getDureeSimulation()
+	 * @see JeuDeLaVie
 	 */
 	private int dureeSimulation;
 	/**
-	 * 
+	 * Les entiers définissant la taille de l'ecran d'affichage.
 	 */
-	Timer timer;
 	private int x1,x2,y1,y2;
 	/**
-	 * 
+	 * Constructeur Simulation.
 	 * @param duree
+	 * 				Un entier correspondant à la durrée de simulation du jeu de la vie.
 	 * @param jeu
+	 * 				Un jeu de la vie.
+	 * @see Simulation#jeu
+	 * @see Simulation#dureeSimulation
 	 */
 	public Simulation(int duree,JeuDeLaVie jeu){
 		this.jeu = jeu;
@@ -37,8 +54,16 @@ public class Simulation {
 		
 		simuler();
 	}
+	/**
+	 * 
+	 * @param x1
+	 * @param x2
+	 * @param y1
+	 * @param y2
+	 */
 	public void afficher(int x1,int x2,int y1,int y2){
-		String s = "Nombre total de cellule vivante = "+jeu.getPlateau().getTailleCelluleVivante()+"\n";
+		int cpt = 0;
+		String s = " ";
 		for(int i=x1-1;i<=y2+1;i++)
 			s = s+" = ";
 		
@@ -53,6 +78,7 @@ public class Simulation {
 					Cellule k = new Cellule(i,j,-1,true);
 					if(jeu.getPlateau().contains(k)){
 						s = s+" o ";
+						cpt++;
 					}
 					else 
 						s = s+" - ";
@@ -62,7 +88,8 @@ public class Simulation {
 		}
 		for(int i=x1-1;i<=y2+1;i++)
 			s = s+" = ";
-		s +="\n";
+		s +="\nNombre total de cellule vivante = "+jeu.getPlateau().getTailleCelluleVivante()+"\n";
+		s = s + "Nombre de cellule vivante afficher = "+cpt+"\n";
 		System.out.print(s);
 	}
 	public void simuler(){
@@ -129,11 +156,11 @@ public class Simulation {
 		x2 = x1 + 35;
 		y2 = y1 + 36;
 	}
-	/*public static void main(String[]args) throws FileNotFoundException, LectureException{
+	public static void main(String[]args) throws FileNotFoundException, LectureException{
 		@SuppressWarnings("unused")
 		Simulation si = new Simulation(4,
 						new JeuDeLaVie(
 						new PlateauInfini("Dossier_Teste/teste_jeu.LIF")));
-	}*/
+	}
 	
 }
