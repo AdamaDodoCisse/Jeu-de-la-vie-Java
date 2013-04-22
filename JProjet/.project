@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>Dossier_Teste/OSCSP7-9.LIF</name>
+			<type>1</type>
+			<location>/home/kouyate/lif/OSCSP7-9.LIF</location>
+		</link>
+	</linkedResources>
 </projectDescription>
