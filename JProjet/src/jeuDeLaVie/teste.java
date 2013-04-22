@@ -14,7 +14,7 @@ public static void main(String []args) throws FileNotFoundException, HTMLExcepti
 	@SuppressWarnings("unused")
 	JeuDeLaVie jeu = new JeuDeLaVie(plateau);
 	@SuppressWarnings("unused")
-	HTMLGenerateur html = new HTMLGenerateur("Dossier_Teste", 500, 2, "ess");
+	HTMLGenerateur html = new HTMLGenerateur("Dossier_Teste", 1000, 2, "ess");
 }
 
 }
