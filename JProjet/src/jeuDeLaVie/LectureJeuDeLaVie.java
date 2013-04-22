@@ -82,7 +82,7 @@ public class LectureJeuDeLaVie {
 						plateau.ajouterRegleMort(3);
 					}
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
