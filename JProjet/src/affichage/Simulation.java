@@ -5,7 +5,11 @@ import javax.swing.Timer;
 
 import structureDeDonnee.Cellule;
 import jeuDeLaVie.JeuDeLaVie;
-
+/**
+ * 
+ * @author kouyate
+ *
+ */
 public class Simulation {
 	/**
 	 * 
