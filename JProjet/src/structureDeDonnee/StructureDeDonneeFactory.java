@@ -54,6 +54,8 @@ public class StructureDeDonneeFactory {
 	 */
 	public static Matrice getPlateau(int typePlateau,String nomFichier) throws FileNotFoundException, LectureException{
 		Matrice plateau = null;
+		
+		
 		switch(typePlateau){
 		
 		case PLATEAU_FINI : 
@@ -64,6 +66,7 @@ public class StructureDeDonneeFactory {
 			break;
 		case PLATEAU_CIRCULAIRE :
 			plateau = new PlateauCirculaire(nomFichier);
+			break;
 		default : 
 			throw new IllegalArgumentException("Type de jeu Inconnu "+typePlateau);
 		}

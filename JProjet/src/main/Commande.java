@@ -200,13 +200,15 @@ public class Commande {
 					} else if (args[0].equals("-s")){
 						try{
 							int typePlateau = Integer.parseInt(args[3]);
+							
 							if(typePlateau >=1 && typePlateau<=3){
 								simuler(nomRepertoire,temps,typePlateau);
 							} else {
 								throw new CommandeException("l'entier doit être entre 1 et 3");
 							}
 						}catch(Exception e){
-							throw new CommandeException("le quatrième arguments est un entier");
+							System.out.println(e.getLocalizedMessage());
+							//throw new CommandeException("le quatrième arguments est un entier");
 						}
 					}
 					

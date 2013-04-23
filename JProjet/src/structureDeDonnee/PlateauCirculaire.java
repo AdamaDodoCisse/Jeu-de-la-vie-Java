@@ -26,8 +26,8 @@ public class PlateauCirculaire extends PlateauFini {
 		// la taille doit etre fixer 
 		setMinAbscisse(0);
 		setMinOrdonnee(0);
-		setMaxAbscisse(10);
-		setMaxOrdonnee(10);
+		setMaxAbscisse(40);
+		setMaxOrdonnee(40);
 		
 		
 		// TODO Auto-generated constructor stub
