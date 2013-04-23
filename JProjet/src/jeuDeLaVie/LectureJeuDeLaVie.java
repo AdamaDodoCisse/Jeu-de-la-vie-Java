@@ -4,8 +4,8 @@ import interface_.Matrice;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -32,14 +32,14 @@ public class LectureJeuDeLaVie {
 	 * 				Une structure de donnée répresentant un plateau du jeu de la vie.
 	 * @throws LectureException 
 	 * 				Lève une exception si le nom de fichier passer en paramètre n'existe pas.
-	 * @throws FileNotFoundException 
+	 * @throws IOException 
 	 * @see Matrice
 	 * @see PlateauFini
 	 * @see PlateauInfini
 	 * @see PlateauCirculaire
 	 * 
 	 */
-	public static void LectureJeu(String nomFichier,Matrice plateau) throws LectureException, FileNotFoundException{
+	public static void LectureJeu(String nomFichier,Matrice plateau) throws LectureException, IOException{
 		BufferedReader reader = null;
 		File fichier=new File(nomFichier);
 		/*
@@ -56,7 +56,7 @@ public class LectureJeuDeLaVie {
 				|| fichier.isFile() && fichier.getAbsolutePath().endsWith(".LIF")){
 			//initialisation du reader pour lire le fichier 
 			reader = new BufferedReader(new FileReader(fichier));
-			try {
+			
 				while((line = reader.readLine())!=null){
 					/*
 					 * teste si la ligne courante est un bloque,récupere les deux entiers 
@@ -108,10 +108,6 @@ public class LectureJeuDeLaVie {
 						plateau.ajouterRegleMort(3);
 					}
 				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			//on trie l'ensemble des cellules vivantes du plateau
 			plateau.trierCellule();
 		} else {
@@ -142,7 +138,7 @@ public class LectureJeuDeLaVie {
 	 * 				Un plateau du jeu de la vie dans le quel les cellules vivantes sont ajoutés.
 	 * @see JeuDeLaVie
 	 */
-	public static void ajouterCelluleVivante(String line ,int abscisse,int ordonnee, Matrice grille){
+	/*public static void ajouterCelluleVivante(String line ,int abscisse,int ordonnee, Matrice grille){
 		int i = 0;
 		int tmp=ordonnee;
 		while(i<line.length()){
@@ -154,7 +150,7 @@ public class LectureJeuDeLaVie {
 		}
 		abscisse++;
 		ordonnee=tmp;
-	}
+	}*/
 	/**
 	 * Ajoute les règles dans un plateau donner en paramètre </b>
 	 * à partir d'une chaine de caractère passé en paramètre. 

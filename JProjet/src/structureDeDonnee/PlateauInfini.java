@@ -1,6 +1,5 @@
 package structureDeDonnee;
-
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import exception.LectureException;
@@ -21,7 +20,7 @@ public class PlateauInfini extends PlateauFini{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public PlateauInfini(String nomFichier) throws FileNotFoundException, LectureException {
+	public PlateauInfini(String nomFichier) throws LectureException, IOException {
 		super(nomFichier);
 		// TODO Auto-generated constructor stub
 	}

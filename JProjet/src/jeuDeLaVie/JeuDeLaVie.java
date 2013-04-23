@@ -1,6 +1,6 @@
 package jeuDeLaVie;
+import java.io.IOException;
 
-import java.io.FileNotFoundException;
 import exception.LectureException;
 import interface_.Matrice;
 import structureDeDonnee.PlateauCirculaire;
@@ -51,15 +51,14 @@ public class JeuDeLaVie implements interface_.Jeu {
      * 				Un nom de fichier LIF(fichier comportant le jeu de la vie).	
      * @param structure
      * 				Une structure de donnée répresentant un plateau du jeu de la vie.
-     * @throws FileNotFoundException
-     * 				Lève une exception si le nom de fichier passer en paramètre n'existe pas.
      * @throws LectureException 
+     * @throws IOException 
      * @see Matrice
 	 * @see PlateauFini
 	 * @see PlateauInfini
 	 * @see PlateauCirculaire
      */
-    public JeuDeLaVie(String nomFichier,Matrice structure) throws FileNotFoundException, LectureException{
+    public JeuDeLaVie(String nomFichier,Matrice structure) throws LectureException, IOException{
     	this.plateau = structure;
     	LectureJeuDeLaVie.LectureJeu(nomFichier, plateau);
     }

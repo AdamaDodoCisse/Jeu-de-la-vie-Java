@@ -1,6 +1,7 @@
 package testJeuDeLaVie;
 import static org.junit.Assert.*;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import interface_.Matrice;
 import jeuDeLaVie.JeuDeLaVie;
 import org.junit.After;
@@ -31,7 +32,7 @@ protected JeuDeLaVie  jeu;
 	}
 	
 @Test 
-public void testJeuDeLaVie() throws FileNotFoundException, LectureException{
+public void testJeuDeLaVie() throws LectureException, IOException{
 	Matrice matrice= new PlateauFini();
 	jeu=new JeuDeLaVie("Dossier_Teste/teste_jeu2.LIF", matrice);
 	

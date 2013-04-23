@@ -1,8 +1,7 @@
 package testJeuDeLaVie;
 
 import static org.junit.Assert.*;
-
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import jeuDeLaVie.LectureJeuDeLaVie;
 
@@ -29,27 +28,21 @@ public class LectureJeuDeLaVieTest {
 
 	@SuppressWarnings("static-access")
 	@Test
-	public void testLectureJeu() throws FileNotFoundException, LectureException {
+	public void testLectureJeu() throws LectureException, IOException {
 		lecture.LectureJeu("Dossier_Teste/teste_jeu.LIF", plateau);
 		assertEquals(plateau.getTailleCelluleVivante(), 4);
 		assertTrue(plateau.contains(new Cellule(0,0,-1,true)));
 		assertTrue(plateau.contains(new Cellule(0,1,-1,true)));
 		assertTrue(plateau.contains(new Cellule(1,0,-1,true)));
 		assertTrue(plateau.contains(new Cellule(1,1,-1,true)));
-		
+		plateau = new PlateauInfini();
 		lecture.LectureJeu("Dossier_Teste/teste.LIF",plateau);
+		try{
+			lecture.LectureJeu("fichier", plateau);
+		}catch(LectureException e){
+			
+		}
 		
-	}
-
-	@SuppressWarnings("static-access")
-	@Test
-	public void testAjouterCelluleVivante() {
-		String ligne = "***...";
-		lecture.ajouterCelluleVivante(ligne, 0, 0, plateau);
-		assertEquals(plateau.getTailleCelluleVivante(),3);
-		assertTrue(plateau.contains(new Cellule(0,0,-1,true)));
-		assertTrue(plateau.contains(new Cellule(0,1,-1,true)));
-		assertTrue(plateau.contains(new Cellule(0,2,-1,true)));
 		
 	}
 

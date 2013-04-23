@@ -3,8 +3,7 @@
  */
 package structureDeDonnee;
 import interface_.Matrice;
-
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -94,16 +93,15 @@ public class PlateauFini implements Matrice {
 	 * Constructeur Grille.
 	 * @param nomFichier 
 	 * 				Le nom du fichier LIF.
-	 * @throws FileNotFoundException 
-	 * 				Lève une exception si le nom de fichier passer en paramètre n'existe pas.
 	 * @throws LectureException 
+	 * @throws IOException 
 	 * @see Cellule
 	 * @see PlateauFini#celluleVivante
 	 * @see PlateauFini#regleVie
 	 * @see PlateauFini#regleMort
 	 * @see PlateauFini#maxAbscisse {@link PlateauFini#maxOrdonnee} {@link #minAbscisse} {@link #minOrdonnee}
 	 */
-	public PlateauFini(String nomFichier) throws FileNotFoundException, LectureException{
+	public PlateauFini(String nomFichier) throws LectureException, IOException{
 		//initialisation des variables
 		this.celluleVivante = new ArrayList<Cellule>();
 		this.regleVie = new ArrayList<Integer>();

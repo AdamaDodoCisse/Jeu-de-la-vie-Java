@@ -1,6 +1,6 @@
 package affichage;
 import java.awt.Event; 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Iterator;
 import exception.LectureException;
 
@@ -159,7 +159,7 @@ public class Simulation {
 		x2 = x1 + 35;
 		y2 = y1 + 36;
 	}
-	public static void main(String[]args) throws FileNotFoundException, LectureException{
+	public static void main(String[]args) throws LectureException, IOException{
 		@SuppressWarnings("unused")
 		Simulation si = new Simulation(4,
 						new JeuDeLaVie(

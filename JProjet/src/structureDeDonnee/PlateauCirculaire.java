@@ -1,7 +1,7 @@
 package structureDeDonnee;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -24,10 +24,10 @@ public class PlateauCirculaire extends PlateauFini {
 	/**
 	 * 
 	 * @param nomFichier
-	 * @throws FileNotFoundException
 	 * @throws LectureException
+	 * @throws IOException 
 	 */
-	public PlateauCirculaire(String nomFichier) throws FileNotFoundException, LectureException {
+	public PlateauCirculaire(String nomFichier) throws LectureException, IOException {
 		super(nomFichier);
 		// la taille doit etre fixer 
 		setMinAbscisse(0);
@@ -167,7 +167,7 @@ public class PlateauCirculaire extends PlateauFini {
 			}System.out.println();
 		}System.out.println();
 	}
-	public static void main(String []args) throws FileNotFoundException, LectureException{
+	public static void main(String []args) throws LectureException, IOException{
 		final PlateauCirculaire cir = new PlateauCirculaire("Dossier_Teste/teste.LIF");
 		Timer t = new Timer(500, new ActionListener() {
 			

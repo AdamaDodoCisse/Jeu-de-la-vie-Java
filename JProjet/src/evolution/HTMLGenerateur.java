@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 
 import structureDeDonnee.PlateauCirculaire;
 import structureDeDonnee.PlateauFini;
@@ -63,6 +64,7 @@ public class HTMLGenerateur {
 	 * 				Lève une exception lorsque le dossier est vide ou inexistant.
 	 * @throws LectureException 
 	 * 				Lève une exception lorsque le fichier n'existe pas.
+	 * @throws IOException 
 	 * @see PlateauFini
 	 * @see PlateauInfini
 	 * @see PlateauCirculaire
@@ -70,7 +72,7 @@ public class HTMLGenerateur {
 	 */
 	public HTMLGenerateur(String fileName,int temps,int typePlateau,
 						  String nomPage
-						   )throws HTMLException, LectureException{
+						   )throws HTMLException, LectureException, IOException{
 		this.typePlateau = typePlateau;
 		//Genere le contenu de la page HTML
 		preparerBalise(fileName, temps);
@@ -87,8 +89,9 @@ public class HTMLGenerateur {
 	 * @throws HTMLException
 	 * 				Lève une exception lorsque le dossier est vide ou inexistant.
 	 * @throws LectureException 
+	 * @throws IOException 
 	 */
-	public String analyser(String fileName,int temps)throws HTMLException, LectureException {
+	public String analyser(String fileName,int temps)throws HTMLException, LectureException, IOException {
 		File dossier = new File(fileName); 
 		String body ="";
 		if(dossier.isDirectory()){
@@ -205,10 +208,11 @@ public class HTMLGenerateur {
 	 * @throws HTMLException
 	 * 				Lève une exception lorsque le dossier est vide ou inexistant.
 	 * @throws LectureException 
+	 * @throws IOException 
 	 * @see HTMLGenerateur
 	 * @see HTMLException
 	 */
-	private void preparerBalise(String filename, int temps) throws HTMLException, LectureException{
+	private void preparerBalise(String filename, int temps) throws HTMLException, LectureException, IOException{
 		balise = "<html>" +
 				"	<head>" +
 				"		<title> Jeu de la vie" +

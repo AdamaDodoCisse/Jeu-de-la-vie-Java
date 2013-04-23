@@ -1,5 +1,5 @@
 package structureDeDonnee;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import exception.LectureException;
 
@@ -44,15 +44,14 @@ public class StructureDeDonneeFactory {
 	 * @param nomFichier
 	 * 				Un nom de fichier LIF(fichier comportant le jeu de la vie).
 	 * @return	Un plateau(Structure de donnée) correspondant au type passé en paramètre.
-	 * @throws FileNotFoundException
-	 * 				Lève une exception si le nom de fichier passer en paramètre n'existe pas.
 	 * @throws LectureException 
+	 * @throws IOException 
 	 * @see Matrice
 	 * @see PlateauFini
 	 * @see PlateauInfini
 	 * @see PlateauCirculaire
 	 */
-	public static Matrice getPlateau(int typePlateau,String nomFichier) throws FileNotFoundException, LectureException{
+	public static Matrice getPlateau(int typePlateau,String nomFichier) throws LectureException, IOException{
 		Matrice plateau = null;
 		
 		

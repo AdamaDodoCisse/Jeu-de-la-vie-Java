@@ -46,10 +46,10 @@ public class Commande {
 	 * @param args
 	 * 				Un tableau de chaine de caractère conténant les commandes.
 	 * @throws LectureException 
-	 * @throws FileNotFoundException 
+	 * @throws IOException 
 	 * @see Commande
 	 */
-	public Commande(String []args) throws LectureException, FileNotFoundException{
+	public Commande(String []args) throws LectureException, IOException{
 		
 		try {
 			executer(args);
@@ -100,12 +100,13 @@ public class Commande {
 	 * @param typePlateau
 	 * 				Un entier coorespondant au type de plateau du jeu de la vie.
 	 * @throws LectureException 
+	 * @throws IOException 
 	 * @see JeuDeLaVie
 	 * @see PlateauFini
 	 * @see PlateauInfini
 	 * @see PlateauCirculaire
 	 */
-	private void simuler(String nomFichier,int temps,int typePlateau) throws LectureException{
+	private void simuler(String nomFichier,int temps,int typePlateau) throws LectureException, IOException{
 		JeuDeLaVie jeu;
 		try {
 			plateau = StructureDeDonneeFactory.getPlateau(typePlateau, nomFichier);
@@ -128,10 +129,11 @@ public class Commande {
 	 * @param nomFichierHtml
 	 * 				Une chaine de caractère qui correspond au nom du fichier HTML à générer.
 	 * @throws LectureException 
+	 * @throws IOException 
 	 * @see HTMLGenerateur
 	 * @see JeuDeLaVie
 	 */
-	private void genererHTML(String nomDossier,int temps,int typePlateau,String nomFichierHtml) throws LectureException {
+	private void genererHTML(String nomDossier,int temps,int typePlateau,String nomFichierHtml) throws LectureException, IOException {
 		try {
 			new HTMLGenerateur(nomDossier, temps, typePlateau, nomFichierHtml);
 		} catch (HTMLException e) {
@@ -147,11 +149,12 @@ public class Commande {
 	 * @param nomFichier
 	 * 				Un nom fichier en chaine de caractère.
 	 * @throws LectureException 
+	 * @throws IOException 
 	 * @see ReconnaissanceType
 	 * @see JeuDeLaVie
 	 * 				
 	 */
-	private void analyserFichier(int typePlateau,int temps,String nomFichier) throws LectureException{
+	private void analyserFichier(int typePlateau,int temps,String nomFichier) throws LectureException, IOException{
 		try {
 			plateau = StructureDeDonneeFactory.getPlateau(typePlateau, nomFichier);
 			ReconnaissanceType re = new ReconnaissanceType(temps, plateau);
@@ -168,11 +171,11 @@ public class Commande {
 	 * @throws CommandeException
 	 * 				Lève une exception lorsque la commande est invalide.
 	 * @throws LectureException 
-	 * @throws FileNotFoundException 
+	 * @throws IOException 
 	 * @see CommandeException
 	 */
 	
-	private void executer(String []args)throws CommandeException, LectureException, FileNotFoundException{
+	private void executer(String []args)throws CommandeException, LectureException, IOException{
 		if(args.length==0){
 			System.out.println("Veuillez saisir une des commandes");
 			System.out.println();
