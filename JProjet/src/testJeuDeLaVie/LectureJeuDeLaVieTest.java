@@ -40,7 +40,7 @@ public class LectureJeuDeLaVieTest {
 		try{
 			lecture.LectureJeu("fichier", plateau);
 		}catch(LectureException e){
-			
+			assertTrue(true);
 		}
 		
 		
