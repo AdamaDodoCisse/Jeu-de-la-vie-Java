@@ -16,6 +16,7 @@ import jeuDeLaVie.JeuDeLaVie;
  * <b>PlateauCirculaire est la classe répresentant une structure de donnée du jeu de la vie </br>
  * dans un plateau circulaire(Monde circulaire).</b>
  * Elle hérite de la classe {@link PlateauFini}.
+ * @see PlateauFini
  * @see JeuDeLaVie
  * @author kouyate
  */
