@@ -6,10 +6,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class HTMLGenerateurTest {
+import structureDeDonnee.StructureDeDonneeFactory;
 
+import evolution.HTMLGenerateur;
+
+public class HTMLGenerateurTest {
+	protected HTMLGenerateur generateur;
 	@Before
 	public void setUp() throws Exception {
+		generateur = new HTMLGenerateur("Dossier_Teste",StructureDeDonneeFactory.PLATEAU_INFINI,1,"Teste");
 	}
 
 	@After
