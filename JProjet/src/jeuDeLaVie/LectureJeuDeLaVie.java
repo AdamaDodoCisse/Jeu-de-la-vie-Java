@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -17,9 +16,10 @@ import structureDeDonnee.PlateauFini;
 import structureDeDonnee.PlateauInfini;
 
 /**
- * <b>LectureJeuDeLaVie est la classe permettant d'initialiser un plateau du jeu de la vie.</b>
+ * <b>LectureJeuDeLaVie est la classe permettant d'initialiser un plateau du jeu de la vie</br>
+ * à partir d'un fichier au format LIF.</b>
  * @see JeuDeLaVie
- * @author kouyate
+ * @author Cissé,Diallo,Kouyate,Melaine
  *
  */
 
@@ -99,11 +99,17 @@ public class LectureJeuDeLaVie {
 		}
 	}
 	/**
-	 * 
+	 * Ajoute les cellules vivantes dans un plateau donner en paramètre </b>
+	 * à partir d'une chaine de caractère passé en paramètre. 
 	 * @param line
+	 * 				Une chaine de caractère.
 	 * @param abscisse
+	 * 				Un entier correspondant à l'abscisse.
 	 * @param ordonnee
+	 * 				Un entier correspondant à l'ordonnée.
 	 * @param grille
+	 * 				Un plateau du jeu dans le quel les cellules vivantes sont ajoutés.
+	 * @see JeuDeLaVie
 	 */
 	public static void ajouterCelluleVivante(String line ,int abscisse,int ordonnee, Matrice grille){
 		int i = 0;
@@ -121,7 +127,9 @@ public class LectureJeuDeLaVie {
 	/**
 	 * 
 	 * @param line
+	 * 				Une chaine de caractère.
 	 * @param plateau
+	 * 				
 	 */
 	public static void ajouterRegle(String line, Matrice plateau){
 		line = line.replaceAll("[^0-9/]", "");

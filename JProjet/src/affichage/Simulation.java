@@ -2,8 +2,6 @@ package affichage;
 import java.awt.Event; 
 import java.io.FileNotFoundException;
 import java.util.Iterator;
-import javax.swing.Timer;
-
 import exception.LectureException;
 
 import structureDeDonnee.Cellule;
@@ -13,9 +11,14 @@ import jeuDeLaVie.JeuDeLaVie;
  * <b>Simulation est la classe qui simule l'evolution d'un jeu de la vie dans </br>
  * un temps déterminer dans un terminale</b>
  * <p>
- * Une 
+ * Un object simulation est caractérisée par : 
+ * <ul>
+ * <li>Un jeu de la vie.</li>
+ * <li>Une durée de simulation du jeu.</li>
+ * </ul>
+ * @see JeuDeLaVie
  * </p>
- * @author kouyate
+ * @author Cissé,Diallo,kouyate,Melaine
  *
  */
 public class Simulation {

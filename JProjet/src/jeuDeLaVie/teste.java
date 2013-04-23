@@ -6,7 +6,6 @@ import evolution.HTMLGenerateur;
 import exception.HTMLException;
 import exception.LectureException;
 import structureDeDonnee.PlateauCirculaire;
-import structureDeDonnee.PlateauFini;
 import interface_.Matrice;
 
 public class teste {
