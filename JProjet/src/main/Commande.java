@@ -207,8 +207,8 @@ public class Commande {
 								throw new CommandeException("l'entier doit être entre 1 et 3");
 							}
 						}catch(Exception e){
-							System.out.println(e.getLocalizedMessage());
-							//throw new CommandeException("le quatrième arguments est un entier");
+							
+							throw new CommandeException("le quatrième arguments est un entier");
 						}
 					}
 					

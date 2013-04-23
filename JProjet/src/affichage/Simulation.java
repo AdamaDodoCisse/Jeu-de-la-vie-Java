@@ -110,7 +110,7 @@ public class Simulation {
 			afficher(x1,x2,y1,y2);
 			temps++;
 			try{
-				Thread.sleep(5);
+				Thread.sleep(500);
 			}catch(Exception e){
 				
 			}

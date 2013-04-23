@@ -1,5 +1,6 @@
 package evolution;
 
+import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
@@ -249,7 +250,7 @@ public class HTMLGenerateur {
 			f3.close();
 			System.out.println("Fichier HTML créer sous le nom de : "+nomPage+".html");
 			System.out.println("Terminer");
-		//	Desktop.getDesktop().open(f1);
+			Desktop.getDesktop().open(f1);
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -270,24 +271,24 @@ public class HTMLGenerateur {
 		if(re.isInconnu()){
 			return  "<tr>" +
 					"	<th> <a href="+link+">"+file+"</a></th>" +
-					"<td> <img src='Dossier_Teste\\valide.png' /> </td>" +
-					"<td> <img src='Dossier_Teste\\error.png' />  </td>" +
-					"<td> <img src='Dossier_Teste\\error.png' />  </td>" +
-					"<td> <img src='Dossier_Teste\\error.png' />  </td>" +
-					"<td> <img src='Dossier_Teste\\error.png' />   </td>" +
-					"<td> <img src='Dossier_Teste\\error.png' />   </td>" +
-					"<td> <img src='Dossier_Teste\\error.png' />   </td>"+
+					"<td> <img src=Dossier_Teste/valide.png /> </td>" +
+					"<td> <img src=Dossier_Teste/error.png />  </td>" +
+					"<td> <img src=Dossier_Teste/error.png />  </td>" +
+					"<td> <img src=Dossier_Teste/error.png />  </td>" +
+					"<td> <img src=Dossier_Teste/error.png />   </td>" +
+					"<td> <img src=Dossier_Teste/error.png />   </td>" +
+					"<td> <img src=Dossier_Teste/error.png />   </td>"+
 					"<td> (0,0) </td>"+
 					"</tr>" ; 
 
 		}else if(re.isMort()){
 			return "<tr>" +
 					"	<th><a href="+link+">"+file+"</a></th>" +
-					"<td> <img src='Dossier_Teste\\error.png' />  </td>" +
-					"<td> <img src='Dossier_Teste\\valide.png' /> </td>" +
-					"<td> <img src='Dossier_Teste\\valide.png' /> </td>" +
-					"<td> <img src='Dossier_Teste\\valide.png' /> </td>" +
-					"<td> <img src='Dossier_Teste\\valide.png' /> </td>" +
+					"<td> <img src=Dossier_Teste/error.png />  </td>" +
+					"<td> <img src=Dossier_Teste/valide.png /> </td>" +
+					"<td> <img src=Dossier_Teste/valide.png /> </td>" +
+					"<td> <img src=Dossier_Teste/valide.png /> </td>" +
+					"<td> <img src=Dossier_Teste/valide.png /> </td>" +
 					"<td> 0 </td>" +
 					"<td> 0 </td>" +
 					"<td> (0,0) </td>"+
@@ -295,11 +296,11 @@ public class HTMLGenerateur {
 		else if(re.isStabilite()){
 			return  "<tr>" +
 					"	<th><a href="+link+">"+file+"</a></th>" +
-					"<td> <img src='Dossier_Teste\\error.png' />  </td>" +
-					"<td> <img src='Dossier_Teste\\error.png' /> </td>" +
-					"<td> <img src='Dossier_Teste\\valide.png' /> </td>" +
-					"<td> <img src='Dossier_Teste\\valide.png' /></td>" +
-					"<td> <img src='Dossier_Teste\\valide.png' /> </td>" +
+					"<td> <img src=Dossier_Teste/error.png />  </td>" +
+					"<td> <img src=Dossier_Teste/error.png /> </td>" +
+					"<td> <img src=Dossier_Teste/valide.png /> </td>" +
+					"<td> <img src=Dossier_Teste/valide.png /></td>" +
+					"<td> <img src=Dossier_Teste/valide.png /> </td>" +
 					"<td> "+re.getPeriodeFinal()+" </td>" +
 					"<td> "+re.getTailleQueue()+" </td>" +
 					"<td> ("+re.getLignes()+","+re.getColonnes()+") </td>"+
@@ -307,11 +308,11 @@ public class HTMLGenerateur {
 		else if(re.isOscillation()){
 			return  "<tr>" +
 					"	<th><a href="+link+">"+file+"</a></th>" +
-					"<td> <img src='Dossier_Teste\\error.png' /> </td>" +
-					"<td> <img src='Dossier_Teste\\error.png' /> </td>" +
-					"<td> <img src='Dossier_Teste\\error.png' />  </td>" +
-					"<td> <img src='Dossier_Teste\\valide.png' /> </td>" +
-					"<td> <img src='Dossier_Teste\\valide.png' /> </td>" +
+					"<td> <img src=Dossier_Teste/error.png /> </td>" +
+					"<td> <img src=Dossier_Teste/error.png /> </td>" +
+					"<td> <img src=Dossier_Teste/error.png />  </td>" +
+					"<td> <img src=Dossier_Teste/valide.png /> </td>" +
+					"<td> <img src=Dossier_Teste/valide.png /> </td>" +
 					"<td> "+re.getPeriodeFinal()+" </td>" +
 					"<td> "+re.getTailleQueue()+" </td>" +
 					"<td> ("+re.getLignes()+","+re.getColonnes()+") </td>"+
@@ -319,11 +320,11 @@ public class HTMLGenerateur {
 		else{
 			return  "<tr>" +
 					"	<th><a href="+link+">"+file+"</a></th>" +
-					"<td> <img src='Dossier_Teste\\error.png' />  </td>" +
-					"<td> <img src='Dossier_Teste\\error.png' />  </td>" +
-					"<td> <img src='Dossier_Teste\\error.png' />  </td>" +
-					"<td> <img src='Dossier_Teste\\valide.png' />  </td>" +
-					"<td> <img src='Dossier_Teste\\valide.png' /> </td>" +
+					"<td> <img src=Dossier_Teste/error.png />  </td>" +
+					"<td> <img src=Dossier_Teste/error.png />  </td>" +
+					"<td> <img src=Dossier_Teste/error.png />  </td>" +
+					"<td> <img src=Dossier_Teste/valide.png />  </td>" +
+					"<td> <img src=Dossier_Teste/valide.png /> </td>" +
 					"<td> "+re.getPeriodeFinal()+" </td>" +
 					"<td> "+re.getTailleQueue()+" </td>" +
 					"<td> ("+re.getLignes()+","+re.getColonnes()+") </td>"+
