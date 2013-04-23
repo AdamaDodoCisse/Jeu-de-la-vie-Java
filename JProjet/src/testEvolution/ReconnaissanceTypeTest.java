@@ -73,13 +73,13 @@ public class ReconnaissanceTypeTest {
 	@Test
 	public void testDistance() {
 		double b = type.distance(new Cellule(1,1,-1,true), new Cellule(1,1,-1,true));
-		assertFalse(b!=0);
+		assertTrue(b==0);
 		
 	}
 
 	@Test
 	public void testGetConfiguration1() {
-		assertTrue(type.getConfiguration1().getClass()==JeuDeLaVie.class);
+		assertEquals(type.getConfiguration1().getClass(),JeuDeLaVie.class);
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class ReconnaissanceTypeTest {
 	}
 	@Test
 	public void testGetConfiguration2() {
-		assertTrue(type.getConfiguration2().getClass()==JeuDeLaVie.class);
+		assertEquals(type.getConfiguration2().getClass(),JeuDeLaVie.class);
 	}
 
 	@Test
@@ -98,23 +98,23 @@ public class ReconnaissanceTypeTest {
 
 	@Test
 	public void testGetPeriodeFinal() {
-		assertTrue(type.getPeriodeFinal()==0);
+		assertEquals(type.getPeriodeFinal(),0);
 	}
 
 	@Test
 	public void testSetPeriodeFinal() {
 		type.setPeriodeFinal(1);
-		assertTrue(type.getPeriodeFinal()==1);
+		assertEquals(type.getPeriodeFinal(),1);
 	}
 
 	@Test
 	public void testGetTailleQueue() {
-		assertTrue(type.getTailleQueue()==0);
+		assertEquals(type.getTailleQueue(),0);
 	}
 
 	@Test
 	public void testSetTailleQueue() {
-		assertTrue(type.getTailleQueue()==0);
+		assertEquals(type.getTailleQueue(),0);
 	}
 
 	@Test
