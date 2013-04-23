@@ -43,11 +43,13 @@ public class LectureJeuDeLaVie {
 		BufferedReader reader = null;
 		File fichier=new File(nomFichier);
 		/*
-		 * on initialise 
+		 * on initialise les coordonnées abscisse et ordonnée des cellules à 0
+		 * au début de la lecture du fichier.
 		 */
 		int abscisse=0;
 		int ordonnee=0;
 		String line = null; 
+		//Scanner pour lire les entiers du fichier
 		Scanner scanner  = null;
 		//teste que le fichier existe et qu'il est au format LIF
 		if( fichier.isFile() && fichier.getAbsolutePath().endsWith(".lif")
@@ -57,7 +59,8 @@ public class LectureJeuDeLaVie {
 			try {
 				while((line = reader.readLine())!=null){
 					/*
-					 * 
+					 * teste si la ligne courante est un bloque,récupere les deux entiers 
+					 * du bloque et met à jour la valeur du coordonnée abscisse et ordonnee.
 					 */
 					if(line.matches("^#P[\\s0-9-]+")){
 						line = line.replaceAll("[^0-9\\s-]", "");
@@ -65,11 +68,21 @@ public class LectureJeuDeLaVie {
 						abscisse = scanner.nextInt();
 						ordonnee = scanner.nextInt();
 						
-					} else if (line.matches("^#R[\\s0-9]+/[0-9]+$")){
+					} 
+					/*
+					 * teste si la ligne courante du fichier est une règle, ajoute ces règles 
+					 * au plateau du jeu.
+					 */
+					else if (line.matches("^#R[\\s0-9]+/[0-9]+$")){
 
 						ajouterRegle(line,plateau);
 
-					} else if (line.matches("^[.*]+")){
+					} 
+					/*
+					 * teste si la ligne courante du fichier est une chaine de cellule vivante, ajoute les cellules
+					 * vivantes dans l'ensemble des cellules vivantes du plateau du jeu.
+					 */
+					else if (line.matches("^[.*]+")){
 
 						int i = 0;
 						int tmp=ordonnee;
@@ -83,7 +96,12 @@ public class LectureJeuDeLaVie {
 						abscisse++;
 						ordonnee=tmp;
 
-					} else if (line.matches("^#N$")){
+					} 
+					/*
+					 * teste si la ligne courante du fichier definie une règle normal du jeu de la vie,
+					 * ajoute les règles normales au plateau du jeu de la vie.
+					 */
+					else if (line.matches("^#N$")){
 
 						plateau.ajouterRegleVie(3);
 						plateau.ajouterRegleMort(2);
@@ -94,10 +112,15 @@ public class LectureJeuDeLaVie {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			//on trie l'ensemble des cellules vivantes du plateau
 			plateau.trierCellule();
 		} else {
 			throw new LectureException(nomFichier + " = n'existe pas ou le format est incorrecte ");
 		}
+		/*
+		 * si les règles du jeu n'ont pas été renseigner dans le fichier on ajoute
+		 * les règles normales du jeu de la vie.
+		 */
 		if(plateau.getTailleRegleMort()==0){
 			plateau.ajouterRegleMort(2);
 			plateau.ajouterRegleMort(3);
@@ -143,17 +166,21 @@ public class LectureJeuDeLaVie {
 	 * 				
 	 */
 	public static void ajouterRegle(String line, Matrice plateau){
+		//on remplace tous les caractères sauf les règles séparer par un /
 		line = line.replaceAll("[^0-9/]", "");
+		//on récupere les règles dans un stringTokenizer
 		StringTokenizer regle = new StringTokenizer(line,"/");
 		if(regle.countTokens()==2){
 			String k = regle.nextToken();
 			int i=0;
+			//on ajoute les règle de vie des cellules 
 			while(i<=k.length()-1){
 				plateau.ajouterRegleVie(Integer.parseInt(k.charAt(i)+""));
 				i++;
 			}
 			k = regle.nextToken();
 			i=0;
+			//on ajoute les règles de mort des cellules vivantes
 			while(i<=k.length()-1){
 				plateau.ajouterRegleMort(Integer.parseInt(k.charAt(i)+""));
 				i++;
