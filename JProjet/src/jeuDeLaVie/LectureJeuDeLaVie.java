@@ -42,21 +42,29 @@ public class LectureJeuDeLaVie {
 	public static void LectureJeu(String nomFichier,Matrice plateau) throws LectureException, FileNotFoundException{
 		BufferedReader reader = null;
 		File fichier=new File(nomFichier);
+		/*
+		 * on initialise 
+		 */
 		int abscisse=0;
 		int ordonnee=0;
 		String line = null; 
 		Scanner scanner  = null;
-		if( fichier.isFile() && fichier.getAbsolutePath().matches("\\.[Ll][Ii][Ff]$")
+		//teste que le fichier existe et qu'il est au format LIF
+		if( fichier.isFile() && fichier.getAbsolutePath().endsWith(".lif")
 				|| fichier.isFile() && fichier.getAbsolutePath().endsWith(".LIF")){
-
+			//initialisation du reader pour lire le fichier 
 			reader = new BufferedReader(new FileReader(fichier));
 			try {
 				while((line = reader.readLine())!=null){
+					/*
+					 * 
+					 */
 					if(line.matches("^#P[\\s0-9-]+")){
 						line = line.replaceAll("[^0-9\\s-]", "");
 						scanner = new Scanner(line);
 						abscisse = scanner.nextInt();
 						ordonnee = scanner.nextInt();
+						
 					} else if (line.matches("^#R[\\s0-9]+/[0-9]+$")){
 
 						ajouterRegle(line,plateau);
@@ -88,7 +96,7 @@ public class LectureJeuDeLaVie {
 			}
 			plateau.trierCellule();
 		} else {
-			throw new LectureException(nomFichier + " n'existe pas !");
+			throw new LectureException(nomFichier + " = n'existe pas ou le format est incorrecte ");
 		}
 		if(plateau.getTailleRegleMort()==0){
 			plateau.ajouterRegleMort(2);
@@ -108,7 +116,7 @@ public class LectureJeuDeLaVie {
 	 * @param ordonnee
 	 * 				Un entier correspondant à l'ordonnée.
 	 * @param grille
-	 * 				Un plateau du jeu dans le quel les cellules vivantes sont ajoutés.
+	 * 				Un plateau du jeu de la vie dans le quel les cellules vivantes sont ajoutés.
 	 * @see JeuDeLaVie
 	 */
 	public static void ajouterCelluleVivante(String line ,int abscisse,int ordonnee, Matrice grille){
@@ -125,10 +133,13 @@ public class LectureJeuDeLaVie {
 		ordonnee=tmp;
 	}
 	/**
-	 * 
+	 * Ajoute les règles dans un plateau donner en paramètre </b>
+	 * à partir d'une chaine de caractère passé en paramètre. 
 	 * @param line
 	 * 				Une chaine de caractère.
 	 * @param plateau
+	 * 				Un plateau du jeu de la vie dans le quel les règles sont ajoutés.
+	 * @see JeuDeLaVie
 	 * 				
 	 */
 	public static void ajouterRegle(String line, Matrice plateau){

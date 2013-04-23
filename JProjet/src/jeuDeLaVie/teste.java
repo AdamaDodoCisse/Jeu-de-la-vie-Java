@@ -10,7 +10,7 @@ import interface_.Matrice;
 
 public class teste {
 public static void main(String []args) throws FileNotFoundException, HTMLException, LectureException{
-	Matrice plateau = new PlateauCirculaire("Dossier_Teste/AQUA33.LIF");
+	Matrice plateau = new PlateauCirculaire("Dossier_Teste/ADDER.lif");
 	@SuppressWarnings("unused")
 	JeuDeLaVie jeu = new JeuDeLaVie(plateau);
 	@SuppressWarnings("unused")
