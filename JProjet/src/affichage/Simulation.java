@@ -1,8 +1,14 @@
 package affichage;
 import java.awt.Event; 
+import java.io.IOException;
 import java.util.Iterator;
 
+import exception.LectureException;
+
 import structureDeDonnee.Cellule;
+import structureDeDonnee.PlateauCirculaire;
+import structureDeDonnee.PlateauFini;
+import structureDeDonnee.PlateauInfini;
 import jeuDeLaVie.JeuDeLaVie;
 /**
  * <b>Simulation est la classe qui simule l'evolution d'un jeu de la vie dans </br>
@@ -99,7 +105,7 @@ public class Simulation {
 			afficher(x1,x2,y1,y2,temps);
 			temps++;
 			try{
-				Thread.sleep(12);
+				Thread.sleep(100);
 			}catch(Exception e){
 				
 			}
@@ -146,11 +152,11 @@ public class Simulation {
 		x2 = x1 + 35;
 		y2 = y1 + 36;
 	}
-	/*public static void main(String[]args) throws LectureException, IOException{
+	public static void main(String[]args) throws LectureException, IOException{
 		@SuppressWarnings("unused")
 		Simulation si = new Simulation(200,
 						new JeuDeLaVie(
-						new PlateauCirculaire("Dossier_Teste/VAISSEAU.LIF")));
-	}*/
+						new PlateauFini("Dossier_Teste/ADDER.lif")));
+	}
 	
 }
