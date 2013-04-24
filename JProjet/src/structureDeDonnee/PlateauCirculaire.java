@@ -1,14 +1,8 @@
 package structureDeDonnee;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-
-import javax.swing.Timer;
-
 import exception.LectureException;
 
 import jeuDeLaVie.JeuDeLaVie;
