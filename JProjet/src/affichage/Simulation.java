@@ -21,7 +21,7 @@ import jeuDeLaVie.JeuDeLaVie;
  * </p>
  * @author Cissé,Diallo,kouyate,Melaine
  *
- */
+ */ 
 public class Simulation {
 	/**
 	 * Jeu de la vie à simuler.
