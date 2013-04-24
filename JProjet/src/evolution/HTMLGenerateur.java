@@ -1,10 +1,8 @@
 package evolution;
 
-import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -39,8 +37,22 @@ import interface_.Matrice;
 public class HTMLGenerateur {
 	/**
 	 * Contenu du fichier HTML à générer.
+	 * @see HTMLGenerateur#getBalise()
+	 * @see HTMLGenerateur#setBalise(String)
 	 */
 	private String balise;
+	/**
+	 * Chemin du dossier à analyser.
+	 * @see HTMLGenerateur#getDossier()
+	 * @see HTMLGenerateur#setDossier(String)
+	 */
+	private String dossier;
+	/**
+	 * Temps d'analyse de chaques fichiers du dossier.
+	 * @see HTMLGenerateur#getTemps()
+	 * @see HTMLGenerateur#setTemps(int)
+	 */
+	private int temps;
 	/**
 	 * Type de Plateau du jeu de la vie.
 	 * @see StructureDeDonneeFactory
@@ -73,11 +85,14 @@ public class HTMLGenerateur {
 	public HTMLGenerateur(String fileName,int temps,int typePlateau,
 						  String nomPage
 						   )throws HTMLException, LectureException, IOException{
+		this.dossier = fileName;
+		this.temps = temps;
 		this.typePlateau = typePlateau;
+		balise = "";
 		//Genere le contenu de la page HTML
-		preparerBalise(fileName, temps);
+		/*preparerBalise(fileName, temps);
 		//Genere la page HTML
-		generer(nomPage);
+		generer(nomPage);*/
 	}
 	/**
 	 * Calcule le type d'évolution de l'ensemble des fichiers du dossier passer en paramètre.
@@ -85,7 +100,7 @@ public class HTMLGenerateur {
 	 * 				Un nom de dossier en chaine de caractère.
 	 * @param temps
 	 * 				Un entier correspondant au nombre d'évolution à éffectuer.
-	 * @return Une chaine de caractère qui contient les informations de toutes les fichiers du dossier.
+	 * @return Une chaine de caractère qui contient le type d'évolution de tous les fichiers du dossier.
 	 * @throws HTMLException
 	 * 				Lève une exception lorsque le dossier est vide ou inexistant.
 	 * @throws LectureException 
@@ -100,7 +115,8 @@ public class HTMLGenerateur {
 				@Override
 				public boolean accept(File pathname) {
 					if(pathname.isFile()){
-						return pathname.getAbsolutePath().endsWith(".LIF");
+						return pathname.getAbsolutePath().endsWith(".LIF")
+								|| pathname.getAbsolutePath().endsWith(".lif");
 					}return false;
 				}
 			}) ;
@@ -109,27 +125,23 @@ public class HTMLGenerateur {
 					System.out.println(lesFichiers[i].getName()+" en cours d'analyse...");
 					//calcule du type d'évolution du fichier courant.
 					Matrice plateau;
-					try {
+		
 						plateau = StructureDeDonneeFactory.
-													getPlateau(typePlateau, lesFichiers[i].getAbsolutePath());
+								  getPlateau(typePlateau, lesFichiers[i].getAbsolutePath());
 						ReconnaissanceType nouveauRec = new ReconnaissanceType(
 								temps,
 								plateau);
+						//calcule du type d'évolutions avec ses caractéristiques
 						nouveauRec.calculerTypeEvolution(temps);
 						System.out.println(lesFichiers[i].getName()+" traité...");
 						//ajout des informations du fichier courant à la chaine body.
 						body+=parser(nouveauRec,lesFichiers[i].getName(),lesFichiers[i].getAbsolutePath());
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
 				}
 			return body;
 			
 			} else { //Si le dossier ne comporte aucun fichier LIF on lève une exception.
 				throw new HTMLException("Aucun fichier Lif dans " +
-						"le dossier " +fileName);
+						"le dossier = " +fileName);
 			}
 		} else { //Si le chemin est incorrecte on lève une exception.
 			throw new HTMLException("Le chemin : << "+fileName+" << n'est pas un dossier");
@@ -243,10 +255,13 @@ public class HTMLGenerateur {
 	 * Génere la page HTML.
 	 * @param nomPage
 	 * 				Le nom de la page à générer en chaine de caractère.
+	 * @throws IOException 
+	 * @throws LectureException 
+	 * @throws HTMLException 
 	 * @see HTMLGenerateur
 	 */
-	public void generer(String nomPage){
-		try{
+	public void generer(String nomPage) throws HTMLException, LectureException, IOException{
+			preparerBalise(dossier, temps);
 			File f1 = new File(nomPage+".html");
 			FileWriter f2 =new FileWriter(f1) ;
 			BufferedWriter f3 = new BufferedWriter(f2);
@@ -254,10 +269,7 @@ public class HTMLGenerateur {
 			f3.close();
 			System.out.println("Fichier HTML créer sous le nom de : "+nomPage+".html");
 			System.out.println("Terminer");
-			Desktop.getDesktop().open(f1);
-		}catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+			//Desktop.getDesktop().open(f1);
 	}
 	/**
 	 * Genere un contenu de la page HTML .
@@ -271,7 +283,7 @@ public class HTMLGenerateur {
 	 * @see ReconnaissanceType
 	 * @see HTMLGenerateur
 	 */
-	public String parser(ReconnaissanceType re,String file,String link){
+	private String parser(ReconnaissanceType re,String file,String link){
 		if(re.isInconnu()){
 			return  "<tr>" +
 					"	<th> <a href="+link+">"+file+"</a></th>" +
@@ -334,6 +346,62 @@ public class HTMLGenerateur {
 					"<td> ("+re.getLignes()+","+re.getColonnes()+") </td>"+
 					"</tr>" ; 
 			}
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public String getBalise() {
+		return balise;
+	}
+	/**
+	 * 
+	 * @param balise
+	 */
+	public void setBalise(String balise) {
+		this.balise = balise;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public int getTypePlateau() {
+		return typePlateau;
+	}
+	/**
+	 * 
+	 * @param typePlateau
+	 */
+	public void setTypePlateau(int typePlateau) {
+		this.typePlateau = typePlateau;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public int getTemps() {
+		return temps;
+	}
+	/**
+	 * 
+	 * @param temps
+	 */
+	public void setTemps(int temps) {
+		this.temps = temps;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public String getDossier() {
+		return dossier;
+	}
+	/**
+	 * 
+	 * @param dossier
+	 */
+	public void setDossier(String dossier) {
+		this.dossier = dossier;
 	}
 
 }
