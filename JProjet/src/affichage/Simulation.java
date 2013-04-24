@@ -1,6 +1,7 @@
 package affichage;
 import java.awt.Event; 
 import java.io.IOException;
+import java.io.IOException;
 import java.util.Iterator;
 import exception.LectureException;
 
@@ -144,6 +145,7 @@ public class Simulation {
 	/**
 	 * @param dureeSimulation the dureeSimulation to set
 	 */
+	
 	public void setDureeSimulation(int dureeSimulation) {
 		this.dureeSimulation = dureeSimulation;
 	}
