@@ -7,11 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-
-import org.omg.CosNaming.IstringHelper;
-
 import exception.LectureException;
-
 import jeuDeLaVie.JeuDeLaVie;
 import jeuDeLaVie.LectureJeuDeLaVie;
 
@@ -159,7 +155,7 @@ public class PlateauFini implements Matrice {
 	 * Getter de minOrdonnee.
 	 * @return Le minimum des ordonnées des cellules vivantes.
 	 * @see Cellule
-	 * @see PlateauFini#minOrdonnee
+	 * @see PlateauFini#minOrdonnee 
 	 */
 	public int getMinOrdonnee() {
 		return minOrdonnee;
@@ -221,6 +217,7 @@ public class PlateauFini implements Matrice {
 	/* (non-Javadoc)
 	 * @see structure.StructureDeDonnee#ajouterCellule(structure.Cellule)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean ajouterCellule(Cellule cellule) {
 			//teste l'effet de bord 
@@ -478,7 +475,7 @@ public class PlateauFini implements Matrice {
 			Cellule cellule = iterateur.next();
 			Cellule nouvelleCellule = new Cellule(cellule.getAbscisse()+x,
 					cellule.getOrdonnee()+y,1,false);
-					if(!is_Bordure(nouvelleCellule))
+					if(!this.is_Bordure(nouvelleCellule))
 							tmp.add(nouvelleCellule);
 		}
 		return tmp;
@@ -493,11 +490,6 @@ public class PlateauFini implements Matrice {
 			   c.getOrdonnee() > getMaxOrdonnee()||
 			   c.getAbscisse() > getMaxAbscisse()||
 			   c.getAbscisse() < getMinAbscisse();
-	}
-	@Override
-	public boolean removeAll() {
-		celluleVivante = new ArrayList<Cellule>();
-		return true;
 	}
 	/**
 	 * 

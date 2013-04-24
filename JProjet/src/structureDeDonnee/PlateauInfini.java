@@ -1,7 +1,5 @@
 package structureDeDonnee;
 import java.io.IOException;
-import java.util.ArrayList;
-
 import exception.LectureException;
 
 import jeuDeLaVie.JeuDeLaVie;
@@ -26,7 +24,7 @@ public class PlateauInfini extends PlateauFini{
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean is_bordure(){
+	public boolean is_Bordure(Cellule c){
 		return false;
 	}
 	

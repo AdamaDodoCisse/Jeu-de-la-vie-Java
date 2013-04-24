@@ -139,7 +139,7 @@ public interface Matrice extends Cloneable{
 	 * @see Matrice
 	 * @see JeuDeLaVie
 	 */
-	public boolean removeAll();
+	//public boolean removeAll();
 	/**
 	 * Supprime une cellule à l'ensemble des cellules vivantes. 
 	 * @param cellule

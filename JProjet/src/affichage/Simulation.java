@@ -6,7 +6,7 @@ import java.util.Iterator;
 import exception.LectureException;
 
 import structureDeDonnee.Cellule;
-import structureDeDonnee.PlateauInfini;
+import structureDeDonnee.PlateauCirculaire;
 import jeuDeLaVie.JeuDeLaVie;
 /**
  * <b>Simulation est la classe qui simule l'evolution d'un jeu de la vie dans </br>
@@ -95,11 +95,12 @@ public class Simulation {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		int temps=0;
+		int temps=1;
 		while(temps<dureeSimulation){
 			System.out.println((char)Event.ESCAPE + "8");
 			jeu.evolutionSuivante();
 			afficher(x1,x2,y1,y2);
+			System.out.println("Numéro de génération = "+temps);
 			temps++;
 			try{
 				Thread.sleep(100);
@@ -151,9 +152,9 @@ public class Simulation {
 	}
 	public static void main(String[]args) throws LectureException, IOException{
 		@SuppressWarnings("unused")
-		Simulation si = new Simulation(4,
+		Simulation si = new Simulation(200,
 						new JeuDeLaVie(
-						new PlateauInfini("Dossier_Teste/VAISSEAU.LIF")));
+						new PlateauCirculaire("Dossier_Teste/VAISSEAU.LIF")));
 	}
 	
 }
