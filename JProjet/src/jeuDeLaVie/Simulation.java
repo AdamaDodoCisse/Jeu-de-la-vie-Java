@@ -1,7 +1,6 @@
 package jeuDeLaVie;
 import java.awt.Event; 
 import java.io.IOException;
-import java.io.IOException;
 import java.util.Iterator;
 import exception.LectureException;
 
