@@ -8,12 +8,8 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import structureDeDonnee.PlateauInfini;
 import structureDeDonnee.StructureDeDonneeFactory;
-
 import evolution.HTMLGenerateur;
-import evolution.ReconnaissanceType;
 import exception.HTMLException;
 import exception.LectureException;
 
