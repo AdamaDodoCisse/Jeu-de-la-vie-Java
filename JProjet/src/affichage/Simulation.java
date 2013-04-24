@@ -1,12 +1,8 @@
 package affichage;
 import java.awt.Event; 
-import java.io.IOException;
-
 import java.util.Iterator;
-import exception.LectureException;
 
 import structureDeDonnee.Cellule;
-import structureDeDonnee.PlateauCirculaire;
 import jeuDeLaVie.JeuDeLaVie;
 /**
  * <b>Simulation est la classe qui simule l'evolution d'un jeu de la vie dans </br>
@@ -150,11 +146,11 @@ public class Simulation {
 		x2 = x1 + 35;
 		y2 = y1 + 36;
 	}
-	public static void main(String[]args) throws LectureException, IOException{
+	/*public static void main(String[]args) throws LectureException, IOException{
 		@SuppressWarnings("unused")
 		Simulation si = new Simulation(200,
 						new JeuDeLaVie(
 						new PlateauCirculaire("Dossier_Teste/VAISSEAU.LIF")));
-	}
+	}*/
 	
 }
