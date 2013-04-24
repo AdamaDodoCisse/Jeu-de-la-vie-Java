@@ -17,7 +17,7 @@ public class Main {
 	public static void main(String[] args) throws LectureException, IOException {
 		// TODO Auto-generated method stub
 		new Commande(args);
-		 
-}
+
+	}
 
 }
