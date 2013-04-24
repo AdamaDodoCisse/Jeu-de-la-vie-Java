@@ -61,7 +61,7 @@ public class Simulation {
 	 * @param y1
 	 * @param y2
 	 */
-	public void afficher(int x1,int x2,int y1,int y2){
+	public void afficher(int x1,int x2,int y1,int y2,int temps){
 		int cpt = 0;
 		String s = " ";
 		for(int i=jeu.getPlateau().getMinAbscisse();i <= jeu.getPlateau().getMinAbscisse() + 37 ;i++){
@@ -78,13 +78,14 @@ public class Simulation {
 		}
 		s +="\nNombre total de cellule vivante = "+jeu.getPlateau().getTailleCelluleVivante()+"\n";
 		s = s + "Nombre de cellule vivante afficher = "+cpt+"\n";
+		s = s + "Numéro de génération = "+temps+"\n";
 		System.out.print(s);
 	}
 	public void simuler(){
 		System.out.println((char)Event.ESCAPE + "[2J");
 		System.out.print((char)Event.ESCAPE + "7");
 		//updateVariableAffichage();
-		afficher(x1,x2,y1,y2);
+		afficher(x1,x2,y1,y2,0);
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e1) {
@@ -95,11 +96,10 @@ public class Simulation {
 		while(temps<dureeSimulation){
 			System.out.println((char)Event.ESCAPE + "8");
 			jeu.evolutionSuivante();
-			afficher(x1,x2,y1,y2);
-			System.out.println("Numéro de génération = "+temps);
+			afficher(x1,x2,y1,y2,temps);
 			temps++;
 			try{
-				Thread.sleep(100);
+				Thread.sleep(12);
 			}catch(Exception e){
 				
 			}

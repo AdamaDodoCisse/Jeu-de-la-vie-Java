@@ -135,7 +135,7 @@ public class Commande {
 	 */
 	private void genererHTML(String nomDossier,int temps,int typePlateau,String nomFichierHtml) throws LectureException, IOException {
 		try {
-			new HTMLGenerateur(nomDossier, temps, typePlateau, nomFichierHtml);
+			new HTMLGenerateur(nomDossier, temps, typePlateau, nomFichierHtml).generer(nomDossier);
 		} catch (HTMLException e) {
 			System.out.println(e.getMessage());
 		}

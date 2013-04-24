@@ -1,6 +1,6 @@
 JEU DE LA VIE : OPTIONS ET COMMANDES DU PROGRAMME
 
-Afficher les noms et prénoms des aide.txt concepteurs du jeu :
+Afficher les noms et prénoms des concepteurs du jeu :
 	java -jar JeuDeLaVie.jar -name
 
 Afficher la liste des options du programme :
