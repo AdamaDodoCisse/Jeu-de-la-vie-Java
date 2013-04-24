@@ -2,6 +2,7 @@ package structureDeDonnee;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -21,7 +22,7 @@ import jeuDeLaVie.JeuDeLaVie;
  */
 public class PlateauCirculaire extends PlateauFini {
 	
-	public PlateauCirculaire(String nomFichier) throws FileNotFoundException, LectureException {
+	public PlateauCirculaire(String nomFichier) throws LectureException, IOException {
 		super(nomFichier);
 		// la taille doit etre fixer 
 		
@@ -33,10 +34,10 @@ public class PlateauCirculaire extends PlateauFini {
 		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * 
-	 * @param cellule
-	 * @param increment
-	 * @return
+	 * <b> Cette methode permet de calculer la symetrie horizontale d'une cellule <:b>
+	 * @param cellule 
+	 * @param increment 
+	 * @return une cellule qui est sa symetrie horizontale (autrment dit bord opposé)
 	 */
 	private Cellule SymetrieHorizontale(Cellule cellule,int increment){
 		if(increment < 0){
@@ -56,6 +57,12 @@ public class PlateauCirculaire extends PlateauFini {
 		}	
 	}
 	
+	/**
+	 * <b> Cette methode permet de calculer la symetrie verticale d'une cellule </b>
+	 * @param cellule
+	 * @param increment
+	 * @return une cellule qui est sa symetrie verticale(autrement dit bord opposé)
+	 */
 	private Cellule SymetrieVertivale(Cellule cellule,int increment){
 		if(increment < 0 ){
 			if(cellule.getAbscisse() == getMinAbscisse()){
@@ -74,7 +81,9 @@ public class PlateauCirculaire extends PlateauFini {
 		}	
 	}
 	
-	
+	/**
+	 * <b> cette methode permet de calculer l'evolution au plateauCirculaire </b>
+	 */
 	@SuppressWarnings("unchecked")
 	public void evoluer(){
 		ArrayList<Cellule> liste1 =new ArrayList<Cellule>();
@@ -123,14 +132,13 @@ public class PlateauCirculaire extends PlateauFini {
 		}
 		
 		liste1 = ajouterElement(liste1,liste2);
+		
 		liste1 = ajouterElement(liste1,liste3);
 		liste1 = ajouterElement(liste1,liste4);
 		liste1 = ajouterElement(liste1,liste5);
 		liste1 = ajouterElement(liste1,liste6);
 		liste1 = ajouterElement(liste1,liste7);
 		liste1 = ajouterElement(liste1,liste8);
-		
-		
 		liste1 = ajouterElement(liste1,(ArrayList<Cellule>) getCelluleVivante());	// cellule Vivante pas declarer d'abord 
 		Collections.sort(liste1);
 		calculerEvolution(liste1);
