@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import affichage.Simulation;
 
 import structureDeDonnee.PlateauCirculaire;
 import structureDeDonnee.PlateauFini;
@@ -16,6 +15,7 @@ import structureDeDonnee.StructureDeDonneeFactory;
 import jeuDeLaVie.HTMLGenerateur;
 import jeuDeLaVie.JeuDeLaVie;
 import jeuDeLaVie.ReconnaissanceType;
+import jeuDeLaVie.Simulation;
 import exception.CommandeException;
 import exception.HTMLException;
 import exception.LectureException;
