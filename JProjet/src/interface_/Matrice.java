@@ -161,5 +161,16 @@ public interface Matrice extends Cloneable{
 	 * @see JeuDeLaVie
 	 */
 	public boolean add(Cellule cellule);
+	/**
+	 * 
+	 * @return le max de l'abscisse de la matrice 
+	 */
+	public int getMaxAbscisse();
+	
+	public int getMinAbscisse();
+	
+	public int getMaxOrdonnee();
+	
+	public int getMinOrdonnee();
 	
 }
