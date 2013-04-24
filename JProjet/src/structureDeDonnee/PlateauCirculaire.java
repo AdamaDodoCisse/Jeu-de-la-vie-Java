@@ -137,37 +137,4 @@ public class PlateauCirculaire extends PlateauFini {
 		
 	}
 	
-	/*@SuppressWarnings("unchecked")
-	public void afficher(){
-		for(int i = getMinAbscisse(); i <= getMaxAbscisse(); i++){
-			for (int j = getMinOrdonnee(); j <= getMaxOrdonnee(); j++) {
-				boolean b = false;
-				for(Cellule c :(ArrayList<Cellule>) getCelluleVivante()){
-					if(c.getAbscisse() == i && c.getOrdonnee()==j){
-						System.out.print(" O ");
-						b=true;
-					}
-				}
-				if(!b){
-					System.out.print(" - ");
-				}
-			}System.out.println();
-		}System.out.println();
-	}
-	public static void main(String []args) throws FileNotFoundException, LectureException{
-		final PlateauCirculaire cir = new PlateauCirculaire("Dossier_Teste/teste.LIF");
-		Timer t = new Timer(500, new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				cir.afficher();
-				cir.evoluer();
-			}
-		});
-		t.start();
-		try{
-			System.in.read();
-		}catch(Exception e){};
-	}*/
 }
