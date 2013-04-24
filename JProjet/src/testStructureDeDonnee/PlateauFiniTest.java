@@ -90,6 +90,7 @@ public class PlateauFiniTest {
 		assertEquals(plateau.getTailleCelluleVivante(),17);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testCalculerEvolution() {
 		ArrayList<Cellule> it=new ArrayList<Cellule>();
@@ -119,6 +120,7 @@ assertNotSame(plateau.getTailleCelluleVivante(),it.size());
 	}
 	
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testGetIterateurCellule() {
 		assertNotSame(plateau.getIterateurCellule(),((ArrayList<Cellule>)(plateau.getCelluleVivante())).iterator());
