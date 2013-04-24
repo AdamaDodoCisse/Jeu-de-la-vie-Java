@@ -19,11 +19,6 @@ public class PlateauCirculaire extends PlateauFini {
 	public PlateauCirculaire(String nomFichier) throws LectureException, IOException {
 		super(nomFichier);
 		// la taille doit etre fixer 
-		
-		setMinAbscisse(getMinAbscisse() );
-		setMinOrdonnee(getMinOrdonnee() );
-		setMaxAbscisse(getMaxAbscisse() + 10);
-		setMaxOrdonnee(getMaxOrdonnee() + 10);
 			
 		// TODO Auto-generated constructor stub
 	}
