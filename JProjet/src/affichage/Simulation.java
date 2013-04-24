@@ -1,7 +1,7 @@
 package affichage;
 import java.awt.Event; 
 import java.io.IOException;
-import java.io.IOException;
+
 import java.util.Iterator;
 import exception.LectureException;
 
@@ -68,17 +68,8 @@ public class Simulation {
 	public void afficher(int x1,int x2,int y1,int y2){
 		int cpt = 0;
 		String s = " ";
-		for(int i=x1-1;i<=y2+1;i++)
-			s = s+" = ";
-		
-		s=s+"\n";
-		for(int i=x1-1;i<=x2+1;i++){
-			for(int j=y1-1;j<=y2+1;j++){
-				if(j==y1-1)
-					s=s+" = ";
-				else if(j==y2+1)
-					s=s+" = ";
-				else{
+		for(int i=jeu.getPlateau().getMinAbscisse();i <= jeu.getPlateau().getMinAbscisse() + 37 ;i++){
+			for(int j=jeu.getPlateau().getMinOrdonnee();j<= jeu.getPlateau().getMinOrdonnee() + 38;j++){
 					Cellule k = new Cellule(i,j,-1,true);
 					if(jeu.getPlateau().contains(k)){
 						s = s+" o ";
@@ -86,12 +77,9 @@ public class Simulation {
 					}
 					else 
 						s = s+" - ";
-				}
 			}
 			s=s+"\n";
 		}
-		for(int i=x1-1;i<=y2+1;i++)
-			s = s+" = ";
 		s +="\nNombre total de cellule vivante = "+jeu.getPlateau().getTailleCelluleVivante()+"\n";
 		s = s + "Nombre de cellule vivante afficher = "+cpt+"\n";
 		System.out.print(s);
@@ -99,7 +87,7 @@ public class Simulation {
 	public void simuler(){
 		System.out.println((char)Event.ESCAPE + "[2J");
 		System.out.print((char)Event.ESCAPE + "7");
-		updateVariableAffichage();
+		//updateVariableAffichage();
 		afficher(x1,x2,y1,y2);
 		try {
 			Thread.sleep(5000);
@@ -114,7 +102,7 @@ public class Simulation {
 			afficher(x1,x2,y1,y2);
 			temps++;
 			try{
-				Thread.sleep(500);
+				Thread.sleep(100);
 			}catch(Exception e){
 				
 			}
@@ -165,7 +153,7 @@ public class Simulation {
 		@SuppressWarnings("unused")
 		Simulation si = new Simulation(4,
 						new JeuDeLaVie(
-						new PlateauInfini("Dossier_Teste/teste_jeu.LIF")));
+						new PlateauInfini("Dossier_Teste/VAISSEAU.LIF")));
 	}
 	
 }
