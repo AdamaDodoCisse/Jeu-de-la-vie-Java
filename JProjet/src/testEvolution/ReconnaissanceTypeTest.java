@@ -2,6 +2,7 @@ package testEvolution;
 
 import static org.junit.Assert.*;
 import jeuDeLaVie.JeuDeLaVie;
+import jeuDeLaVie.ReconnaissanceType;
 
 import org.junit.After;
 import org.junit.Before;
@@ -10,7 +11,6 @@ import org.junit.Test;
 import structureDeDonnee.Cellule;
 import structureDeDonnee.PlateauInfini;
 
-import evolution.ReconnaissanceType;
 
 public class ReconnaissanceTypeTest {
 	protected ReconnaissanceType type;

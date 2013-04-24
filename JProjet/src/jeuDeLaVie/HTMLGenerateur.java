@@ -1,4 +1,4 @@
-package evolution;
+package jeuDeLaVie;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,7 +11,6 @@ import structureDeDonnee.PlateauFini;
 import structureDeDonnee.PlateauInfini;
 import structureDeDonnee.StructureDeDonneeFactory;
 
-import jeuDeLaVie.JeuDeLaVie;
 import exception.HTMLException;
 import exception.LectureException;
 import interface_.Matrice;

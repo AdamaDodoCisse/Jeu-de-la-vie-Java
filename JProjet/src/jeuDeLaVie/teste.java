@@ -1,6 +1,5 @@
 package jeuDeLaVie;
 import java.io.IOException;
-import evolution.HTMLGenerateur;
 import exception.HTMLException;
 import exception.LectureException;
 import structureDeDonnee.PlateauCirculaire;

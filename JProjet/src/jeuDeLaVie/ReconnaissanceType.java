@@ -1,10 +1,9 @@
-package evolution;
+package jeuDeLaVie;
 import structureDeDonnee.Cellule;
 import structureDeDonnee.PlateauCirculaire;
 import structureDeDonnee.PlateauFini;
 import structureDeDonnee.PlateauInfini;
 import interface_.Matrice;
-import jeuDeLaVie.JeuDeLaVie;
 
 /**
  * <b>ReconnaissanceType est la classe qui calcule le type d'évolution d'un jeu de la vie.</b>

@@ -5,11 +5,12 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 
+import jeuDeLaVie.HTMLGenerateur;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import structureDeDonnee.StructureDeDonneeFactory;
-import evolution.HTMLGenerateur;
 import exception.HTMLException;
 import exception.LectureException;
 

@@ -13,9 +13,9 @@ import structureDeDonnee.PlateauFini;
 import structureDeDonnee.PlateauInfini;
 import structureDeDonnee.StructureDeDonneeFactory;
 
+import jeuDeLaVie.HTMLGenerateur;
 import jeuDeLaVie.JeuDeLaVie;
-import evolution.HTMLGenerateur;
-import evolution.ReconnaissanceType;
+import jeuDeLaVie.ReconnaissanceType;
 import exception.CommandeException;
 import exception.HTMLException;
 import exception.LectureException;
