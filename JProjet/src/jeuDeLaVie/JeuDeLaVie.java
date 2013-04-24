@@ -2,6 +2,7 @@ package jeuDeLaVie;
 import java.io.IOException;
 
 import exception.LectureException;
+import interface_.Jeu;
 import interface_.Matrice;
 import structureDeDonnee.PlateauCirculaire;
 import structureDeDonnee.PlateauFini;
@@ -24,7 +25,7 @@ import structureDeDonnee.PlateauInfini;
  * @author kouyate
  *
  */
-public class JeuDeLaVie implements interface_.Jeu {
+public class JeuDeLaVie implements Jeu {
 	/**
 	 * Plateau du jeu de la vie.
 	 * @see Matrice
