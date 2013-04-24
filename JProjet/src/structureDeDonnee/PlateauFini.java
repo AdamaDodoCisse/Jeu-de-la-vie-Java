@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
+import org.omg.CosNaming.IstringHelper;
+
 import exception.LectureException;
 
 import jeuDeLaVie.JeuDeLaVie;
@@ -109,6 +111,7 @@ public class PlateauFini implements Matrice {
 		this.maxAbscisse = this.maxOrdonnee = this.minOrdonnee = this.minAbscisse = 0;
 		LectureJeuDeLaVie.LectureJeu(nomFichier, this);
 		update();
+		clear();
 	}
 	/**
 	 * Constructeur PlateauFini.
@@ -221,11 +224,10 @@ public class PlateauFini implements Matrice {
 	@Override
 	public boolean ajouterCellule(Cellule cellule) {
 			//teste l'effet de bord 
-			if(cellule.getAbscisse()>=minAbscisse && cellule.getAbscisse()<=maxAbscisse 
-					&& cellule.getOrdonnee()>=minOrdonnee && cellule.getOrdonnee()<=maxOrdonnee){
-				return celluleVivante.add(cellule);
+			if(is_Bordure(cellule)){
+				return false;
 			}
-		return false;
+			return ((ArrayList<Cellule>) getCelluleVivante()).add(cellule);
 	}
 
 	/* (non-Javadoc)
@@ -474,8 +476,10 @@ public class PlateauFini implements Matrice {
 		Iterator<Cellule> iterateur = getIterateurCellule();
 		while(iterateur.hasNext()){
 			Cellule cellule = iterateur.next();
-			tmp.add(new Cellule(cellule.getAbscisse()+x,
-					cellule.getOrdonnee()+y,1,false));
+			Cellule nouvelleCellule = new Cellule(cellule.getAbscisse()+x,
+					cellule.getOrdonnee()+y,1,false);
+					if(!is_Bordure(nouvelleCellule))
+							tmp.add(nouvelleCellule);
 		}
 		return tmp;
 	}
@@ -484,16 +488,11 @@ public class PlateauFini implements Matrice {
 	 * @param k
 	 * @return
 	 */
-	public ArrayList<Cellule> multiplication(int k) {
-		// TODO Auto-generated method stub
-		ArrayList<Cellule> tmp = new ArrayList<Cellule>();
-		Iterator<Cellule> iterateur = getIterateurCellule();
-		while(iterateur.hasNext()){
-			Cellule cellule = iterateur.next();
-			tmp.add(new Cellule(cellule.getAbscisse(),
-					cellule.getOrdonnee(),k*cellule.getNombreVoisin(),cellule.isStatus()));
-		}
-		return tmp;
+	public boolean is_Bordure(Cellule c){
+		return c.getOrdonnee()< getMinOrdonnee() ||
+			   c.getOrdonnee() > getMaxOrdonnee()||
+			   c.getAbscisse() > getMaxAbscisse()||
+			   c.getAbscisse() < getMinAbscisse();
 	}
 	@Override
 	public boolean removeAll() {
@@ -517,5 +516,25 @@ public class PlateauFini implements Matrice {
 				maxOrdonnee = cellule.getOrdonnee();
 		}
 		
+	}
+	
+	public void clear(){
+		setMinAbscisse(getMinAbscisse()- 2);
+		setMinOrdonnee(getMinOrdonnee() -2);
+		setMaxAbscisse(getMinAbscisse() + 37);
+		setMaxOrdonnee(getMinOrdonnee() + 38);
+		
+		for(int i=0;i<getTailleCelluleVivante();i++){
+			if(getCellule(i).getAbscisse() > getMaxAbscisse()){
+				supprimerCellule(getCellule(i));
+				i--;
+			}
+		}
+		for(int i=0;i<getTailleCelluleVivante();i++){
+			if(getCellule(i).getOrdonnee() > getMaxOrdonnee()){
+				supprimerCellule(getCellule(i));
+				i--;
+			}
+		}
 	}
 }
