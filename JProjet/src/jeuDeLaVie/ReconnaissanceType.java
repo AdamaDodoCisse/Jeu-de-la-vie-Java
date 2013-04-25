@@ -70,7 +70,7 @@ public class ReconnaissanceType {
 	 * @see ReconnaissanceType#isStabilite()
 	 * @see JeuDeLaVie
 	 */
-	private boolean stabilite =false;
+	private boolean stabilite=false;
 	/**
 	 * Indique un type d'évolution mort.</br>
 	 * A l'étape de la création de l'objet elle est initialiser à Faux.
@@ -120,7 +120,7 @@ public class ReconnaissanceType {
 		configuration1 = new JeuDeLaVie(plateau);
 		configuration2 = new JeuDeLaVie(plateauClone);
 		//calculerTypeEvolution(temp);
-		
+
 	}
 	/**
 	 * Calcule le type d'évolution du jeu.</br>
@@ -144,28 +144,28 @@ public class ReconnaissanceType {
 			if(!inconnu){
 				break;
 			}
-			tailleQueue = i;
+			setTailleQueue(i) ;
 			if(estMort()){ //un type d'évolution mort 
-				inconnu = false;
-				mort = true;
+				setInconnu(false);
+				setMort(true);
 			}
 			if(estOscillation()){ //un type d'évolution oscillation 
-				inconnu = false;
-				oscillation=true;
+				setInconnu(false);
+				setOscillation(true);
 				//Calcule de la période
 				while(true){
 					evoluerConfiguration();
-					periodeFinal++;
+					setPeriodeFinal(getPeriodeFinal()+1);
 					if(estOscillation())
 						break;
 				}
 				if(periodeFinal == 1){ //un type d'évolution stable
-					stabilite = true;
+					setStabilite(true);
 				}
 			}
 			if(estVaisseau()){ //un type d'évolution vaisseau 
-				inconnu = false;
-				vaisseau=true;
+				setInconnu(false);
+				setVaisceau(true);
 				if(!isOscillation())
 					//Calcule de la periode		
 					while(true){
@@ -247,8 +247,8 @@ public class ReconnaissanceType {
 				}
 			}
 			//calcule du déplacement de la configuration vaisseau
-			lignes = Math.abs(Math.abs(p1.getAbscisse())-Math.abs(p2.getAbscisse()));
-			colonnes = Math.abs(Math.abs(p1.getOrdonnee())-Math.abs(p2.getOrdonnee()));
+			setLignes(Math.abs(Math.abs(p1.getAbscisse())-Math.abs(p2.getAbscisse())));
+			setColonnes(Math.abs(Math.abs(p1.getOrdonnee())-Math.abs(p2.getOrdonnee())));
 			return true;
 		}
 		return false;
@@ -267,7 +267,7 @@ public class ReconnaissanceType {
 	public double distance(Cellule p1,Cellule p2){
 		return (Math.sqrt((Math.pow(p1.getAbscisse() - p2.getAbscisse(), 2)) + (Math.pow(p1.getOrdonnee() - p2.getOrdonnee(), 2))));
 	}
-	
+
 	/**
 	 * Getter de configuration1.
 	 * @return
@@ -399,15 +399,6 @@ public class ReconnaissanceType {
 		this.mort = mort;
 	}
 	/**
-	 * Vérifie un type vaisseau.
-	 * @return
-	 * 			Un booléen.
-	 * @see ReconnaissanceType#vaisseau
-	 */
-	public boolean isVaisceau() {
-		return vaisseau;
-	}
-	/**
 	 * Setter de vaisseau.
 	 * @param vaisceau
 	 * 			Un booléen.
@@ -468,7 +459,7 @@ public class ReconnaissanceType {
 	public void setLignes(int lignes) {
 		this.lignes = lignes;
 	}
-	
+
 	/**
 	 * Getter  colonnes
 	 * @return colonnes Le déplacement suivant la colonne de l'évolution du jeu.
@@ -477,7 +468,7 @@ public class ReconnaissanceType {
 	public int getColonnes() {
 		return colonnes;
 	}
-	
+
 	/**
 	 * Setter colonnes
 	 * @param colonnes 
@@ -485,9 +476,9 @@ public class ReconnaissanceType {
 	 * @seeReconnaissanceType#colonnes
 	 */
 	public void setColonnes(int colonnes) {
-		this.colonnes = colonnes;
+		this.colonnes = colonnes; 
 	}
-	
+
 	/**
 	 * Methode toString  de ReconnaissanceType
 	 * @return un String
@@ -498,20 +489,20 @@ public class ReconnaissanceType {
 		else if(isMort())
 			return  "Type d'évolution : \n- Mort.\n- Stable.\n- Oscillation.\n- Vaisseau \n" +
 			"Période : "+periodeFinal+" \nTaille de la queue : "+tailleQueue+"\nDéplacement (ligne,colonne) = ("+
-					lignes+","+colonnes+")";
+			getLignes()+","+getColonnes()+")";
 		else if(isStabilite())
 			return  "Type d'évolution : \n- Stable.\n- Oscillation.\n- Vaisseau. \n" +
 			"Période : "+periodeFinal+" \nTaille de la queue : "+tailleQueue+"\nDéplacement (ligne,colonne) = ("+
-					lignes+","+colonnes+")";
+			getLignes()+","+getColonnes()+")";
 		else if(isOscillation())
 			return  "Type d'évolution : \n- Oscillation.\n- Vaisseau. \n" +
 			"Période : "+periodeFinal+" \nTaille de la queue : "+tailleQueue+"\nDéplacement (ligne,colonne) = ("+
-					lignes+","+colonnes+")";
+			getLignes()+","+getColonnes()+")";
 		else
 			return  "Type d'évolution : \n- Vaisseau  \n" +
 			"Période : "+periodeFinal+" \nTaille de la queue : "+tailleQueue+"\nDéplacement (ligne,colonne) = ("+
-			lignes+","+colonnes+")";
+			getLignes()+","+getColonnes()+")";
 	}
 
-	
+
 }
