@@ -53,8 +53,6 @@ public class StructureDeDonneeFactory {
 	 */
 	public static Matrice getPlateau(int typePlateau,String nomFichier) throws LectureException, IOException{
 		Matrice plateau = null;
-		
-		
 		switch(typePlateau){
 		
 		case PLATEAU_FINI : 
