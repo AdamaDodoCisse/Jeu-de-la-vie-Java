@@ -162,15 +162,28 @@ public interface Matrice extends Cloneable{
 	 */
 	public boolean add(Cellule cellule);
 	/**
-	 * 
-	 * @return le max de l'abscisse de la matrice 
+	 * Getter du max des abcisses des cellules vivantes.
+	 * @return Le max des abscisses.
+	 * @see Cellule
 	 */
 	public int getMaxAbscisse();
-	
+	/**
+	 * Getter du min des abcisses des cellules vivantes.
+	 * @return Le min des abscisses.
+	 * @see Cellule
+	 */
 	public int getMinAbscisse();
-	
+	/**
+	 * Getter du max des ordonnées des cellules vivantes.
+	 * @return Le max des ordonnées
+	 * @see Cellule
+	 */
 	public int getMaxOrdonnee();
-	
+	/**
+	 * Getter du min des ordonnées des cellules vivantes.
+	 * @return Le min des ordonnées.
+	 * @see Cellule
+	 */
 	public int getMinOrdonnee();
 	
 }
