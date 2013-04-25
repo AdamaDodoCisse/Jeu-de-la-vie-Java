@@ -203,16 +203,18 @@ public class Commande {
 						simuler(nomRepertoire,temps,StructureDeDonneeFactory.PLATEAU_INFINI);
 					} else if (args[0].equals("-s")){
 						try{
-							int typePlateau = Integer.parseInt(args[3]);
+							int typePlateau = Integer.parseInt(args[4]);
 							
 							if(typePlateau >=1 && typePlateau<=3){
 								simuler(nomRepertoire,temps,typePlateau);
 							} else {
-								throw new CommandeException("l'entier doit être entre 1 et 3");
+								throw new CommandeException("Le type du plateau doit être compris entre 1 et 3 \n " +
+								"Pour plus d'information taper : \n java -jar JeuDeLaVie.jar -h \n");
 							}
 						}catch(Exception e){
 							
-							throw new CommandeException("le quatrième arguments est un entier");
+							throw new CommandeException("Le quatrième argument doit être un entier compris entre 1 et 3\n" +
+									"Pour plus d'information taper : \n java -jar JeuDeLaVie.jar -h \n");
 						}
 					}
 					
@@ -225,11 +227,13 @@ public class Commande {
 							if(typePlateau>=1 && typePlateau<=3){
 								analyserFichier(typePlateau, temps, nomRepertoire);
 							} else {
-								throw new CommandeException("l'entier doit etre entre 1 et 3");
+								throw new CommandeException("Le type du plateau doit être compris entre 1 et 3 \n " +
+								"Pour plus d'information taper : \n java -jar JeuDeLaVie.jar -h \n");
 							}
 								
 						}catch(Exception e){
-							throw new CommandeException("le quatrième arguments est un entier");
+							throw new CommandeException("Le quatrième argument doit être un entier compris entre 1 et 3\n" +
+									"Pour plus d'information taper : \n java -jar JeuDeLaVie.jar -h \n");
 						}
 					}
 					if(args[0].equals("-w") && args.length==3){
@@ -241,11 +245,13 @@ public class Commande {
 							if(a >=1 && a<=3){
 								genererHTML(nomRepertoire, temps, a, "Jeu de la vie");
 							} else {
-								throw new CommandeException("l'entier doit etre entre 1 et 3");
+								throw new CommandeException("Le type du plateau doit être compris entre 1 et 3 \n " +
+										"Pour plus d'information taper : \n java -jar JeuDeLaVie.jar -h \n");
 							}
 								
 						}catch(Exception e){
-							throw new CommandeException("le quatrième arguments est un entier");
+							throw new CommandeException("Le quatrième argument doit être un entier compris entre 1 et 3\n" +
+									"Pour plus d'information taper : \n java -jar JeuDeLaVie.jar -h \n");
 						}
 					}
 				} else {
