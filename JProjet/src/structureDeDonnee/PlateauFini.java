@@ -464,10 +464,10 @@ public class PlateauFini implements Matrice {
 		Collections.sort(celluleVivante); 
 	}
 	/**
-	 * Méthode translation permet de decaler une cellule de x lignes et y colonnes 
+	 * Méthode translation permet de décaler une cellule de x lignes et y colonnes 
 	 * @param x un entier
 	 * @param y un entier
-	 * @return  une liste dont toutes les cellules ont été deplassées de x lignes et y colonnes
+	 * @return  une liste de cellule dont toutes les cellules ont été deplassées de x lignes et y colonnes
 	 */
 	public ArrayList<Cellule> translation(int x, int y) {
 		ArrayList<Cellule> tmp = new ArrayList<Cellule>();
@@ -483,9 +483,10 @@ public class PlateauFini implements Matrice {
 	}
 	
 	/**
-	 *<b> Cette méthode permet de savoir si une cellule est sur les bords </b>
+	 * Vérifie l'effet de bord d'une cellule .</b>
 	 * @param c une cellule
 	 * @return un boolean
+	 * @see Cellule
 	 */
 	public boolean is_Bordure(Cellule c){
 		return c.getOrdonnee()< getMinOrdonnee() ||
@@ -495,7 +496,9 @@ public class PlateauFini implements Matrice {
 	}
 	
 	/**
-	 * <b>Cette méthode permet de faire une mise à jour du Plateau </b>
+	 * Met à jour les variables {@link #maxAbscisse},{@link #maxOrdonnee},{@link #minAbscisse}
+	 * {@link #minOrdonnee}
+	 * @see PlateauFini
 	 */
 	
 	public void update(){
