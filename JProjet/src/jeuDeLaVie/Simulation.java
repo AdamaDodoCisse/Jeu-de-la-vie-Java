@@ -61,15 +61,17 @@ public class Simulation {
 	public void afficher(int temps){
 		int cpt = 0;
 		String s="";
+		String bord = "";
 		for(int i=0;i<=46;i++){
 			if(i==0)
-				s = s + "=";
+				bord = s + "=";
 			else if(i==46)
-				s = s + "=";
+				bord = bord + "=";
 			else 
-				s = s + " = ";
+				bord = bord + " = ";
 		}
-		s = s + "\n";
+		
+		s = bord + "\n";
 		int pos =0;
 		int taille = jeu.getPlateau().getTailleCelluleVivante();
 		for(int i= x1-1;i <= x2 ; i++){
@@ -91,14 +93,7 @@ public class Simulation {
 			}
 			s=s+"\n";
 		}
-		for(int i=0;i<=46;i++){
-			if(i==0)
-				s = s + "=";
-			else if(i==46)
-				s = s + "=";
-			else 
-				s = s + " = ";
-		}
+		s+=bord;
 		s +="\nNombre total de cellule vivante = "+jeu.getPlateau().getTailleCelluleVivante()+"\n";
 		s = s + "Nombre de cellule vivante afficher = "+cpt+"\n";
 		s = s + "Numéro de génération = "+temps+"\n";
