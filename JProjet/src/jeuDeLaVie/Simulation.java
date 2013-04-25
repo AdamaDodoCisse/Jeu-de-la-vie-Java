@@ -118,7 +118,7 @@ public class Simulation {
 			afficher(temps);
 			temps++;
 			try{
-				Thread.sleep(350);
+				Thread.sleep(150);
 			}catch(Exception e){
 				
 			}
