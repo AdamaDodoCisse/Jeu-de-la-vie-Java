@@ -352,57 +352,69 @@ public class HTMLGenerateur {
 			}
 	}
 	/**
-	 * 
-	 * @return
+	 * Getter de balise
+	 * @return un String
+	 * @seeHTMLGenerateur#balise
 	 */
 	public String getBalise() {
 		return balise;
 	}
 	/**
-	 * 
+	 * Setter de balise
 	 * @param balise
+	 * @seeHTMLGenerateur#balise
 	 */
 	public void setBalise(String balise) {
 		this.balise = balise;
 	}
+	
 	/**
-	 * 
-	 * @return
+	 * Getter de typePlateau
+	 * @return un int
+	 * @see HTMLGenerateur#typePlateau
 	 */
 	public int getTypePlateau() {
 		return typePlateau;
 	}
+	
 	/**
-	 * 
+	 * Setter de typePlateau
 	 * @param typePlateau
+	 * @seeHTMLGenerateur#typePlateau
 	 */
 	public void setTypePlateau(int typePlateau) {
 		this.typePlateau = typePlateau;
 	}
+	
 	/**
-	 * 
-	 * @return
+	 * Getter de temps
+	 * @return un int
+	 * @seeHTMLGenerateur#temps
 	 */
 	public int getTemps() {
 		return temps;
 	}
+	
 	/**
-	 * 
+	 * Setter de temps
 	 * @param temps
+	 * @seeHTMLGenerateur#temps
 	 */
 	public void setTemps(int temps) {
 		this.temps = temps;
 	}
 	/**
-	 * 
-	 * @return
+	 * Getter de dossier
+	 * @return un string
+	 * @seeHTMLGenerateur#dossier
 	 */
 	public String getDossier() {
 		return dossier;
 	}
 	/**
-	 * 
+	 * Setter de dossier
 	 * @param dossier
+	 * @seeHTMLGenerateur#dossier
 	 */
 	public void setDossier(String dossier) {
 		this.dossier = dossier;
