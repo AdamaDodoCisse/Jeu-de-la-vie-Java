@@ -62,6 +62,7 @@ public class Simulation {
 		int cpt = 0;
 		String s="";
 		String bord = "";
+		//délimitation de la zone d'affichage par =
 		for(int i=0;i<=46;i++){
 			if(i==0)
 				bord = s + "=";
@@ -74,6 +75,7 @@ public class Simulation {
 		s = bord + "\n";
 		int pos =0;
 		int taille = jeu.getPlateau().getTailleCelluleVivante();
+		//récuperation des cellules vivantes et non dans la chaine
 		for(int i= x1-1;i <= x2 ; i++){
 			for(int j = y1-1;j <= y2+1 ; j++){
 					Cellule k = new Cellule(i,j,-1,true);
@@ -97,7 +99,7 @@ public class Simulation {
 		s +="\nNombre total de cellule vivante = "+jeu.getPlateau().getTailleCelluleVivante()+"\n";
 		s = s + "Nombre de cellule vivante afficher = "+cpt+"\n";
 		s = s + "Numéro de génération = "+temps+"\n";
-		
+		//affichage du jeu de la vie
 		System.out.print(s);
 	}
 	/**
