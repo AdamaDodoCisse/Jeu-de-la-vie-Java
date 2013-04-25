@@ -1,14 +1,6 @@
 package affichage;
 import java.awt.Event; 
-import java.io.IOException;
-import java.util.Iterator;
-
-import exception.LectureException;
-
 import structureDeDonnee.Cellule;
-import structureDeDonnee.PlateauCirculaire;
-import structureDeDonnee.PlateauFini;
-import structureDeDonnee.PlateauInfini;
 import jeuDeLaVie.JeuDeLaVie;
 /**
  * <b>Simulation est la classe qui simule l'evolution d'un jeu de la vie dans </br>
