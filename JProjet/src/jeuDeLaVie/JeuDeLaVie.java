@@ -68,10 +68,21 @@ public class JeuDeLaVie implements Jeu {
 		// TODO Auto-generated method stub
 		this.plateau.evoluer();
 	}
-   
+	
+   /**
+    * Getter de plateau
+    * @return une Matrice
+    * @see JeuDeLaVie#plateau
+    */
 	public Matrice getPlateau(){
 		return plateau;
 	}
+	
+	/**
+	 * Setter de plateau
+	 * @param p
+	 * @see JeuDeLaVie#plateau
+	 */
 	public void setPlateau(Matrice p){
 		plateau = p;
 	}
