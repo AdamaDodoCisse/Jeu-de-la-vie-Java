@@ -55,8 +55,10 @@ public class Simulation {
 	public Simulation(int duree,JeuDeLaVie jeu){
 		this.jeu = jeu;
 		this.dureeSimulation = duree;
-		x1=x2=y1=y2=0;
-		updateVariableAffichage();
+		x1 = jeu.getPlateau().getMinAbscisse();
+		x2 = x1 + 37;
+		y1 = jeu.getPlateau().getMinOrdonnee();
+		y2 = y1 + 38;
 		
 		simuler();
 	}
@@ -67,11 +69,11 @@ public class Simulation {
 	 * @param y1
 	 * @param y2
 	 */
-	public void afficher(int x1,int x2,int y1,int y2,int temps){
+	public void afficher(int temps){
 		int cpt = 0;
 		String s = " ";
-		for(int i=jeu.getPlateau().getMinAbscisse();i <= jeu.getPlateau().getMinAbscisse() + 37 ;i++){
-			for(int j=jeu.getPlateau().getMinOrdonnee();j<= jeu.getPlateau().getMinOrdonnee() + 38;j++){
+		for(int i= x1;i <= x2 ; i++){
+			for(int j = y1;j <= y2 ; j++){
 					Cellule k = new Cellule(i,j,-1,true);
 					if(jeu.getPlateau().contains(k)){
 						s = s+" o ";
@@ -90,8 +92,7 @@ public class Simulation {
 	public void simuler(){
 		System.out.println((char)Event.ESCAPE + "[2J");
 		System.out.print((char)Event.ESCAPE + "7");
-		//updateVariableAffichage();
-		afficher(x1,x2,y1,y2,0);
+		afficher(0);
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e1) {
@@ -102,7 +103,7 @@ public class Simulation {
 		while(temps<dureeSimulation){
 			System.out.println((char)Event.ESCAPE + "8");
 			jeu.evolutionSuivante();
-			afficher(x1,x2,y1,y2,temps);
+			afficher(temps);
 			temps++;
 			try{
 				Thread.sleep(100);
@@ -139,24 +140,6 @@ public class Simulation {
 	
 	public void setDureeSimulation(int dureeSimulation) {
 		this.dureeSimulation = dureeSimulation;
-	}
-	public void updateVariableAffichage(){
-		Iterator<Cellule> iterateur = jeu.getPlateau().getIterateurCellule();
-		while(iterateur.hasNext()){
-			Cellule c = iterateur.next();
-			if(c.getAbscisse()<x1)
-				x1=c.getAbscisse();
-			if(c.getOrdonnee()<y1)
-				y1=c.getOrdonnee();
-		}
-		x2 = x1 + 35;
-		y2 = y1 + 36;
-	}
-	public static void main(String[]args) throws LectureException, IOException{
-		@SuppressWarnings("unused")
-		Simulation si = new Simulation(200,
-						new JeuDeLaVie(
-						new PlateauFini("Dossier_Teste/ADDER.lif")));
 	}
 	
 }
