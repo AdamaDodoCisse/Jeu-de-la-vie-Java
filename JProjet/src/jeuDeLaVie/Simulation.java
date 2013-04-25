@@ -55,7 +55,7 @@ public class Simulation {
 		this.jeu = jeu;
 		this.dureeSimulation = duree;
 		x1 = jeu.getPlateau().getMinAbscisse();
-		x2 = x1 + 32;
+		x2 = x1 + 33;
 		y1 = jeu.getPlateau().getMinOrdonnee();
 		y2 = y1 + 134;
 		
@@ -91,7 +91,7 @@ public class Simulation {
 						cpt++;
 					}
 					else 
-						s = s+"-";
+						s = s+" ";
 			}
 			s=s+"\n";
 		}
@@ -105,8 +105,8 @@ public class Simulation {
 		}
 		s +="\nNombre total de cellule vivante = "+jeu.getPlateau().getTailleCelluleVivante()+"\n";
 		s = s + "Nombre de cellule vivante afficher = "+cpt+"\n";
-		s = s + "Numéro de génération = "+temps+"\n"+
-		"Plateau du jeu = "+jeu.getPlateau().getClass();
+		s = s + "Numéro de génération = "+temps+"\n";
+		
 		System.out.print(s);
 	}
 	public void simuler(){
