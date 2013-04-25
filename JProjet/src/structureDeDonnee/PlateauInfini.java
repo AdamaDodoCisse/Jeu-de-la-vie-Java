@@ -13,20 +13,27 @@ import jeuDeLaVie.JeuDeLaVie;
  *
  */
 public class PlateauInfini extends PlateauFini{
-	
+	/* (non-Javadoc)
+	 * @see StructureDeDonnee.PlateauFini
+	 */
 	public PlateauInfini() {
 		super();
-		
-		// TODO Auto-generated constructor stub
 	}
+	/* (non-Javadoc)
+	 * @see StructureDeDonnee.PlateauFini
+	 */
 	public PlateauInfini(String nomFichier) throws LectureException, IOException {
 		super(nomFichier);
 		// TODO Auto-generated constructor stub
 	}
-
+	/* (non-Javadoc)
+	 * @see StructureDeDonnee.PlateauFini#is_Bordure(Cellule)
+	 */
 	public boolean is_Bordure(Cellule c){
 		return false;
 	}
-	
+	/* (non-Javadoc)
+	 * @see StructureDeDonnee.PlateauFini#clear()
+	 */
 	public void clear(){}
 }
