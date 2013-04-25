@@ -61,20 +61,6 @@ public class Commande {
 	 * @throws FileNotFoundException 
 	 */
 	private void aider() throws FileNotFoundException{
-		/*BufferedReader reader = new BufferedReader(
-								new FileReader(
-								new File("Dossier_Teste/aide.txt")));
-		//affichage du contenu du fichier aide.txt
-		String ligne = null;
-		try {
-			while((ligne = reader.readLine())!=null){
-				System.out.println(ligne);
-			}
-			reader.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 		System.out.println((char)Event.ESCAPE + "[2J");
 		System.out.print("JEU DE LA VIE : OPTIONS ET COMMANDES DU PROGRAMME\n\n" +
 				"Afficher les noms et prénoms des concepteurs du jeu :\n" +
