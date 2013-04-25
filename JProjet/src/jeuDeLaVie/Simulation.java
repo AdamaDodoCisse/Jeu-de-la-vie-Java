@@ -51,14 +51,14 @@ public class Simulation {
 		x2 = x1 + 33;
 		y1 = jeu.getPlateau().getMinOrdonnee();
 		y2 = y1 + 134;
-		
-		simuler();
 	}
 	/**
-	 * Afficher 
-	 * @param temps
+	 * Affiche la configuration du jeu de la vie à un temps donné.
+	 * @param temps 
+	 * 				Numéro de génération du jeu.
+	 * @see JeuDeLaVie
 	 */
-	public void afficher(int temps){
+	private void afficher(int temps){
 		int cpt = 0;
 		String s="";
 		String bord = "";
@@ -103,34 +103,31 @@ public class Simulation {
 		System.out.print(s);
 	}
 	/**
-	 * 
+	 * Effectue une simulation du jeu de la vie.
+	 * @throws InterruptedException 
+	 * @see JeuDeLaVie
 	 */
-	public void simuler(){
+	public void simuler() throws InterruptedException{
 		//on efface l'ecran du terminale
 		System.out.println((char)Event.ESCAPE + "[2J");
 		//enregistrement de la position actuel du curseur
 		System.out.print((char)Event.ESCAPE + "7");
 		afficher(0);
-		try {
+		
 			Thread.sleep(5000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 		int temps=1;
 		//simulation du jeu
 		while(temps<=dureeSimulation){
-			//restorer la position du curseur enregistrer 
+			//restaurer la position du curseur enregistrer 
 			System.out.println((char)Event.ESCAPE + "8");
 			//évolution suivante du jeu
 			jeu.evolutionSuivante();
 			afficher(temps);
 			temps++;
-			try{
+		
 				Thread.sleep(150);
-			}catch(Exception e){
-				
-			}
+			
 		}
 	}
 
