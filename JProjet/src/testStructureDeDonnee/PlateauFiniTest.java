@@ -15,7 +15,9 @@ public class PlateauFiniTest {
 
 	@Before
 	public void setUp() throws Exception {
-		plateau=new PlateauFini("Dossier_Teste/teste_jeu2.LIF");
+		plateau = new PlateauFini();
+		plateau = new PlateauFini("Dossier_Teste/teste.LIF");
+		
 	}
 
 	@After
@@ -25,7 +27,14 @@ public class PlateauFiniTest {
  * Permet de tester  le constructeur de notre PlateauFini
  */
 	@Test public void testPlateauFini(){
+		//teste des attributs de la classe à la construction de l'objet
 		plateau=new PlateauFini();
+		assertEquals(plateau.getTailleCelluleVivante(),0);
+		assertEquals(plateau.getTailleRegleMort(),0);
+		assertEquals(plateau.getTailleRegleVie(),0);
+		assertTrue(plateau.getMaxAbscisse()==plateau.getMaxOrdonnee()
+					&& plateau.getMinAbscisse()==plateau.getMinOrdonnee()
+					&& plateau.getMinOrdonnee()==0);
 	}
 	
 	/*
@@ -33,14 +42,11 @@ public class PlateauFiniTest {
 	 */
 	@Test
 	public void testAjouterCellule() {
-		plateau.ajouterCellule(new Cellule(0, 3, -1, true));
-		plateau.ajouterCellule(new Cellule(-11, 3, -1, true));
-		plateau.ajouterCellule(new Cellule(0, 1000, -1, true));
-		plateau.ajouterCellule(new Cellule(1000, 1000, -1, true));
-		plateau.ajouterCellule(new Cellule(000, 1000, -1, true));
-		plateau.ajouterCellule(new Cellule(-11, -11, -1, true));
-		plateau.ajouterCellule(new Cellule(-11, 7, -1, true));
-		assertEquals(plateau.getTailleCelluleVivante(),18);
+		Cellule c1 = new Cellule(1,1,-1,true);
+		plateau.ajouterCellule(c1);
+		//teste que la cellule n'a pas été ajouter dans la liste des cellules vivantes
+		//à cause de l'effet de bord .
+		assertTrue(plateau.contains(c1));
 	}
 
 	/*
@@ -67,7 +73,17 @@ public class PlateauFiniTest {
 
 	@Test
 	public void testAjouterElement() {
-
+		ArrayList<Cellule> l1 = new ArrayList<Cellule>();
+		ArrayList<Cellule> l2 = new ArrayList<Cellule>();
+		Cellule c1 = new Cellule(0,0,-1,true);
+		Cellule c2 = new Cellule(0,1,-1,true);
+		l1.add(c1);
+		l2.add(c2);
+		ArrayList<Cellule> somme = plateau.ajouterElement(l1, l2);
+		//on teste si la liste somme contient l'ensemble des élements de l1 et l2
+		assertEquals(somme.size(),2);
+		assertTrue(somme.contains(c1));
+		assertTrue(somme.contains(c2));
 	}
 
 	/*
@@ -100,6 +116,7 @@ public class PlateauFiniTest {
 	 */
 	@Test
 	public void testContainsRegleVie() {
+		//les règles du jeu sont vides d'ou la méthode contains doit rétourner false
 		assertTrue(plateau.containsRegleMort(3));
 	}
 /*
@@ -115,23 +132,10 @@ public class PlateauFiniTest {
 	@Test
 	public void testEvoluer() {
 		plateau.evoluer();
-		assertEquals(plateau.getTailleCelluleVivante(),17);
+		assertFalse(plateau.estVide());
+		
 	}
 
-	@SuppressWarnings("unchecked")
-	@Test
-	/*
-	 * permet de tester la méthode calculerEvolution
-	 */
-	public void testCalculerEvolution() {
-		ArrayList<Cellule> it=new ArrayList<Cellule>();
-		it.add(new Cellule(1, 0, -1, true));
-		it.add(new Cellule(0, 0, -1, true));
-		plateau.calculerEvolution(it);
-		plateau.calculerEvolution((ArrayList<Cellule>)plateau.getCelluleVivante());
-assertNotSame(plateau.getTailleCelluleVivante(),it.size());
-
-	}
 /*
  * Nous permet de savoir si effectivement la méthode getcellule retourne bien une cellule
  */
@@ -168,7 +172,7 @@ assertNotSame(plateau.getTailleCelluleVivante(),it.size());
  */
 	@Test
 	public void testGetTailleCelluleVivante() {
-		assertEquals(plateau.getTailleCelluleVivante(),17);
+		assertEquals(plateau.getTailleCelluleVivante(),3);
 	}
 /*
  * Nous permet de savoir la taille de la liste de regle vie
@@ -198,14 +202,10 @@ assertNotSame(plateau.getTailleCelluleVivante(),it.size());
 	@Test
 	public void testTrierCellule() {
 		plateau.trierCellule();
-		assertEquals(plateau.getTailleCelluleVivante(),17);
-	}
-
-	@Test
-	public void testTranslation() {
-		
-		
-
+		assertEquals(plateau.getTailleCelluleVivante(),3);
+		//teste si les cellules sont triés
+		assertEquals(plateau.getCellule(0).compareTo(plateau.getCellule(1)),-1);
+		assertEquals(plateau.getCellule(1).compareTo(plateau.getCellule(2)),-1);
 	}
 
 }

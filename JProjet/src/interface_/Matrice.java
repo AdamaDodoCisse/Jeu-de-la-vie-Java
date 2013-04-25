@@ -2,8 +2,6 @@ package interface_;
 
 import java.util.Iterator;
 
-import jeuDeLaVie.JeuDeLaVie;
-
 import structureDeDonnee.Cellule;
 
 
@@ -15,6 +13,12 @@ import structureDeDonnee.Cellule;
  *
  */
 public interface Matrice extends Cloneable{
+	/**
+	 * 
+	 * @param cellule
+	 * @return
+	 */
+	public  boolean add(Cellule cellule);
 	/**
 	 * Ajoute une cellule à l'ensemble des cellules vivantes du jeu de la vie.
 	 * @param cellule
@@ -84,15 +88,6 @@ public interface Matrice extends Cloneable{
 	 */
 	public Cellule getCellule(int i);
 	/**
-	 * Retourne le nombre de voisin(cellule) vivant d'une cellule parmis ses 8 voisins.
-	 * @param cellule
-	 * 			Une cellule vivante.
-	 * @return Un entier correspondant au nombre de voisin de la cellule passer en paramètre.
-	 * @see Cellule
-	 * @see StructureDeDonnee#getCelluleVivante()
-	 */
-	//public int getNombreVoisin(Cellule cellule);
-	/**
 	 * 
 	 */
 	public void evoluer();
@@ -153,14 +148,7 @@ public interface Matrice extends Cloneable{
 	 * @see Cellule
 	 */
 	public void trierCellule();
-	/**
-	 * Ajoute une cellule vivante dans l'ensemble des cellules vivantes.
-	 * @param cellule
-	 * @return Un booléen indiquant si l'ajout de la cellule à été éffectuer.
-	 * @see Cellule
-	 * @see JeuDeLaVie
-	 */
-	public boolean add(Cellule cellule);
+	
 	/**
 	 * Getter du max des abcisses des cellules vivantes.
 	 * @return Le max des abscisses.

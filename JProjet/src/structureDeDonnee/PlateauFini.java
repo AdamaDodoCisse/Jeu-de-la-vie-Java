@@ -109,111 +109,7 @@ public class PlateauFini implements Matrice {
 		update();
 		clear();
 	}
-	/**
-	 * Constructeur PlateauFini.
-	 * <p>
-	 * Construit un objet grille à partir de l'ensemble des informations fournient.
-	 * </p>
-	 * @param listeCellule
-	 * 			Liste contenant l'ensemble des cellules vivantes.
-	 * @param regleVie
-	 * 			Liste contenant l'ensemble des règle de vie des cellules @see {@link PlateauFini#regleVie}.
-	 * @param regleMort
-	 * 			Liste contenant l'ensemble des règle de mort des cellules @see {@link PlateauFini#regleMort}.
-	 * @see Cellule
-	 * @see PlateauFini#celluleVivante
-	 * @see PlateauFini#regleVie
-	 * @see PlateauFini#regleMort
-	 */
-	public PlateauFini(ArrayList<Cellule> listeCellule,
-			ArrayList<Integer> regleVie, ArrayList<Integer> regleMort){
-		
-		this.celluleVivante = listeCellule;
-		this.regleVie = regleVie;
-		this.regleMort = regleMort;
-	}
-	/**
-	 * Getter de minAbscisse.
-	 * @return Le minimum des abscisses des cellules vivantes.
-	 * @see Cellule
-	 * @see PlateauFini#minAbscisse
-	 */
-	public int getMinAbscisse() {
-		return minAbscisse;
-	}
-	/**
-	 * Setter de minAbscisse.
-	 * @param minAbscisse
-	 * 			Un entier correspondant au minimum des abscisses des cellules vivantes.
-	 * @see Cellule
-	 * @see PlateauFini#minAbscisse
-	 */
-	public void setMinAbscisse(int minAbscisse) {
-		this.minAbscisse = minAbscisse;
-	}
-	/**
-	 * Getter de minOrdonnee.
-	 * @return Le minimum des ordonnées des cellules vivantes.
-	 * @see Cellule
-	 * @see PlateauFini#minOrdonnee 
-	 */
-	public int getMinOrdonnee() {
-		return minOrdonnee;
-	}
-	/**
-	 * Setter de minOrdonnee.
-	 * @param minOrdonnee
-	 * 			Un entier correspondant au minimum des ordonnées des cellules vivantes.
-	 * @see Cellule
-	 * @see PlateauFini#minOrdonnee
-	 */
-	public void setMinOrdonnee(int minOrdonnee) {
-		this.minOrdonnee = minOrdonnee;
-	}
-	/**
-	 * Getter de maxAbscisse.
-	 * @return Le maximum des abscisses des cellules vivantes.
-	 * @see Cellule
-	 * @see PlateauFini#maxAbscisse
-	 */
-	public int getMaxAbscisse() {
-		return maxAbscisse;
-	}
-	/**
-	 * Setter de maxAbscisse.
-	 * @param maxAbscisse
-	 * 			Un entier correspondant au maximum des abscisses des cellules vivantes.
-	 * @see Cellule
-	 * @see PlateauFini#maxAbscisse
-	 */
-	public void setMaxAbscisse(int maxAbscisse) {
-		this.maxAbscisse = maxAbscisse;
-	}
-	/**
-	 * Getter de maxOrdonnee.
-	 * @return Le maximum des ordonnées des cellules vivantes.
-	 * @see Cellule
-	 * @see PlateauFini#maxOrdonnee
-	 */
-	public int getMaxOrdonnee() {
-		return maxOrdonnee;
-	}
-	/**
-	 * Setter de maxOrdonnee.
-	 * @param maxOrdonnee
-	 * 			Un entier correspondant au maximum des ordonnées des cellules vivantes.
-	 * @see Cellule
-	 * @see PlateauFini#maxOrdonnee
-	 */
-	public void setMaxOrdonnee(int maxOrdonnee) {
-		this.maxOrdonnee = maxOrdonnee;
-	}
-	/* (non-Javadoc)
-	 * @see structure.StructureDeDonnee#ajouterCellule(structure.Cellule)
-	 */
-	public  boolean add(Cellule cellule){
-		return celluleVivante.add(cellule);
-	}
+	
 	/* (non-Javadoc)
 	 * @see structure.StructureDeDonnee#ajouterCellule(structure.Cellule)
 	 */
@@ -266,7 +162,7 @@ public class PlateauFini implements Matrice {
 			try {
 				return (Matrice) super.clone();
 			} catch (CloneNotSupportedException e) {
-				System.out.println(e.getMessage()+"nouve");
+				System.out.println(e.getMessage());
 			}
 			return this;
 	}
@@ -539,5 +435,87 @@ public class PlateauFini implements Matrice {
 				i--;
 			}
 		}
+	}
+	/**
+	 * Getter de minAbscisse.
+	 * @return Le minimum des abscisses des cellules vivantes.
+	 * @see Cellule
+	 * @see PlateauFini#minAbscisse
+	 */
+	public int getMinAbscisse() {
+		return minAbscisse;
+	}
+	/**
+	 * Setter de minAbscisse.
+	 * @param minAbscisse
+	 * 			Un entier correspondant au minimum des abscisses des cellules vivantes.
+	 * @see Cellule
+	 * @see PlateauFini#minAbscisse
+	 */
+	public void setMinAbscisse(int minAbscisse) {
+		this.minAbscisse = minAbscisse;
+	}
+	/**
+	 * Getter de minOrdonnee.
+	 * @return Le minimum des ordonnées des cellules vivantes.
+	 * @see Cellule
+	 * @see PlateauFini#minOrdonnee 
+	 */
+	public int getMinOrdonnee() {
+		return minOrdonnee;
+	}
+	/**
+	 * Setter de minOrdonnee.
+	 * @param minOrdonnee
+	 * 			Un entier correspondant au minimum des ordonnées des cellules vivantes.
+	 * @see Cellule
+	 * @see PlateauFini#minOrdonnee
+	 */
+	public void setMinOrdonnee(int minOrdonnee) {
+		this.minOrdonnee = minOrdonnee;
+	}
+	/**
+	 * Getter de maxAbscisse.
+	 * @return Le maximum des abscisses des cellules vivantes.
+	 * @see Cellule
+	 * @see PlateauFini#maxAbscisse
+	 */
+	public int getMaxAbscisse() {
+		return maxAbscisse;
+	}
+	/**
+	 * Setter de maxAbscisse.
+	 * @param maxAbscisse
+	 * 			Un entier correspondant au maximum des abscisses des cellules vivantes.
+	 * @see Cellule
+	 * @see PlateauFini#maxAbscisse
+	 */
+	public void setMaxAbscisse(int maxAbscisse) {
+		this.maxAbscisse = maxAbscisse;
+	}
+	/**
+	 * Getter de maxOrdonnee.
+	 * @return Le maximum des ordonnées des cellules vivantes.
+	 * @see Cellule
+	 * @see PlateauFini#maxOrdonnee
+	 */
+	public int getMaxOrdonnee() {
+		return maxOrdonnee;
+	}
+	/**
+	 * Setter de maxOrdonnee.
+	 * @param maxOrdonnee
+	 * 			Un entier correspondant au maximum des ordonnées des cellules vivantes.
+	 * @see Cellule
+	 * @see PlateauFini#maxOrdonnee
+	 */
+	public void setMaxOrdonnee(int maxOrdonnee) {
+		this.maxOrdonnee = maxOrdonnee;
+	}
+	/* (non-Javadoc)
+	 * @see structure.StructureDeDonnee#ajouterCellule(structure.Cellule)
+	 */
+	public  boolean add(Cellule cellule){
+		return celluleVivante.add(cellule);
 	}
 }
