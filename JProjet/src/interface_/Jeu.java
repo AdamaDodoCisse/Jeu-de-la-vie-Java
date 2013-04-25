@@ -15,24 +15,4 @@ public interface Jeu {
 	 * @see PlateauCirculaire
 	 */
 	public void evolutionSuivante();
-	/**
-	 * Teste si une cellule vivante doit survivre à l'evolution suivante du jeu de la vie.
-	 * Elle est dépendante des règles de Mort des cellules({@link StructureDeDonnee}) définient dans le jeu.
-	 * @param cellule
-	 * 				Une cellule vivante du jeu de la vie.
-	 * @return Un booléen indiquant si la cellule doit mourir ou non.
-	 * @see Cellule
-	 * 
-	 */
-	//public boolean estCelluleMourante(Cellule cellule);
-	/**
-	 * Teste si une cellule doit naitre à l'evolution suivante du jeu de la vie.
-	 * Elle est dépendante des règles de vie des cellules({@link StructureDeDonnee}) définient dans le jeu.
-	 * @param cellule
-	 * 				Une cellule du jeu de la vie.
-	 * @return Un booléen indiquant si la cellule doit naitre ou non.
-	 * @see Cellule
-	 * 
-	 */
-	//public boolean estCelluleNaissante(Cellule cellule);
 }
