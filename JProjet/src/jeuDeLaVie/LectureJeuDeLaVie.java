@@ -125,32 +125,7 @@ public class LectureJeuDeLaVie {
 			plateau.ajouterRegleVie(3);
 		}
 	}
-	/**
-	 * Ajoute les cellules vivantes dans un plateau donner en paramètre </b>
-	 * à partir d'une chaine de caractère passé en paramètre. 
-	 * @param line
-	 * 				Une chaine de caractère.
-	 * @param abscisse
-	 * 				Un entier correspondant à l'abscisse.
-	 * @param ordonnee
-	 * 				Un entier correspondant à l'ordonnée.
-	 * @param grille
-	 * 				Un plateau du jeu de la vie dans le quel les cellules vivantes sont ajoutés.
-	 * @see JeuDeLaVie
-	 */
-	/*public static void ajouterCelluleVivante(String line ,int abscisse,int ordonnee, Matrice grille){
-		int i = 0;
-		int tmp=ordonnee;
-		while(i<line.length()){
-			if(line.charAt(i)=='*'){
-				grille.ajouterCellule(new Cellule(abscisse,ordonnee,-1,true));
-			}
-			ordonnee++;
-			i++;
-		}
-		abscisse++;
-		ordonnee=tmp;
-	}*/
+	
 	/**
 	 * Ajoute les règles dans un plateau donner en paramètre </b>
 	 * à partir d'une chaine de caractère passé en paramètre. 
