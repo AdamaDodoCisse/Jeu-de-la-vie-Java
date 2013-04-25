@@ -36,7 +36,8 @@ import interface_.Matrice;
  */
 public class Commande {
 	/**
-	 * 
+	 * Pateau de jeu la vie
+	 * @see Matrice
 	 */
 	private Matrice plateau;
 	/**
