@@ -37,7 +37,7 @@ public class Simulation {
 	/**
 	 * Constructeur Simulation.
 	 * @param duree
-	 * 				Un entier correspondant à la durrée de simulation du jeu de la vie.
+	 * 				Un entier correspondant à la durée de simulation du jeu de la vie.
 	 * @param jeu
 	 * 				Un jeu de la vie.
 	 * @see Simulation#jeu
@@ -70,6 +70,8 @@ public class Simulation {
 				s = s + " = ";
 		}
 		s = s + "\n";
+		int pos =0;
+		int taille = jeu.getPlateau().getTailleCelluleVivante();
 		for(int i= x1-1;i <= x2 ; i++){
 			for(int j = y1-1;j <= y2+1 ; j++){
 					Cellule k = new Cellule(i,j,-1,true);
@@ -79,9 +81,10 @@ public class Simulation {
 					else if(j==y2+1){
 						s = s + "=";
 					}
-					else if(jeu.getPlateau().contains(k)){
+					else if(pos < taille && jeu.getPlateau().getCellule(pos).equals(k)){
 						s = s+"o";
 						cpt++;
+						pos++;
 					}
 					else 
 						s = s+" ";
