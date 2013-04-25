@@ -2,8 +2,8 @@ package jeuDeLaVie;
 import java.awt.Event; 
 import structureDeDonnee.Cellule;
 /**
- * <b>Simulation est la classe qui simule l'evolution d'un jeu de la vie dans </br>
- * un temps déterminer dans un terminale</b>
+ * <b>Simulation est la classe qui simule l'évolution d'un jeu de la vie </br>
+ * dans un terminale</b>
  * <p>
  * Un object simulation est caractérisée par : 
  * <ul>
