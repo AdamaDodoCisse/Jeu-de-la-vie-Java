@@ -101,6 +101,9 @@ public class Simulation {
 		
 		System.out.print(s);
 	}
+	/**
+	 * 
+	 */
 	public void simuler(){
 		System.out.println((char)Event.ESCAPE + "[2J");
 		System.out.print((char)Event.ESCAPE + "7");
