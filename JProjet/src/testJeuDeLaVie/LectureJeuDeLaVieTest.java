@@ -1,16 +1,11 @@
 package testJeuDeLaVie;
-
 import static org.junit.Assert.*;
 import java.io.IOException;
-
 import jeuDeLaVie.LectureJeuDeLaVie;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import exception.LectureException;
-
 import structureDeDonnee.Cellule;
 import structureDeDonnee.PlateauInfini;
 
@@ -19,7 +14,8 @@ public class LectureJeuDeLaVieTest {
 	protected PlateauInfini plateau;
 	@Before
 	public void setUp() throws Exception {
-		plateau = new PlateauInfini();			//initialisation du jeu 
+		//initialisation d'une nouvelle matrice
+		plateau = new PlateauInfini();			
 	}
 
 	@After
@@ -34,34 +30,50 @@ public class LectureJeuDeLaVieTest {
 	@Test
 	public void testLectureJeu() throws LectureException, IOException {
 		lecture.LectureJeu("Dossier_Teste/teste_jeu.LIF", plateau);
-		assertEquals(plateau.getTailleCelluleVivante(), 4);			//teste si le fichier contient bien quatre cellule
-		assertTrue(plateau.contains(new Cellule(0,0,-1,true)));		//teste si la cellule en position 0 0 a bien été enregistré
-		assertTrue(plateau.contains(new Cellule(0,1,-1,true)));		//teste si la cellule en position 0 1 a bien été enregistré
-		assertTrue(plateau.contains(new Cellule(1,0,-1,true)));		//teste si la cellule en position 1 0 a bien été enregistré
-		assertTrue(plateau.contains(new Cellule(1,1,-1,true)));		//teste si la cellule en position 1 1 a bien été enregistré
+		//teste si le fichier contient bien quatre cellule
+		assertEquals(plateau.getTailleCelluleVivante(), 4);	
+		//teste si la cellule en position 0 0 a bien été enregistré
+		assertTrue(plateau.contains(new Cellule(0,0,-1,true)));	
+		//teste si la cellule en position 0 1 a bien été enregistré
+		assertTrue(plateau.contains(new Cellule(0,1,-1,true)));	
+		//teste si la cellule en position 1 0 a bien été enregistré
+		assertTrue(plateau.contains(new Cellule(1,0,-1,true)));	
+		//teste si la cellule en position 1 1 a bien été enregistré
+		assertTrue(plateau.contains(new Cellule(1,1,-1,true)));		
 		plateau = new PlateauInfini();
 		lecture.LectureJeu("Dossier_Teste/teste.LIF",plateau);
 		try{
-			lecture.LectureJeu("fichier", plateau);					//teste sur les exceptions au cas ou le fichier est introuvable 
-			fail("une exception doit être lever");					
+			//teste sur les exceptions au cas ou le fichier est introuvable	
+			lecture.LectureJeu("fichier", plateau);					 
+			fail("une exception doit être lever");			
 		}catch(LectureException e){
-			assertTrue(true);										//teste que l'exception a étét bien lever
+			//teste que l'exception a étét bien lever
+			assertTrue(true);										
 		}
-		
-		
 	}
 
 	@SuppressWarnings("static-access")
 	@Test
 	public void testAjouterRegle() {
 		String ligne = "#R 3/23";
-		lecture.ajouterRegle(ligne, plateau);						//ajout des regles du jeu 
-		assertEquals(plateau.getTailleRegleMort(),2);				//teste si la taille de la règle de mort est bien 2 vu qui qu'il doit contenir 2 et 3
-		assertEquals(plateau.getTailleRegleVie(),1);				//teste si la taille de la règle de vie est bien 1 vu qu'il doit contenir 3 		
-		assertTrue(plateau.containsRegleMort(3));					//verification que règle de mort contient bien 3
-		assertTrue(plateau.containsRegleMort(2));					//verification que règle de mort contient bien 2 aussi
-		assertTrue(plateau.containsRegleVie(3));					//verification que règle de vie contient 3
-				
+		//ajout des regles du jeu 
+		lecture.ajouterRegle(ligne, plateau);	
+		
+		//teste si la taille de la règle de mort est bien 2 vu qui qu'il doit contenir 2 et 3
+		assertEquals(plateau.getTailleRegleMort(),2);		
+		
+		//teste si la taille de la règle de vie est bien 1 vu qu'il doit contenir 3 		
+		assertEquals(plateau.getTailleRegleVie(),1);
+		
+		//verification que règle de mort contient bien 3
+		assertTrue(plateau.containsRegleMort(3));	
+		
+		//verification que règle de mort contient bien 2 aussi
+		assertTrue(plateau.containsRegleMort(2));		
+		
+		//verification que règle de vie contient 3
+		assertTrue(plateau.containsRegleVie(3));					
+
 	}
 
 }
