@@ -46,6 +46,7 @@ public class Simulation {
 	public Simulation(int duree,JeuDeLaVie jeu){
 		this.jeu = jeu;
 		this.dureeSimulation = duree;
+		//on fixe les variables d'affichage .
 		x1 = jeu.getPlateau().getMinAbscisse();
 		x2 = x1 + 33;
 		y1 = jeu.getPlateau().getMinOrdonnee();
@@ -54,7 +55,7 @@ public class Simulation {
 		simuler();
 	}
 	/**
-	 * 
+	 * Afficher 
 	 * @param temps
 	 */
 	public void afficher(int temps){
