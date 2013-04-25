@@ -1,12 +1,15 @@
 package structureDeDonnee;
 /**
- * <b>Cellule est la classe representant une cellule vivante du jeu de la vie.</br>
+ * <b>Cellule est la classe représentant une cellule du jeu de la vie.</br>
  * Elle implemente l'interface Comparable sur les cellules.</b>
  * <p>
- * Une cellule vivante  est caracterisée par sa position : 
+ * Une cellule vivante  est caracterisée par sa position,son nombre de voisin vivant </br>
+ * et son status (vivante ou morte): 
  * <ul>
  * <li>Un abscisse</li>
  * <li>Un ordonnée</li>
+ * <li>Un entier correspondant à son nombre de voisin</li>
+ * <li>Un booléen correspondant à son status</li>
  * </ul>
  * </p>
  * @author kouyate
@@ -26,15 +29,20 @@ public class Cellule implements Comparable<Cellule>{
 	 */
 	private int ordonnee;
 	/**
-	 * 
+	 * Nombre de voisin vivant de la cellule.
+	 * @see Cellule#getNombreVoisin()
+	 * @see Cellule#setNombreVoisin(int) 
 	 */
 	private int nombreVoisin;
 	/**
-	 * 
+	 * Status de la cellule (vivante ou morte)
+	 * @see Cellule#isStatus()
+	 * @see Cellule#setStatus(boolean)
 	 */
 	private boolean status;
 	/**
-	 * 
+	 * Constructeur Cellule.
+	 * @see Cellule
 	 */
 	public Cellule(){
 		this.abscisse = 0;
@@ -84,6 +92,7 @@ public class Cellule implements Comparable<Cellule>{
      * @return L'abscisse et l'ordonnée sous forme de chaine de caractère.
      * @see Cellule#abscisse
      * @see Cellule#ordonnee
+     * @see Cellule
      */
 	
 	@Override
@@ -94,7 +103,7 @@ public class Cellule implements Comparable<Cellule>{
 	/**
 	 * Methode hashCode.
 	 * @return Un entier correspondant à la hashCode générée.
-	 * 
+	 * @see Cellule
 	 */
 	@Override
 	public int hashCode() {
@@ -107,6 +116,7 @@ public class Cellule implements Comparable<Cellule>{
 	/**
 	 * Méthode equals.
 	 * @return Vrai ou Faux selon le teste d'égalité des deux objets.
+	 * @see Cellule
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -158,29 +168,34 @@ public class Cellule implements Comparable<Cellule>{
 		this.ordonnee = ordonnee;
 	}
 	/**
-	 * 
-	 * @return
+	 * Getter du nombre de voisin vivant de la cellule.
+	 * @return Un entier coorrespondant au nombre de voisin vivant de la cellule.
+	 * @see Cellule
 	 */
 	public int getNombreVoisin() {
 		return nombreVoisin;
 	}
 	/**
-	 * 
+	 * Setter du nombre du nombre de voisin vivant de la cellule.
 	 * @param nombreVoisin
+	 * 				Nombre de voisin de la cellule.
 	 */
 	public void setNombreVoisin(int nombreVoisin) {
 		this.nombreVoisin = nombreVoisin;
 	}
 	/**
-	 * 
-	 * @return
+	 * Getter du status de la cellule .
+	 * @return Le status de la cellule 
+	 * @see Cellule
 	 */
 	public boolean isStatus() {
 		return status;
 	}
 	/**
-	 * 
+	 * Setter du status de la cellule.
 	 * @param status
+	 * 				Status de la cellule.
+	 * @see Cellule
 	 */
 	public void setStatus(boolean status) {
 		this.status = status;
