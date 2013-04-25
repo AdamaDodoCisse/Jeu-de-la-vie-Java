@@ -352,16 +352,17 @@ public class HTMLGenerateur {
 			}
 	}
 	/**
-	 * Getter de balise
-	 * @return un String
+	 * Getter du contenu de la page HTML.
+	 * @return Le contenu de la page HTML en chaine de caractère.
 	 * @seeHTMLGenerateur#balise
 	 */
 	public String getBalise() {
 		return balise;
 	}
 	/**
-	 * Setter de balise
+	 * Setter du contenu de la page HTML.
 	 * @param balise
+	 * 				Le contenu de la page HTML en chaine de caractère.
 	 * @seeHTMLGenerateur#balise
 	 */
 	public void setBalise(String balise) {
@@ -369,8 +370,8 @@ public class HTMLGenerateur {
 	}
 	
 	/**
-	 * Getter de typePlateau
-	 * @return un int
+	 * Getter du type de plateau.
+	 * @return Le type de plateau.
 	 * @see HTMLGenerateur#typePlateau
 	 */
 	public int getTypePlateau() {
@@ -378,8 +379,9 @@ public class HTMLGenerateur {
 	}
 	
 	/**
-	 * Setter de typePlateau
+	 * Setter du type de plateau.
 	 * @param typePlateau
+	 * 				Le type du plateau.
 	 * @seeHTMLGenerateur#typePlateau
 	 */
 	public void setTypePlateau(int typePlateau) {
@@ -387,8 +389,8 @@ public class HTMLGenerateur {
 	}
 	
 	/**
-	 * Getter de temps
-	 * @return un int
+	 * Getter du temps d'analyse des fichiers.
+	 * @return Le temps d'analyse des fichiers.
 	 * @seeHTMLGenerateur#temps
 	 */
 	public int getTemps() {
@@ -396,24 +398,26 @@ public class HTMLGenerateur {
 	}
 	
 	/**
-	 * Setter de temps
+	 * Setter du temps d'analyse des fichiers.
 	 * @param temps
+	 * 				Le temps d'analyse des fichiers.
 	 * @seeHTMLGenerateur#temps
 	 */
 	public void setTemps(int temps) {
 		this.temps = temps;
 	}
 	/**
-	 * Getter de dossier
-	 * @return un string
+	 * Getter de dossier.
+	 * @return Le nom du dossier en chaine de caractère.
 	 * @seeHTMLGenerateur#dossier
 	 */
 	public String getDossier() {
 		return dossier;
 	}
 	/**
-	 * Setter de dossier
-	 * @param dossier
+	 * Setter du nom du dossier à analyser.
+	 * @param dossier 
+	 * 				Le nom du dossier en chaine de caractère.
 	 * @seeHTMLGenerateur#dossier
 	 */
 	public void setDossier(String dossier) {
