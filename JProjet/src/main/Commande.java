@@ -1,9 +1,6 @@
 package main;
-
-import java.io.BufferedReader;
-import java.io.File;
+import java.awt.Event;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
 
@@ -64,7 +61,7 @@ public class Commande {
 	 * @throws FileNotFoundException 
 	 */
 	private void aider() throws FileNotFoundException{
-		BufferedReader reader = new BufferedReader(
+		/*BufferedReader reader = new BufferedReader(
 								new FileReader(
 								new File("Dossier_Teste/aide.txt")));
 		//affichage du contenu du fichier aide.txt
@@ -77,7 +74,28 @@ public class Commande {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
+		System.out.println((char)Event.ESCAPE + "[2J");
+		System.out.print("JEU DE LA VIE : OPTIONS ET COMMANDES DU PROGRAMME\n\n" +
+				"Afficher les noms et prénoms des concepteurs du jeu :\n" +
+				"	java -jar JeuDeLaVie.jar -name\n\n" +
+				"Afficher la liste des options du programme :\n" +
+				"	java -jar JeuDeLaVie.jar -h\n\n" +
+				"Exécuter une simulation du jeu d'une durée d :" +
+				"	java -jar JeuDeLaVie.jar -s d fichier.lif\n\n" +
+				"Calculer le type d'évolution du jeu avec ses caracteristiques \n" +
+				"max répresente la durée maximal pour déduire les résultats du calcule :\n" +
+				"	java -jar JeuDeLaVie.jar -c max fichier.lif\n\n" +
+				"Calculer le type d'évolution de tous les jeux contenus dans le dossier passé \n" +
+				"en paramètre et affiche les résultats sous forme d'un fichier HTML :\n" +
+				"	java -jar JeuDeLaVie.jar -w max dossier\n\n" +
+				"Pour les même actions dans un Plateau Fini ou Circulaire : \n" +
+				"Taper la commande correspodant à votre action parmis les commandes çi-dessu suivi du type de plateau :\n" +
+				"	1 = Plateau Infini\n" +
+				"	2 = Plateau Fini\n" +
+				"	3 = Plateau Circulaire\n\n" +
+				"Exemple = Pour éffectuer une simulation du jeu dans un plateau fini d'une durée d \n" +
+				"	java -jar JeuDeLaVie.jar -s d 2\n\n");
 		
 		
 	}
@@ -87,10 +105,10 @@ public class Commande {
 	
 	private void groupe(){
 		System.out.println(
-				"Kouyate Sory\n" +
-				"Melaine\n" +
-				"Diallo Youssouf\n" +
-				"Cissé Adama Dodo\n");
+				"- Kouyate Sory\n" +
+				"- Melaine\n" +
+				"- Diallo Youssouf\n" +
+				"- Cissé Adama Dodo\n");
 	}
 	/**
 	 * Execute une simulation d'un jeu de la vie sur une durée donné.
@@ -155,7 +173,8 @@ public class Commande {
 	 * @see JeuDeLaVie
 	 * 				
 	 */
-	private void analyserFichier(int typePlateau,int temps,String nomFichier) throws LectureException, IOException{
+	private void analyserFichier(int typePlateau,int temps,String nomFichier) 
+			throws LectureException, IOException{
 		try {
 			plateau = StructureDeDonneeFactory.getPlateau(typePlateau, nomFichier);
 			ReconnaissanceType re = new ReconnaissanceType(temps, plateau);
@@ -176,7 +195,9 @@ public class Commande {
 	 * @see CommandeException
 	 */
 	
-	private void executer(String []args)throws CommandeException, LectureException, IOException{
+	private void executer(String []args)throws CommandeException,
+	LectureException, IOException{
+		
 		if(args.length==0){
 			System.out.println("Veuillez saisir une des commandes");
 			System.out.println();
