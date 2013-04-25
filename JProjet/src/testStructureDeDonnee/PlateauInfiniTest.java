@@ -21,7 +21,9 @@ public class PlateauInfiniTest {
 	public void tearDown() throws Exception {
 	}
 
-		
+		/*
+		 * permet de savoir si  l'ajout d'une cellule se fait exatement
+		 */
 	
 	@Test
 	public void testAjouterCellule() {
@@ -29,7 +31,9 @@ public class PlateauInfiniTest {
 	assertTrue(plateau.ajouterCellule(c));
 	}
 
-	
+	/*
+	 * permet de tester le constructeur de plateauInfini
+	 */
 	@Test
 	public void testPlateauInfini() {
 		plateau=new  PlateauInfini();
