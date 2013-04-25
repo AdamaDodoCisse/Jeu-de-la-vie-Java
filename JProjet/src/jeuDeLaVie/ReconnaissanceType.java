@@ -435,49 +435,59 @@ public class ReconnaissanceType {
 		this.inconnu = inconnu;
 	}
 	/**
-	 * 
-	 * @return
+	 * Getter vaisseau
+	 * @return Un boolean
+	 @see ReconnaissanceType#vaisseau
 	 */
 	public boolean isVaisseau() {
 		return vaisseau;
 	}
 	/**
-	 * 
-	 * @param vaisseau
+	 * Setter vaisseau
+	 * @param vaisseau 
+	 * @seeReconnaissanceType#vaisseau
 	 */
 	public void setVaisseau(boolean vaisseau) {
 		this.vaisseau = vaisseau;
 	}
 	/**
-	 * 
-	 * @return
+	 * Getter lignes
+	 * @return lignes
+	 * @seeReconnaissanceType#lignes
 	 */
 	public int getLignes() {
 		return lignes;
 	}
 	/**
-	 * 
+	 * Setter lignes 
 	 * @param lignes
+	 * @seeReconnaissanceType#lignes
 	 */
 	public void setLignes(int lignes) {
 		this.lignes = lignes;
 	}
+	
 	/**
-	 * 
-	 * @return
+	 * Getter  colonnes
+	 * @return colonnes 
+	 * @seeReconnaissanceType#colonnes
 	 */
 	public int getColonnes() {
 		return colonnes;
 	}
+	
 	/**
-	 * 
+	 * Setter colonnes
 	 * @param colonnes
+	 * @seeReconnaissanceType#colonnes
 	 */
 	public void setColonnes(int colonnes) {
 		this.colonnes = colonnes;
 	}
+	
 	/**
-	 * Méthode toString.
+	 * Methode string  de ReconnaissanceType
+	 * @return un String
 	 */
 	public String toString(){
 		if(isInconnu())
