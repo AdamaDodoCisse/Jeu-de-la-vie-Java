@@ -443,8 +443,9 @@ public class ReconnaissanceType {
 		return vaisseau;
 	}
 	/**
-	 * Setter vaisseau
+	 * Setter vaisseau.
 	 * @param vaisseau 
+	 * 				Un booléen 
 	 * @seeReconnaissanceType#vaisseau
 	 */
 	public void setVaisseau(boolean vaisseau) {
@@ -452,15 +453,16 @@ public class ReconnaissanceType {
 	}
 	/**
 	 * Getter lignes
-	 * @return lignes
+	 * @return lignes Le déplacement suivant la ligne de l'évolution du jeu
 	 * @seeReconnaissanceType#lignes
 	 */
 	public int getLignes() {
 		return lignes;
 	}
 	/**
-	 * Setter lignes 
+	 * Setter lignes. 
 	 * @param lignes
+	 * 				Le déplacement suivant la ligne de l'évolution du jeu.
 	 * @seeReconnaissanceType#lignes
 	 */
 	public void setLignes(int lignes) {
@@ -469,7 +471,7 @@ public class ReconnaissanceType {
 	
 	/**
 	 * Getter  colonnes
-	 * @return colonnes 
+	 * @return colonnes Le déplacement suivant la colonne de l'évolution du jeu.
 	 * @seeReconnaissanceType#colonnes
 	 */
 	public int getColonnes() {
@@ -479,6 +481,7 @@ public class ReconnaissanceType {
 	/**
 	 * Setter colonnes
 	 * @param colonnes 
+	 * 				Le déplacement suivant la ligne de l'évolution du jeu
 	 * @seeReconnaissanceType#colonnes
 	 */
 	public void setColonnes(int colonnes) {
