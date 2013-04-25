@@ -55,7 +55,7 @@ public class Simulation {
 		this.jeu = jeu;
 		this.dureeSimulation = duree;
 		x1 = jeu.getPlateau().getMinAbscisse();
-		x2 = x1 + 44;
+		x2 = x1 + 32;
 		y1 = jeu.getPlateau().getMinOrdonnee();
 		y2 = y1 + 134;
 		
@@ -68,10 +68,10 @@ public class Simulation {
 	public void afficher(int temps){
 		int cpt = 0;
 		String s="";
-		for(int i=x1-1;i<=x2+1;i++){
-			if(i==x2+1)
+		for(int i=0;i<=46;i++){
+			if(i==0)
 				s = s + "=";
-			else if(i==x1-1)
+			else if(i==46)
 				s = s + "=";
 			else 
 				s = s + " = ";
@@ -95,10 +95,10 @@ public class Simulation {
 			}
 			s=s+"\n";
 		}
-		for(int i=x1-1;i<=x2+1;i++){
-			if(i==x2+1)
+		for(int i=0;i<=46;i++){
+			if(i==0)
 				s = s + "=";
-			else if(i==x1-1)
+			else if(i==46)
 				s = s + "=";
 			else 
 				s = s + " = ";
@@ -106,7 +106,7 @@ public class Simulation {
 		s +="\nNombre total de cellule vivante = "+jeu.getPlateau().getTailleCelluleVivante()+"\n";
 		s = s + "Nombre de cellule vivante afficher = "+cpt+"\n";
 		s = s + "Numéro de génération = "+temps+"\n"+
-		"Plateau du jeu = "+jeu.getPlateau().getClass()+"\n";
+		"Plateau du jeu = "+jeu.getPlateau().getClass();
 		System.out.print(s);
 	}
 	public void simuler(){
@@ -162,7 +162,7 @@ public class Simulation {
 		this.dureeSimulation = dureeSimulation;
 	}
 	public static void main(String[]args) throws LectureException, IOException{
-		Matrice plateau = new PlateauInfini("Dossier_Teste/ADDER.lif");
+		Matrice plateau = new PlateauInfini("Dossier_Teste/VAISSEAU.LIF");
 		JeuDeLaVie j = new JeuDeLaVie(plateau);
 		Simulation s = new Simulation(150,j);
 	}
