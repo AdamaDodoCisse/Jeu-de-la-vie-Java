@@ -478,7 +478,7 @@ public class ReconnaissanceType {
 	
 	/**
 	 * Setter colonnes
-	 * @param colonnes
+	 * @param colonnes 
 	 * @seeReconnaissanceType#colonnes
 	 */
 	public void setColonnes(int colonnes) {
@@ -486,7 +486,7 @@ public class ReconnaissanceType {
 	}
 	
 	/**
-	 * Methode string  de ReconnaissanceType
+	 * Methode toString  de ReconnaissanceType
 	 * @return un String
 	 */
 	public String toString(){
