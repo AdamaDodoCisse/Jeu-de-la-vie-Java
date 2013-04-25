@@ -168,7 +168,8 @@ public class Commande {
 			plateau = StructureDeDonneeFactory.getPlateau(typePlateau, nomFichier);
 			ReconnaissanceType re = new ReconnaissanceType(temps, plateau);
 			re.calculerTypeEvolution(temps);
-			System.out.println(re);
+			System.out.println((char)Event.ESCAPE + "[2J");
+			System.out.println(re+"\n");
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
