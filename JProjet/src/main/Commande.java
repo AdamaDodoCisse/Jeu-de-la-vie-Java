@@ -203,7 +203,7 @@ public class Commande {
 						simuler(nomRepertoire,temps,StructureDeDonneeFactory.PLATEAU_INFINI);
 					} else if (args[0].equals("-s")){
 						try{
-							int typePlateau = Integer.parseInt(args[4]);
+							int typePlateau = Integer.parseInt(args[3]);
 							
 							if(typePlateau >=1 && typePlateau<=3){
 								simuler(nomRepertoire,temps,typePlateau);
