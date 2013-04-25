@@ -2,14 +2,10 @@ package main;
 import java.awt.Event;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-
-
 import structureDeDonnee.PlateauCirculaire;
 import structureDeDonnee.PlateauFini;
 import structureDeDonnee.PlateauInfini;
 import structureDeDonnee.StructureDeDonneeFactory;
-
 import jeuDeLaVie.HTMLGenerateur;
 import jeuDeLaVie.JeuDeLaVie;
 import jeuDeLaVie.ReconnaissanceType;
