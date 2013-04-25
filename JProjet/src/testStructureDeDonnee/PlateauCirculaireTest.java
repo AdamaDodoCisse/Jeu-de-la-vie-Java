@@ -13,6 +13,9 @@ public class PlateauCirculaireTest {
 		plateaucirculaire = new PlateauCirculaire("Dossier_Teste/VAISSEAU.LIF");
 	}
 
+	/*permet de tester la méthode evoluer dans plateauCirculaire
+	 * 
+	 */
 	@Test
 	public void testEvoluer() {
 		assertFalse(plateaucirculaire.estVide());
@@ -21,7 +24,9 @@ public class PlateauCirculaireTest {
 			assertEquals(plateaucirculaire.getTailleCelluleVivante(), 5);
 		}
 	}
-
+/*
+* permet de tester le constructeur de Plateaucirculaire
+ */
 	@Test
 	public void testPlateauCirculaire() {
 		assertFalse(plateaucirculaire.estVide());
