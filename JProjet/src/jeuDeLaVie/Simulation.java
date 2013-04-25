@@ -1,14 +1,6 @@
 package jeuDeLaVie;
-import interface_.Jeu;
-import interface_.Matrice;
-
 import java.awt.Event; 
-import java.io.IOException;
-
-import exception.LectureException;
 import structureDeDonnee.Cellule;
-import structureDeDonnee.PlateauFini;
-import structureDeDonnee.PlateauInfini;
 /**
  * <b>Simulation est la classe qui simule l'evolution d'un jeu de la vie dans </br>
  * un temps déterminer dans un terminale</b>
@@ -161,10 +153,4 @@ public class Simulation {
 	public void setDureeSimulation(int dureeSimulation) {
 		this.dureeSimulation = dureeSimulation;
 	}
-	public static void main(String[]args) throws LectureException, IOException{
-		Matrice plateau = new PlateauInfini("Dossier_Teste/VAISSEAU.LIF");
-		JeuDeLaVie j = new JeuDeLaVie(plateau);
-		Simulation s = new Simulation(150,j);
-	}
-	
 }
