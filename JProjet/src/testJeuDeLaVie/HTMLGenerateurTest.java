@@ -62,6 +62,7 @@ public class HTMLGenerateurTest {
 
 	@Test
 	public void testGenerer() throws HTMLException, LectureException, IOException {
+		//teste de la génération d'une page HTML 
 		String nomPage = "Teste";
 		generateur.generer(nomPage);
 		File page = new File(nomPage+".html");
