@@ -249,10 +249,10 @@ public class PlateauFini implements Matrice {
 		return regleMort.add(regle);
 	}
 	/**
-	 * 
-	 * @param l1
-	 * @param l2
-	 * @return
+	 * Methode ajouterEelement
+	 * @param l1 liste de cellule de vivante
+	 * @param l2 liste de cellule de vivante
+	 * @return une liste contenant  la concatenation dès deux liste passées en paramètre
 	 */
 	public ArrayList<Cellule> ajouterElement(ArrayList<Cellule> l1,ArrayList<Cellule>l2){
 		Iterator<Cellule> iterateur = l2.iterator();
@@ -302,18 +302,17 @@ public class PlateauFini implements Matrice {
 	public boolean estVide() {
 		return celluleVivante.isEmpty();
 	}
+
 	/**
-	 * 
+	 * Methode evoluer permet de calculer l'évolution
+	 * en utilisant la méthode translation;
 	 */
+	
 	public void evoluer(){
-		/*
-		 * 
-		 */
 		ArrayList<Cellule> liste1 = translation(-1,-1);
 		ArrayList<Cellule> liste2 = translation(-1, 0);
 		ArrayList<Cellule> liste3 = translation(-1, 1);
 		ArrayList<Cellule> liste4 = translation( 0,-1);
-		//
 		ArrayList<Cellule> liste5 = translation( 0, 1);
 		ArrayList<Cellule> liste6 = translation(1, -1);
 		ArrayList<Cellule> liste7 = translation(1, 0);
@@ -329,9 +328,11 @@ public class PlateauFini implements Matrice {
 		Collections.sort(liste1);
 		calculerEvolution(liste1);
 	}
+	
+	
 	/**
-	 * 
-	 * @param liste1
+	 * Methode calculerEvolution permet  de faire l'évolution de la liste passée en paramètre
+	 * @param liste1 une liste de cellule vivante
 	 */
 	public void calculerEvolution(ArrayList<Cellule>liste1){
 		int i=0;
@@ -463,10 +464,10 @@ public class PlateauFini implements Matrice {
 		Collections.sort(celluleVivante); 
 	}
 	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @return
+	 * Méthode translation permet de decaler une cellule de x lignes et y colonnes 
+	 * @param x un entier
+	 * @param y un entier
+	 * @return  une liste dont toutes les cellules ont été deplassées de x lignes et y colonnes
 	 */
 	public ArrayList<Cellule> translation(int x, int y) {
 		ArrayList<Cellule> tmp = new ArrayList<Cellule>();
@@ -480,10 +481,11 @@ public class PlateauFini implements Matrice {
 		}
 		return tmp;
 	}
+	
 	/**
-	 * 
-	 * @param k
-	 * @return
+	 *<b> Cette méthode permet de savoir si une cellule est sur les bords </b>
+	 * @param c une cellule
+	 * @return un boolean
 	 */
 	public boolean is_Bordure(Cellule c){
 		return c.getOrdonnee()< getMinOrdonnee() ||
@@ -491,9 +493,11 @@ public class PlateauFini implements Matrice {
 			   c.getAbscisse() > getMaxAbscisse()||
 			   c.getAbscisse() < getMinAbscisse();
 	}
+	
 	/**
-	 * 
+	 * <b>Cette méthode permet de faire une mise à jour du Plateau </b>
 	 */
+	
 	public void update(){
 		Iterator<Cellule> iterateur = this.getIterateurCellule();
 		while(iterateur.hasNext()){
@@ -510,6 +514,10 @@ public class PlateauFini implements Matrice {
 		
 	}
 	
+	/**
+	 *<b> Cette permet d'effacer toutes les cellules qui sont en dehors de notre cadre car nous sommes dans
+	 * un monde fini </b>
+	 */
 	public void clear(){
 		setMinAbscisse(getMinAbscisse()- 2);
 		setMinOrdonnee(getMinOrdonnee() -2);
