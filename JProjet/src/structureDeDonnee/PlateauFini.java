@@ -513,8 +513,8 @@ public class PlateauFini implements Matrice {
 	public void clear(){
 		setMinAbscisse(getMinAbscisse()- 2);
 		setMinOrdonnee(getMinOrdonnee() -2);
-		setMaxAbscisse(getMinAbscisse() + 37);
-		setMaxOrdonnee(getMinOrdonnee() + 38);
+		setMaxAbscisse(getMinAbscisse() + 44);
+		setMaxOrdonnee(getMinOrdonnee() + 134);
 		
 		for(int i=0;i<getTailleCelluleVivante();i++){
 			if(getCellule(i).getAbscisse() > getMaxAbscisse()){

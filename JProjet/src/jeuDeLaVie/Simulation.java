@@ -1,6 +1,14 @@
 package jeuDeLaVie;
+import interface_.Jeu;
+import interface_.Matrice;
+
 import java.awt.Event; 
+import java.io.IOException;
+
+import exception.LectureException;
 import structureDeDonnee.Cellule;
+import structureDeDonnee.PlateauFini;
+import structureDeDonnee.PlateauInfini;
 /**
  * <b>Simulation est la classe qui simule l'evolution d'un jeu de la vie dans </br>
  * un temps déterminer dans un terminale</b>
@@ -47,37 +55,58 @@ public class Simulation {
 		this.jeu = jeu;
 		this.dureeSimulation = duree;
 		x1 = jeu.getPlateau().getMinAbscisse();
-		x2 = x1 + 37;
+		x2 = x1 + 44;
 		y1 = jeu.getPlateau().getMinOrdonnee();
-		y2 = y1 + 38;
+		y2 = y1 + 134;
 		
 		simuler();
 	}
 	/**
 	 * 
-	 * @param x1
-	 * @param x2
-	 * @param y1
-	 * @param y2
+	 * @param temps
 	 */
 	public void afficher(int temps){
 		int cpt = 0;
-		String s = " ";
-		for(int i= x1;i <= x2 ; i++){
-			for(int j = y1;j <= y2 ; j++){
+		String s="";
+		for(int i=x1-1;i<=x2+1;i++){
+			if(i==x2+1)
+				s = s + "=";
+			else if(i==x1-1)
+				s = s + "=";
+			else 
+				s = s + " = ";
+		}
+		s = s + "\n";
+		for(int i= x1-1;i <= x2 ; i++){
+			for(int j = y1-1;j <= y2+1 ; j++){
 					Cellule k = new Cellule(i,j,-1,true);
-					if(jeu.getPlateau().contains(k)){
-						s = s+" o ";
+					if(j==y1-1){
+						s = s + "=";
+					}
+					else if(j==y2+1){
+						s = s + "=";
+					}
+					else if(jeu.getPlateau().contains(k)){
+						s = s+"o";
 						cpt++;
 					}
 					else 
-						s = s+" - ";
+						s = s+"-";
 			}
 			s=s+"\n";
 		}
+		for(int i=x1-1;i<=x2+1;i++){
+			if(i==x2+1)
+				s = s + "=";
+			else if(i==x1-1)
+				s = s + "=";
+			else 
+				s = s + " = ";
+		}
 		s +="\nNombre total de cellule vivante = "+jeu.getPlateau().getTailleCelluleVivante()+"\n";
 		s = s + "Nombre de cellule vivante afficher = "+cpt+"\n";
-		s = s + "Numéro de génération = "+temps+"\n";
+		s = s + "Numéro de génération = "+temps+"\n"+
+		"Plateau du jeu = "+jeu.getPlateau().getClass()+"\n";
 		System.out.print(s);
 	}
 	public void simuler(){
@@ -91,13 +120,13 @@ public class Simulation {
 			e1.printStackTrace();
 		}
 		int temps=1;
-		while(temps<dureeSimulation){
+		while(temps<=dureeSimulation){
 			System.out.println((char)Event.ESCAPE + "8");
 			jeu.evolutionSuivante();
 			afficher(temps);
 			temps++;
 			try{
-				Thread.sleep(100);
+				Thread.sleep(350);
 			}catch(Exception e){
 				
 			}
@@ -131,6 +160,11 @@ public class Simulation {
 	
 	public void setDureeSimulation(int dureeSimulation) {
 		this.dureeSimulation = dureeSimulation;
+	}
+	public static void main(String[]args) throws LectureException, IOException{
+		Matrice plateau = new PlateauInfini("Dossier_Teste/ADDER.lif");
+		JeuDeLaVie j = new JeuDeLaVie(plateau);
+		Simulation s = new Simulation(150,j);
 	}
 	
 }
