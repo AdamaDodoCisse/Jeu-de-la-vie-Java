@@ -105,7 +105,9 @@ public class Simulation {
 	 * 
 	 */
 	public void simuler(){
+		//on efface l'ecran du terminale
 		System.out.println((char)Event.ESCAPE + "[2J");
+		//enregistrement de la position actuel du curseur
 		System.out.print((char)Event.ESCAPE + "7");
 		afficher(0);
 		try {
@@ -115,8 +117,11 @@ public class Simulation {
 			e1.printStackTrace();
 		}
 		int temps=1;
+		//simulation du jeu
 		while(temps<=dureeSimulation){
+			//restorer la position du curseur enregistrer 
 			System.out.println((char)Event.ESCAPE + "8");
+			//évolution suivante du jeu
 			jeu.evolutionSuivante();
 			afficher(temps);
 			temps++;
@@ -129,28 +134,36 @@ public class Simulation {
 	}
 
 	/**
-	 * @return the jeu
+	 * Getter jeu
+	 * @return Le jeu de la vie.
+	 * @see Simulation#jeu
 	 */
 	public JeuDeLaVie getJeu() {
 		return jeu;
 	}
 
 	/**
-	 * @param jeu the jeu to set
+	 * Setter jeu
+	 * @param jeu un jeu de la vie
+	 * @see Simulation#jeu
 	 */
 	public void setJeu(JeuDeLaVie jeu) {
 		this.jeu = jeu;
 	}
 
 	/**
+	 * Getter dureeSimulation
 	 * @return the dureeSimulation
+	 * @see Simulation#dureeSimulation
 	 */
 	public int getDureeSimulation() {
 		return dureeSimulation;
 	}
 
 	/**
-	 * @param dureeSimulation the dureeSimulation to set
+	 * Setter dureeSimulation
+	 * @param dureeSimulation Un entier correspondant à la durée de simulation.
+	 * @see Simulation#dureeSimulation
 	 */
 	
 	public void setDureeSimulation(int dureeSimulation) {
