@@ -46,9 +46,10 @@ public class Commande {
 	 * 				Un tableau de chaine de caractère conténant les commandes.
 	 * @throws LectureException 
 	 * @throws IOException 
+	 * @throws InterruptedException 
 	 * @see Commande
 	 */
-	public Commande(String []args) throws LectureException, IOException{
+	public Commande(String []args) throws LectureException, IOException, InterruptedException{
 		
 		try {
 			executer(args);
@@ -107,17 +108,18 @@ public class Commande {
 	 * 				Un entier coorespondant au type de plateau du jeu de la vie.
 	 * @throws LectureException 
 	 * @throws IOException 
+	 * @throws InterruptedException 
 	 * @see JeuDeLaVie
 	 * @see PlateauFini
 	 * @see PlateauInfini
 	 * @see PlateauCirculaire
 	 */
-	private void simuler(String nomFichier,int temps,int typePlateau) throws LectureException, IOException{
+	private void simuler(String nomFichier,int temps,int typePlateau) throws LectureException, IOException, InterruptedException{
 		JeuDeLaVie jeu;
 		try {
 			plateau = StructureDeDonneeFactory.getPlateau(typePlateau, nomFichier);
 			jeu = new JeuDeLaVie(plateau);
-			new Simulation(temps, jeu);
+			new Simulation(temps, jeu).simuler();
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
@@ -179,11 +181,12 @@ public class Commande {
 	 * 				Lève une exception lorsque la commande est invalide.
 	 * @throws LectureException 
 	 * @throws IOException 
+	 * @throws InterruptedException 
 	 * @see CommandeException
 	 */
 	
 	private void executer(String []args)throws CommandeException,
-	LectureException, IOException{
+	LectureException, IOException, InterruptedException{
 		
 		if(args.length==0){
 			System.out.println("Veuillez saisir une des commandes");
