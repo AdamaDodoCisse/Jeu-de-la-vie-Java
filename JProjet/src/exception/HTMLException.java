@@ -6,7 +6,6 @@ public class HTMLException extends Exception{
 	 * @param message
 	 * 
 	 */
-	
 	public HTMLException(String message){
 		super(message);
 	}
