@@ -15,11 +15,10 @@ import jeuDeLaVie.JeuDeLaVie;
  * @author kouyate
  */
 public class PlateauCirculaire extends PlateauFini {
-	
+
 	public PlateauCirculaire(String nomFichier) throws LectureException, IOException {
-		super(nomFichier);
-		// la taille doit etre fixer 
-			
+		super(nomFichier); 
+
 		// TODO Auto-generated constructor stub
 	}
 	/**
@@ -37,15 +36,15 @@ public class PlateauCirculaire extends PlateauFini {
 			}
 		}else{
 			if(cellule.getOrdonnee() == getMaxOrdonnee()){
-				
+
 				return new Cellule(cellule.getAbscisse(), getMinAbscisse(), 1, false);
 			}else{
-				
+
 				return new Cellule(cellule.getAbscisse(), cellule.getOrdonnee() + increment, 1, false);
 			}
 		}	
 	}
-	
+
 	/**
 	 * <b> Cette methode permet de calculer la symetrie verticale d'une cellule </b>
 	 * @param cellule
@@ -57,19 +56,19 @@ public class PlateauCirculaire extends PlateauFini {
 			if(cellule.getAbscisse() == getMinAbscisse()){
 				return new Cellule(getMaxAbscisse(), cellule.getOrdonnee(), 1, false);
 			}else{
-				
+
 				return new Cellule(cellule.getAbscisse() + increment,cellule.getOrdonnee(), 1 , false);
 			}
 		}else{
 			if(cellule.getAbscisse() == getMaxAbscisse()){
-				
+
 				return new Cellule(getMinAbscisse(), cellule.getOrdonnee(), 1, false);
 			}else{
 				return new Cellule(cellule.getAbscisse() + increment, cellule.getOrdonnee(), 1, false);
 			}
 		}	
 	}
-	
+
 	/**
 	 * <b> cette methode permet de calculer l'evolution au plateauCirculaire </b>
 	 */
@@ -77,7 +76,7 @@ public class PlateauCirculaire extends PlateauFini {
 	public void evoluer(){
 		ArrayList<Cellule> liste1 =new ArrayList<Cellule>();
 		Iterator<Cellule> c = getIterateurCellule();
-		
+
 		while(c.hasNext()){
 			liste1.add(SymetrieHorizontale(c.next(), 1));
 		}
@@ -91,7 +90,7 @@ public class PlateauCirculaire extends PlateauFini {
 		while(c3.hasNext()){
 			liste3.add(SymetrieHorizontale(c3.next(), -1));
 		}	
-		
+
 		ArrayList<Cellule> liste4 = new ArrayList<Cellule>();
 		Iterator<Cellule> c4 = getIterateurCellule();
 		while(c4.hasNext()){
@@ -119,9 +118,7 @@ public class PlateauCirculaire extends PlateauFini {
 		while(c8.hasNext()){
 			liste8.add(SymetrieHorizontale(SymetrieVertivale(c8.next(), 1), -1));
 		}
-		
 		liste1 = ajouterElement(liste1,liste2);
-		
 		liste1 = ajouterElement(liste1,liste3);
 		liste1 = ajouterElement(liste1,liste4);
 		liste1 = ajouterElement(liste1,liste5);
@@ -131,7 +128,7 @@ public class PlateauCirculaire extends PlateauFini {
 		liste1 = ajouterElement(liste1,(ArrayList<Cellule>) getCelluleVivante());	// cellule Vivante pas declarer d'abord 
 		Collections.sort(liste1);
 		calculerEvolution(liste1);
-		
+
 	}
-	
+
 }
