@@ -569,6 +569,7 @@ let rec validator = function xml -> function dtd ->
 
 let main () = 
   print_string "Validateur XML DTD";
+  print_newline();
   print_string "Veuillez saisir le fichier XML : ";
   let xml = read_line() in 
   print_string "Veuillez saisir le fichier DTD : ";
