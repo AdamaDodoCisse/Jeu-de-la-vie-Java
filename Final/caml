@@ -587,5 +587,6 @@ let main () =
   with
       ValidatorException c -> print_string("\n"^c^"\n\n")
     |	Failure c -> print_string("\n"^c^"\n\n")
+    | Sys_error c -> print_string("\n"^c^"\n\n")
     |_-> print_string "\nerreur\n\n";;  
 main();;
