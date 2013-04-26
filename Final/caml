@@ -122,7 +122,7 @@ let is_compatible op cl =
   match op,cl with 
     |Open(a),Close(b) -> a=b
     |_,_ ->false ;; 
-
+let is_pcdata str= string_match (regexp "[a-zA-Z0-9 ]+") str 0;;
 (*
 
   fonction qui fais la lecture d'un fichier et le renvoie sous forme de chaine de caractere
@@ -249,7 +249,7 @@ type documentDTD = DocumentDTD of description list ;;
 *)
 
 let clean3 chaine =global_replace (regexp "[\t]") " " chaine;;
-let is_pcdata str= string_match (regexp "[a-zA-Z0-9 ]+") str 0;;
+
 
 
 (*conversion PARTIE 2*)
