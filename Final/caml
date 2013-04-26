@@ -8,6 +8,7 @@ open String;;
 
 *)
 
+
 (* 
    Definition des operations pour le XML => type
    Un identifiant est defini par une chaine de caractere 
@@ -544,15 +545,16 @@ let rec validator = function xml -> function dtd ->
 	else false
       |tetexml::restexml -> 
 	let nom_de_la_balise =(match tetexml with |Id(Open(a),_,_ )-> a | _-> failwith "") in
-	let interieur_de_la_tete = (match tetexml with |Id(a,b,c) -> b| Data(a) -> failwith ("[ "^nom_de_la_balise^" ] doit contenir des balises")) in
+	let interieur_de_la_tete = (match tetexml with |Id(a,b,c) -> b
+	  | Data(a) -> failwith ("Invalide <"^nom_de_la_balise^"> ne doit contenir que des balises")) in
 	let nouveau_xml = (Document interieur_de_la_tete) in
 	let parametre_de_la_tete = parametreDTD tetexml desclist in 
       (match parametre_de_la_tete with
 	|EMPTY -> (match interieur_de_la_tete with |[] -> (aux restexml) 
-	    |_-> raise (ValidatorException (nom_de_la_balise^" est senser etre vide !Invalide")))
+	    |_-> raise (ValidatorException ("Invalide <"^nom_de_la_balise^"> est senser etre vide")))
 	|Donnee-> (match nouveau_xml with |Document(a) -> (match a with  |[Data(s)] -> (aux restexml) | _-> false ))
 	|Model(element) -> let balise_v = try (in_param (baliseparam (Model element)) (list_xml  interieur_de_la_tete)) with |Failure c->
-			  raise  (ValidatorException ("Erreur [ "^c^(" ] est une balise intruit dans [ ")^(nom_de_la_balise)^" ]"))|_-> false in
+			  raise  (ValidatorException ("Invalide  <"^c^("> ne figure pas dans les paramètres de  <")^(nom_de_la_balise)^">"))|_-> false in
 	  if not balise_v then 
 	    raise ( ValidatorException ("Invalide balise intruit dans "^(nom_de_la_balise)^" !!!")) else 
 	  (match element with
@@ -565,16 +567,24 @@ let rec validator = function xml -> function dtd ->
       )
   in aux entrylist;;
 
-
-baliseparam (Model (DansOccur [Atom (I "nom"); Atom (I "telephone")]));;
-try
-let xml = (initialisateurXML "/home/cisse/program/fichier.xml")in 
-let dtd = (initialisateurDTD "/home/cisse/program/fichier.dtd")in
-  if validator xml dtd then
-    print_string "Valide "
-  else
-    print_string "Invalide !!!" 
-with 
-    ValidatorException c -> print_string c
-  |Failure c ->print_string c
-  |_-> print_string "erreur";;
+let main () = 
+  print_string "Validateur XML DTD";
+  print_string "Veuillez saisir le fichier XML : ";
+  let xml = read_line() in 
+  print_string "Veuillez saisir le fichier DTD : ";
+  let dtd = read_line() in
+  try 
+    let nouveauXML = (initialisateurXML (global_replace (regexp ";*") "" xml)) in
+    let nouveauDTD = (initialisateurDTD (global_replace (regexp ";*") "" dtd)) in 
+    if (List.length (entrylist_of_document nouveauXML)) = 1 then 
+      if (validator nouveauXML nouveauDTD) then
+	print_string "Valide !!!"
+      else 
+	print_string "Invalide !!!"
+    else
+      print_string "Invalide un fichier XML ne doit posseder qu'une seule balise racine"
+  with
+      ValidatorException c -> print_string c
+    |	Failure c -> print_string c
+    |_-> print_string "erreur";;  
+main();;
