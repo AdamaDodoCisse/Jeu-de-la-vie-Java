@@ -579,13 +579,13 @@ let main () =
     let nouveauDTD = (initialisateurDTD (global_replace (regexp ";*") "" dtd)) in 
     if (List.length (entrylist_of_document nouveauXML)) = 1 then 
       if (validator nouveauXML nouveauDTD) then
-	print_string "Valide !!!"
+	print_string "\nValide !!!\n\n"
       else 
-	print_string "Invalide !!!"
+	print_string "\nInvalide !!!\n\n"
     else
-      print_string "Invalide un fichier XML ne doit posseder qu'une seule balise racine"
+      print_string "\nInvalide un fichier XML ne doit posseder qu'une seule balise racine\n\n"
   with
-      ValidatorException c -> print_string c
-    |	Failure c -> print_string c
-    |_-> print_string "erreur";;  
+      ValidatorException c -> print_string("\n"^c^"\n\n")
+    |	Failure c -> print_string("\n"^c^"\n\n")
+    |_-> print_string "\nerreur\n\n";;  
 main();;
