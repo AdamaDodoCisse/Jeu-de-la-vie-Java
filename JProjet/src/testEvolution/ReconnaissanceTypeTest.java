@@ -156,7 +156,7 @@ public class ReconnaissanceTypeTest {
 	@Test
 	public void testIsVaisceau() {
 		type.setVaisseau(true);
-		assertTrue(type.isVaisceau());
+		assertTrue(type.isVaisseau());
 	}
 
 	@Test

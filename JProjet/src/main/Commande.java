@@ -88,11 +88,12 @@ public class Commande {
 	 */
 	
 	private void groupe(){
-		System.out.println(
-				"- Kouyate Sory\n" +
-				"- Melaine\n" +
-				"- Diallo Youssouf\n" +
-				"- Cissé Adama Dodo\n");
+		System.out.println((char)Event.ESCAPE + "[2J");
+		System.out.println("Nom et Prénom : \n"+
+				"- KOUYATE Sory\n" +
+				"- MELAINE \n" +
+				"- DIALLO Youssouf\n" +
+				"- CISSE Adama Dodo\n");
 	}
 	/**
 	 * Execute une simulation d'un jeu de la vie sur une durée donné.
