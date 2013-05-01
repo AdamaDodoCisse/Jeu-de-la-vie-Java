@@ -5,11 +5,7 @@ open String;;
 (*
 
   PARTIE 1
-
-*)
-
-
-(* 
+ 
    Definition des operations pour le XML => type
    Un identifiant est defini par une chaine de caractere 
 
@@ -99,7 +95,7 @@ let string_of_balise = function
 
 (*
 
-  fonction qui teste si une balise est fermante
+  fonction qui teste si une balise est ouvrante
 
 *)
 let is_open str =
@@ -163,7 +159,7 @@ let formate_chaine chaine = let rec aux = fun i copie ->
 let premiere_balise_fermante op liste =
   let rec aux interieur liste i =
     match liste with 
-      |[] -> failwith "fichier xml invalide !"
+      |[] -> failwith "Fichier xml invalide !!"
       |h::t when (is_open h) && (open_of_string h)=op -> aux (interieur@[h]) t (i+1)
       |h::t -> 
 	if is_close h && is_compatible op (close_of_string h) && i=0 then (interieur,t),close_of_string h  
@@ -272,14 +268,14 @@ let id_of_string chaine = ((global_replace (regexp "[^a-zA-Z]") "" chaine):id) ;
 
 (*
 
-  fonction qui une chaine I(chaine) qui est un atom
+  fonction qui convertie une chaine de caractère en Atom
 
 *)
 let atomI_of_string chaine = I ((global_replace (regexp "[^a-zA-Z]") "" chaine):id) ;;
 
 (*
    
-   fonction qui convertie une chaine en une Occurrence
+   fonction qui convertie une chaine de caractère en Occurrence
   
 *)
 let occur_of_string chaine = match chaine with
@@ -290,14 +286,14 @@ let occur_of_string chaine = match chaine with
 
 (*
 
-   fonction qui convertie une occurrence en un element
+   fonction qui convertie une occurrence en elements
    
 *)
 let elements_of_occurrence occur = Occur occur ;;
 
 (*
    
-   fonction qui convertie une chaine en un element ET ,
+   fonction qui convertie une chaine de caractère en elements (ListOccur)
  
 *)
 let listOccur_of_string chaine = 
@@ -308,8 +304,7 @@ let listOccur_of_string chaine =
 
 (*
 
-   fonction qui convertie une chaine en un element |
- 
+  fonction qui convertie une chaine de caractère en elements (DansOccur)
 *)
 let dansOccur_of_string chaine =
   let tmp = split (regexp "|") (global_replace (regexp "[(<)> ]+") "" chaine) in 
@@ -319,7 +314,7 @@ let dansOccur_of_string chaine =
 
 (*
 
-   fonction qui converstie une chaine en un model
+   fonction qui convertie une chaine de caractère en model
  
 *)
 let model_of_string chaine = match chaine with
@@ -333,7 +328,7 @@ let model_of_string chaine = match chaine with
 
 (*
 
-   fonction qui convertie une chaine en une description
+   fonction qui convertie une chaine de caractère en description
 
 *)
 let description_of_string id model = Desc (id_of_string id, model_of_string model);;
@@ -364,11 +359,9 @@ let initialisateurDTD nomFichier =
 	     (List.tl (List.tl (List.tl liste))) in aux [] liste 
     with Failure c -> failwith "Document DTD non valide !!!";;
 
-(*DERNIERE PARTIE*)
-
 (*
 
-   fonction qui renvoie le nombre d occurrence d un id
+   fonction qui renvoie le nombre d'occurrence d'un id
   
 *)
 let rec nombre_occurrence  = function id -> function  
@@ -377,11 +370,9 @@ let rec nombre_occurrence  = function id -> function
       |Id(Open a,_,_) when a=id -> 1+( nombre_occurrence id t)
       |_-> nombre_occurrence id t;;
 
-(*TESTE DERNIERE PARTIE*)
-
 (*
   
-   fonction qui teste l occurrence par rapport a une liste
+   fonction qui teste une occurence par rapport à une liste d'occurence 
   
 *)
 let teste_occurrence = function occurence -> function entryliste ->
@@ -392,11 +383,9 @@ let teste_occurrence = function occurence -> function entryliste ->
     |(AtomIntero (I id))-> (nombre_occurrence id entryliste)=1 or (nombre_occurrence id entryliste)=0
     |_-> true;;
 
-(*CONVERSION DERNIERE PARTIE*)
-
 (*
 
-   convertion un document xml en une liste d entry
+   convertie un document xml en une liste d'entry
 
 *)
 let entrylist_of_document = function
@@ -404,16 +393,15 @@ let entrylist_of_document = function
 
 (*
 
-  convertion un document dtd en une liste de description
+  convertie un document dtd en une liste de description
 
 *)
 let desclist_of_document = function 
   |DocumentDTD(a) -> a;;
 
-
 (*
   
-  convertie une liste d entry en une chaine de caractere
+  convertie une liste d'entry en chaine de caractère
 
 *)
 let rec string_of_list = function 
@@ -442,11 +430,9 @@ let rec liste_balise = function
   |[]-> []
   |h::t -> match h with |Desc(a,b)-> [a]@(liste_balise t) 
     
-(*TESTE DERNIERE PARTIE*)
-    
 (*
   
-  fonction qui prend un open et une liste de chaine de caractere et teste s il figure dans la liste
+  fonction qui prend un open et une liste de chaine de caractere et teste s'il figure dans la liste
  
 *)
 let rec in_liste_balise = function op -> function 
@@ -457,21 +443,21 @@ let rec in_liste_balise = function op -> function
   fonction qui prend un entry et un liste de description et renvoi le paramètre correspondant
 
 *)
-let parametreDTD entri dtd=
+let parametreDTD entri dtd =
   match entri with 
     |Id(Open a,b,c) ->
       let tete = a in 
       let rec retrouve_parametre = function str -> function
-	|[] -> failwith "parametre DTD introuvable !"
+	|[] -> failwith "Fichier XML invalide \nLe fichier XML est non conforme au document DTD !"
 	|h::t when (match h with Desc(x,y) -> x=str)=true -> 
 	  (match h with 
 	    |Desc(o1,o2)-> o2 )
 	|h::t -> retrouve_parametre str t  in retrouve_parametre tete dtd
-    |_ -> failwith "innattendue ";;
+    |_ -> failwith "inatendue ";; 
 
 (*
   
-  renvoie la liste des noms de balise autoriser dans le model passer en parametre
+ renvoie la liste des noms de balise autoriser dans le model passer en paramètre
 
 *)
 
@@ -492,7 +478,7 @@ let rec baliseparam = function model ->
 
 (*
 
-  teste si toutes les balises sont a l'interieur du parametre dtd 
+  teste si toutes les balises sont a l'interieur du paramètre dtd 
   elle sera utile dans Validator Xml
   
 *)	
@@ -546,17 +532,18 @@ let rec validator = function xml -> function dtd ->
       |tetexml::restexml -> 
 	let nom_de_la_balise =(match tetexml with |Id(Open(a),_,_ )-> a | _-> failwith "") in
 	let interieur_de_la_tete = (match tetexml with |Id(a,b,c) -> b
-	  | Data(a) -> failwith ("Invalide <"^nom_de_la_balise^"> ne doit contenir que des balises")) in
+	  | Data(a) -> failwith ("Fichier XML invalide !!\nLa balise <"^nom_de_la_balise^"> ne doit contenir que des balises.")) in
 	let nouveau_xml = (Document interieur_de_la_tete) in
 	let parametre_de_la_tete = parametreDTD tetexml desclist in 
       (match parametre_de_la_tete with
 	|EMPTY -> (match interieur_de_la_tete with |[] -> (aux restexml) 
-	    |_-> raise (ValidatorException ("Invalide <"^nom_de_la_balise^"> est senser etre vide")))
+	    |_-> raise (ValidatorException ("Fichier XML invalide !!\nLa balise <"^nom_de_la_balise^"> doit être vide.")))
 	|Donnee-> (match nouveau_xml with |Document(a) -> (match a with  |[Data(s)] -> (aux restexml) | _-> false ))
 	|Model(element) -> let balise_v = try (in_param (baliseparam (Model element)) (list_xml  interieur_de_la_tete)) with |Failure c->
-			  raise  (ValidatorException ("Invalide  <"^c^("> ne figure pas dans les paramètres de  <")^(nom_de_la_balise)^">"))|_-> false in
+			  raise  (ValidatorException ("Fichier XML invalide !!\nLa balise <"^c^("> n'est pas definie dans les règles de la balise <")^(nom_de_la_balise)^"> dans le document DTD."))
+	  |_-> false in
 	  if not balise_v then 
-	    raise ( ValidatorException ("Invalide balise intruit dans "^(nom_de_la_balise)^" !!!")) else 
+	    raise ( ValidatorException ("Fichier XML invalide !!\nIl existe une balise intruit dans "^(nom_de_la_balise)^".")) else 
 	  (match element with
 	    | Occur(oc) ->(teste_occurrence oc interieur_de_la_tete) && (aux restexml) && (validator nouveau_xml dtd)
 	    | ListOccur(listoc) -> 
@@ -568,25 +555,24 @@ let rec validator = function xml -> function dtd ->
   in aux entrylist;;
 
 let main () = 
-  print_string "Validateur XML DTD";
+  print_string "\nVALIDATEUR DE DOCUMENT (XML,DTD)\n";
   print_newline();
-  print_string "Veuillez saisir le fichier XML : ";
+  print_string "Veuillez saisir le chemin du fichier XML : ";
   let xml = read_line() in 
-  print_string "Veuillez saisir le fichier DTD : ";
+  print_string "Veuillez saisir le chemin du fichier DTD : ";
   let dtd = read_line() in
   try 
     let nouveauXML = (initialisateurXML (global_replace (regexp ";*") "" xml)) in
     let nouveauDTD = (initialisateurDTD (global_replace (regexp ";*") "" dtd)) in 
     if (List.length (entrylist_of_document nouveauXML)) = 1 then 
       if (validator nouveauXML nouveauDTD) then
-	print_string "\nValide !!!\n\n"
+	print_string "\nFichier XML Valide !!\n\n"
       else 
-	print_string "\nInvalide !!!\n\n"
+	print_string "\nFichier XML invalide !!!\n\n"
     else
       print_string "\nInvalide un fichier XML ne doit posseder qu'une seule balise racine\n\n"
   with
       ValidatorException c -> print_string("\n"^c^"\n\n")
     |	Failure c -> print_string("\n"^c^"\n\n")
     | Sys_error c -> print_string("\n"^c^"\n\n")
-    |_-> print_string "\nerreur\n\n";;  
-main();;
+    |_-> print_string "\nerreur\n\n";;   
