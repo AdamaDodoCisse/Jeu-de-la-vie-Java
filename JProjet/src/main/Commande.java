@@ -88,7 +88,7 @@ public class Commande {
 	 */
 	
 	private void groupe(){
-		System.out.println((char)Event.ESCAPE + "[2J");
+		//System.out.println((char)Event.ESCAPE + "[2J");
 		System.out.println("Nom et Prénom : \n"+
 				"- KOUYATE Sory\n" +
 				"- MELAINE \n" +
