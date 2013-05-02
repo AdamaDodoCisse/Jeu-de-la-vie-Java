@@ -126,7 +126,7 @@ public class Simulation {
 			afficher(temps);
 			temps++;
 		
-				Thread.sleep(150);
+				Thread.sleep(200);
 			
 		}
 	}

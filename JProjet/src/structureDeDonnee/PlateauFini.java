@@ -236,7 +236,9 @@ public class PlateauFini implements Matrice {
 		Cellule cellule2 = new Cellule();
 		ArrayList<Cellule> tmp = new ArrayList<Cellule>();
 		/*
-		 * 
+		 * on parcoure la liste passé en paramètre en comtant le nombre de
+		 * voisin de chaque cellule et on calucule l'évolution suivante des 
+		 * cellules par rapport au règle du plateau
 		 */
 		while(i<liste1.size()){
 			 cellule1 = new Cellule(liste1.get(i).getAbscisse(),
@@ -269,6 +271,7 @@ public class PlateauFini implements Matrice {
 		}
 		ArrayList<Cellule>tmp2 = new ArrayList<Cellule>();
 		Iterator<Cellule> it = tmp.iterator();
+		//calcul de l'evolution des cellules
 		while(it.hasNext()){
 			Cellule cell = it.next();
 			if(cell.isStatus()){

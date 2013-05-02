@@ -59,7 +59,7 @@ public class Commande {
 	 * @throws FileNotFoundException 
 	 */
 	private void aider() throws FileNotFoundException{
-		System.out.println((char)Event.ESCAPE + "[2J");
+		System.out.print((char)Event.ESCAPE + "[2J");
 		System.out.print("JEU DE LA VIE : OPTIONS ET COMMANDES DU PROGRAMME\n\n" +
 				"Afficher les noms et prénoms des concepteurs du jeu :\n" +
 				"	java -jar JeuDeLaVie.jar -name\n\n" +
@@ -78,8 +78,8 @@ public class Commande {
 				"	1 = Plateau Infini\n" +
 				"	2 = Plateau Fini\n" +
 				"	3 = Plateau Circulaire\n\n" +
-				"Exemple = Pour éffectuer une simulation du jeu dans un plateau fini d'une durée d \n" +
-				"	java -jar JeuDeLaVie.jar -s d 2\n\n");
+				"Exemple = Pour éffectuer une simulation du jeu dans un plateau fini d'une durée de 10 \n" +
+				"	java -jar JeuDeLaVie.jar -s 10 fichier.lif 2\n\n");
 		
 		
 	}
@@ -91,7 +91,7 @@ public class Commande {
 		//System.out.println((char)Event.ESCAPE + "[2J");
 		System.out.println("Nom et Prénom : \n"+
 				"- KOUYATE Sory\n" +
-				"- MELAINE \n" +
+				"- MELAINE Gbahi\n" +
 				"- DIALLO Youssouf\n" +
 				"- CISSE Adama Dodo\n");
 	}
@@ -166,6 +166,7 @@ public class Commande {
 			ReconnaissanceType re = new ReconnaissanceType(temps, plateau);
 			re.calculerTypeEvolution(temps);
 			System.out.println((char)Event.ESCAPE + "[2J");
+			System.out.println("Fichier : "+nomFichier);
 			System.out.println(re+"\n");
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());

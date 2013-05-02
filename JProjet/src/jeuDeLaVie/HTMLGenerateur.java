@@ -227,6 +227,7 @@ public class HTMLGenerateur {
 	private void preparerBalise(String filename, int temps) throws HTMLException, LectureException, IOException{
 		balise = "<html>" +
 				"	<head>" +
+				"<META http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\">"+
 				"		<title> Jeu de la vie" +
 
 				"		</title>" +
