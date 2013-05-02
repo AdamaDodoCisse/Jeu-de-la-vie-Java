@@ -25,7 +25,7 @@ public class Cellule implements Comparable<Cellule>{
 	/**
 	 * Ordonnée de la cellule vivante.
 	 * @see Cellule#getOrdonnee()
-	 * @see Cellule#setY(int)
+	 * @see Cellule#setOrdonnee(int)
 	 */
 	private int ordonnee;
 	/**
@@ -160,7 +160,7 @@ public class Cellule implements Comparable<Cellule>{
 	}
 	/**
 	 * Setter de l'ordonnée de la cellule vivante.
-	 * @param y 
+	 * @param ordonnee 
 	 * 			L'ordonnée de la cellule vivante.
 	 * @see Cellule#ordonnee
 	 */

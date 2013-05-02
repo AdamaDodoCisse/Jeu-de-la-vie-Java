@@ -132,7 +132,6 @@ public interface Matrice extends Cloneable{
 	 * Supprime toutes les cellules vivantes.
 	 * @return Un booléen indiquant si la suppression de l'ensemble à réussit.
 	 * @see Matrice
-	 * @see JeuDeLaVie
 	 */
 	public boolean removeAll();
 	/**

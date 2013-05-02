@@ -354,7 +354,7 @@ public class HTMLGenerateur {
 	/**
 	 * Getter du contenu de la page HTML.
 	 * @return Le contenu de la page HTML en chaine de caractère.
-	 * @seeHTMLGenerateur#balise
+	 * @see HTMLGenerateur#balise
 	 */
 	public String getBalise() {
 		return balise;
@@ -363,7 +363,7 @@ public class HTMLGenerateur {
 	 * Setter du contenu de la page HTML.
 	 * @param balise
 	 * 				Le contenu de la page HTML en chaine de caractère.
-	 * @seeHTMLGenerateur#balise
+	 * @see HTMLGenerateur#balise
 	 */
 	public void setBalise(String balise) {
 		this.balise = balise;
@@ -382,7 +382,7 @@ public class HTMLGenerateur {
 	 * Setter du type de plateau.
 	 * @param typePlateau
 	 * 				Le type du plateau.
-	 * @seeHTMLGenerateur#typePlateau
+	 * @see HTMLGenerateur#typePlateau
 	 */
 	public void setTypePlateau(int typePlateau) {
 		this.typePlateau = typePlateau;
@@ -391,7 +391,7 @@ public class HTMLGenerateur {
 	/**
 	 * Getter du temps d'analyse des fichiers.
 	 * @return Le temps d'analyse des fichiers.
-	 * @seeHTMLGenerateur#temps
+	 * @see HTMLGenerateur#temps
 	 */
 	public int getTemps() {
 		return temps;
@@ -401,7 +401,7 @@ public class HTMLGenerateur {
 	 * Setter du temps d'analyse des fichiers.
 	 * @param temps
 	 * 				Le temps d'analyse des fichiers.
-	 * @seeHTMLGenerateur#temps
+	 * @see HTMLGenerateur#temps
 	 */
 	public void setTemps(int temps) {
 		this.temps = temps;
@@ -409,7 +409,7 @@ public class HTMLGenerateur {
 	/**
 	 * Getter de dossier.
 	 * @return Le nom du dossier en chaine de caractère.
-	 * @seeHTMLGenerateur#dossier
+	 * @see HTMLGenerateur#dossier
 	 */
 	public String getDossier() {
 		return dossier;
@@ -418,7 +418,7 @@ public class HTMLGenerateur {
 	 * Setter du nom du dossier à analyser.
 	 * @param dossier 
 	 * 				Le nom du dossier en chaine de caractère.
-	 * @seeHTMLGenerateur#dossier
+	 * @see HTMLGenerateur#dossier
 	 */
 	public void setDossier(String dossier) {
 		this.dossier = dossier;

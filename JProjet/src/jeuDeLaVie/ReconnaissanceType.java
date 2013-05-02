@@ -1,5 +1,6 @@
 package jeuDeLaVie;
 import structureDeDonnee.Cellule;
+import jeuDeLaVie.*;
 import structureDeDonnee.PlateauCirculaire;
 import structureDeDonnee.PlateauFini;
 import structureDeDonnee.PlateauInfini;
@@ -26,6 +27,7 @@ import interface_.Matrice;
  * @author kouyate
  */
 
+@SuppressWarnings("unused")
 public class ReconnaissanceType {
 	/**
 	 * Prémière configuration du jeu la vie.
@@ -82,8 +84,8 @@ public class ReconnaissanceType {
 	/**
 	 *  Indique un type d'évolution vaisseau.<br>
 	 *  A l'étape de la création de l'objet elle est initialiser à Faux.
-	 *  @see ReconnaissanceType#setVaisceau(boolean)
-	 *  @see ReconnaissanceType#isVaisceau()
+	 *  @see ReconnaissanceType#setVaisseau(boolean)
+	 *  @see ReconnaissanceType#isVaisseau()
 	 *  @see JeuDeLaVie
 	 */
 	private boolean vaisseau=false;
@@ -92,7 +94,6 @@ public class ReconnaissanceType {
 	 * A l'étape de la création de l'objet elle est initialiser à Vrai.
 	 * @see ReconnaissanceType#setInconnu(boolean)
 	 * @see ReconnaissanceType#isInconnu()
-	 * @see JeuDeLaVie
 	 */
 	private boolean inconnu=true;
 	/**
@@ -439,7 +440,7 @@ public class ReconnaissanceType {
 	 * Setter vaisseau.
 	 * @param vaisseau 
 	 * 				Un booléen 
-	 * @seeReconnaissanceType#vaisseau
+	 * @see ReconnaissanceType#vaisseau
 	 */
 	public void setVaisseau(boolean vaisseau) {
 		this.vaisseau = vaisseau;
@@ -447,7 +448,7 @@ public class ReconnaissanceType {
 	/**
 	 * Getter lignes
 	 * @return lignes Le déplacement suivant la ligne de l'évolution du jeu
-	 * @seeReconnaissanceType#lignes
+	 * @see ReconnaissanceType#lignes
 	 */
 	public int getLignes() {
 		return lignes;
@@ -456,7 +457,7 @@ public class ReconnaissanceType {
 	 * Setter lignes. 
 	 * @param lignes
 	 * 				Le déplacement suivant la ligne de l'évolution du jeu.
-	 * @seeReconnaissanceType#lignes
+	 * @see ReconnaissanceType#lignes
 	 */
 	public void setLignes(int lignes) {
 		this.lignes = lignes;
@@ -465,7 +466,7 @@ public class ReconnaissanceType {
 	/**
 	 * Getter  colonnes
 	 * @return colonnes Le déplacement suivant la colonne de l'évolution du jeu.
-	 * @seeReconnaissanceType#colonnes
+	 * @see ReconnaissanceType#colonnes
 	 */
 	public int getColonnes() {
 		return colonnes;
@@ -475,7 +476,7 @@ public class ReconnaissanceType {
 	 * Setter colonnes
 	 * @param colonnes 
 	 * 				Le déplacement suivant la ligne de l'évolution du jeu
-	 * @seeReconnaissanceType#colonnes
+	 * @see ReconnaissanceType#colonnes
 	 */
 	public void setColonnes(int colonnes) {
 		this.colonnes = colonnes; 
