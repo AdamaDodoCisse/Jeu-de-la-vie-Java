@@ -145,29 +145,31 @@ public class ReconnaissanceType {
 				break;
 			}
 			setTailleQueue(i) ;
-			if(estMort()){ //un type d'évolution mort 
+			if(estMort()){ //on teste si on a un type d'évolution mort 
 				setInconnu(false);
 				setMort(true);
 			}
-			if(estOscillation()){ //un type d'évolution oscillation 
+			if(estOscillation()){ //on teste si on a un type d'évolution oscillation 
 				setInconnu(false);
 				setOscillation(true);
-				//Calcule de la période
+				//Calcule de la période d'évolution.
 				while(true){
 					evoluerConfiguration();
 					setPeriodeFinal(getPeriodeFinal()+1);
 					if(estOscillation())
 						break;
 				}
-				if(periodeFinal == 1){ //un type d'évolution stable
+				//on teste si on a un type d'évolution stable
+				if(periodeFinal == 1){ 
 					setStabilite(true);
 				}
 			}
-			if(estVaisseau()){ //un type d'évolution vaisseau 
+			//on teste si on a un type d'évolution vaisseau 
+			if(estVaisseau()){ 
 				setInconnu(false);
 				setVaisceau(true);
 				if(!isOscillation())
-					//Calcule de la periode		
+					//Calcule de la periode	d'évolution	
 					while(true){
 						evoluerConfiguration();
 						periodeFinal++;

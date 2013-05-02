@@ -185,7 +185,7 @@ public class Commande {
 	
 	private void executer(String []args)throws CommandeException,
 	LectureException, IOException, InterruptedException{
-		
+		//si aucun argument n'a été saisi on affiche les options du programme
 		if(args.length==0){
 			System.out.println("Veuillez saisir une des commandes");
 			System.out.println();
@@ -193,6 +193,10 @@ public class Commande {
 		}
 			
 		if(args.length ==1  ||( args.length ==3 || args.length ==4)){
+			/*
+			 * on teste si le nombre d'argument est égal à 1 alors on a soit l'option 
+			 * d'affichage des nom ou de l'aide du programme sinon on lance une exception.
+			 */
 			if(args.length==1){
 				
 				if(args[0].equals("-name")){
@@ -203,17 +207,42 @@ public class Commande {
 					throw new CommandeException("Commande inconnu !");
 				}
 					
-			} else if (args.length == 3 || args.length == 4){
-				
+			}
+			/*
+			 * on teste si le nombre d'argument est égal à 3 ou 4 on à trois options alors
+			 * on a trois options 
+			 * 
+			 */
+			else if (args.length == 3 || args.length == 4){
+				//on teste si le deuxieme argument est un entier
 				if(args[1].matches("^[0-9]+$")){
+					//on récupere le deuxième argument sous forme d'entier
 					int temps = Integer.parseInt(args[1]);
+					/*on récupere le troisième argument qui correspond soit au nom d'un
+					 * fichier ou un dossier
+					 */
 					String nomRepertoire = args[2];
+					/*
+					 * on teste si le premier argument correspond à une simulation et que 
+					 *le nombre d'argument est égal à 3 alors on lance la simulation du jeu 
+					 *avec les paramètre donnés dans un monde infini.
+					 */
 					if(args[0].equals("-s") && args.length==3){
 						simuler(nomRepertoire,temps,StructureDeDonneeFactory.PLATEAU_INFINI);
-					} else if (args[0].equals("-s")){
+					} 
+					/*
+					 * on teste si le premier argument correspond à une simulation
+					 */
+					else if (args[0].equals("-s")){
 						try{
+							//on récupere le quatrième argument qui correspond au type de plateau
 							int typePlateau = Integer.parseInt(args[3]);
-							
+							/*
+							 * on teste si le type du plateau est compris entre 1 et 3 alors on lance
+							 * une simulation du jeu de la vie avec les paramètres donnés et le type de
+							 * plateau souhaité par l'utilisateur.
+							 * Sinon on lance une exception. 
+							 */
 							if(typePlateau >=1 && typePlateau<=3){
 								simuler(nomRepertoire,temps,typePlateau);
 							} else {
@@ -226,7 +255,13 @@ public class Commande {
 									"Pour plus d'information taper : \n java -jar JeuDeLaVie.jar -h \n");
 						}
 					}
-					
+					/*
+					 * on teste si le premier argument correspond à un calcul de type
+					 * d'évolution et que le nombre d'argument est égal à 3 alors on
+					 * calcul le type d'évolution du jeu dans un plateau infini
+					 * sinon si le nombre d'argument est égal 4 alors alors on calcul le type
+					 * d'évolution du jeu dans un plateau defini par l'utilisateur.
+					 */
 					if(args[0].equals("-c") && args.length==3){
 						analyserFichier(StructureDeDonneeFactory.PLATEAU_INFINI, 
 										temps, nomRepertoire);
@@ -245,6 +280,14 @@ public class Commande {
 									"Pour plus d'information taper : \n java -jar JeuDeLaVie.jar -h \n");
 						}
 					}
+					/*
+					 * on teste si le premier argument correspond à la génération d'une page
+					 * HTML et que le nombre d'argument est égal à 3 alors on lance la génération 
+					 * dans un monde infini avec les paramètres donnés
+					 * sinon si le premier argument correspond à la génération d'une page et 
+					 * que le nombre d'argument est égal 4 alors on lance la génération 
+					 * dans un plateau defini par l'utilisateur avec les paramètres donnés.
+					 */
 					if(args[0].equals("-w") && args.length==3){
 						genererHTML(nomRepertoire, temps, 
 								StructureDeDonneeFactory.PLATEAU_INFINI, "Jeu de la vie");
