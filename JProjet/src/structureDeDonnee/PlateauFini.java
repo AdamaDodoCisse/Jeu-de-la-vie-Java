@@ -518,4 +518,9 @@ public class PlateauFini implements Matrice {
 	public  boolean add(Cellule cellule){
 		return celluleVivante.add(cellule);
 	}
+	@Override
+	public boolean removeAll() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

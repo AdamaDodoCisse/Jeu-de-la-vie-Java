@@ -235,7 +235,7 @@ public class HTMLGenerateur {
 				"	<body>" +
 				"<form> " +
 				"<table border=1>" +
-				"<caption>JEU DE LA VIE</br> RESULTAT D'ANALYSE DES FICHIERS LIF DU DOSSIER "+filename +"</caption>" +
+				"<caption>JEU DE LA VIE</br> RESULTAT D'ANALYSE DES FICHIERS LIF DU DOSSIER : "+filename +"</caption>" +
 				"<tr>" +
 				"<th>Nom du fichier</th>" +
 				"<th>Inconnu</th>" +

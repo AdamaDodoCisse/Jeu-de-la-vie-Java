@@ -2,7 +2,11 @@ package interface_;
 import structureDeDonnee.PlateauCirculaire;
 import structureDeDonnee.PlateauFini;
 import structureDeDonnee.PlateauInfini;
-
+/**
+ * <b>Jeu est l'interface définissant un jeu de la vie.</b>
+ * @author kouyate,Cisse,Diallo,Melaine
+ *
+ */
 public interface Jeu {
 	/**
 	 * Calcule l'évolution suivante de l'ensemble des cellules vivantes et des cellules </br>

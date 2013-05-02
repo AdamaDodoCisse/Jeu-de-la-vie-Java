@@ -14,13 +14,7 @@ import structureDeDonnee.Cellule;
  */
 public interface Matrice extends Cloneable{
 	/**
-	 * 
-	 * @param cellule
-	 * @return
-	 */
-	public  boolean add(Cellule cellule);
-	/**
-	 * Ajoute une cellule à l'ensemble des cellules vivantes du jeu de la vie.
+	 * Ajoute une cellule à l'ensemble des cellules vivantes d'un plateau du jeu de la vie.
 	 * @param cellule
 	 * 			Une cellule vivante.
 	 * @return Un booléen indiquant si l'ajout à été bien éffectué ou non.
@@ -28,19 +22,25 @@ public interface Matrice extends Cloneable{
 	 */
 	public boolean ajouterCellule(Cellule cellule);
 	/**
-	 * Ajoute une règle à l'ensemble des "règles de vie" du jeu de la vie.
+	 * Ajoute une règle à l'ensemble des "règles de vie" d'un plateau du jeu de la vie.
 	 * @param regle
 	 * 			Un entier correspondant à une règle(condition pour qu'une cellule mort naisse).
 	 * @return Un booléen indiquant si l'ajout de la règle c'est éffectuer avec succès.
 	 */
 	public boolean ajouterRegleVie(Integer regle);
 	/**
-	 * Ajoute une règle à l'ensemble des "règles de Mort" du jeu de la vie.
+	 * Ajoute une règle à l'ensemble des "règles de Mort" d'un plateau du jeu de la vie.
 	 * @param regle
 	 * 			Un entier correspondant à une règle (condition pour qu'une cellule vivant reste vivant).
 	 * @return Un booléen indiquant si l'ajout de la règle c'est éffectuer avec succès.
 	 */
 	public boolean ajouterRegleMort(Integer regle);
+	/**
+	 * Ajoute une cellule à l'ensemble des cellules du plateau.
+	 * @param cellule
+	 * @return Un booléen
+	 */
+	public  boolean add(Cellule cellule);
 	/**
 	 * Méthode clone de la structure de donnée.
 	 * @return Une structure de donnée correspondant au clone de l'objet this.
@@ -88,7 +88,7 @@ public interface Matrice extends Cloneable{
 	 */
 	public Cellule getCellule(int i);
 	/**
-	 * 
+	 * Evolue la configuration courante d'un plateau du jeu de la vie.
 	 */
 	public void evoluer();
 	/**
@@ -134,7 +134,7 @@ public interface Matrice extends Cloneable{
 	 * @see Matrice
 	 * @see JeuDeLaVie
 	 */
-	//public boolean removeAll();
+	public boolean removeAll();
 	/**
 	 * Supprime une cellule à l'ensemble des cellules vivantes. 
 	 * @param cellule
@@ -144,31 +144,31 @@ public interface Matrice extends Cloneable{
 	 */
 	public boolean supprimerCellule(Cellule cellule);
 	/**
-	 * Trie l'ensemble des cellules vivantes.
+	 * Trie l'ensemble des cellules vivantes d'un plateau du jeu de la vie.
 	 * @see Cellule
 	 */
 	public void trierCellule();
 	
 	/**
-	 * Getter du max des abcisses des cellules vivantes.
+	 * Getter du max des abcisses des cellules vivantes du plateau.
 	 * @return Le max des abscisses.
 	 * @see Cellule
 	 */
 	public int getMaxAbscisse();
 	/**
-	 * Getter du min des abcisses des cellules vivantes.
+	 * Getter du min des abcisses des cellules vivantes du plateau
 	 * @return Le min des abscisses.
 	 * @see Cellule
 	 */
 	public int getMinAbscisse();
 	/**
-	 * Getter du max des ordonnées des cellules vivantes.
+	 * Getter du max des ordonnées des cellules vivantes du plateau.
 	 * @return Le max des ordonnées
 	 * @see Cellule
 	 */
 	public int getMaxOrdonnee();
 	/**
-	 * Getter du min des ordonnées des cellules vivantes.
+	 * Getter du min des ordonnées des cellules vivantes du plateau.
 	 * @return Le min des ordonnées.
 	 * @see Cellule
 	 */
