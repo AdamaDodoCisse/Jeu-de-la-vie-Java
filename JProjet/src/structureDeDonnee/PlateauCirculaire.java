@@ -12,7 +12,7 @@ import jeuDeLaVie.JeuDeLaVie;
  * dans un plateau circulaire(Monde circulaire).</b>
  * Elle hérite de la classe {@link PlateauFini}.
  * @see JeuDeLaVie
- * @author kouyate
+ * @author cissé adama dodo
  */
 public class PlateauCirculaire extends PlateauFini {
 
